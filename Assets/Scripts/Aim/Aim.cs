@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 public class Aim : MonoBehaviour
 {
     [Range(0, 99)]
-    [SerializeField]private float sensitivity;
+    [SerializeField] private float sensitivity;
+
+    [SerializeField] private Gun curGun;
 
     public void Awake()
     {
@@ -19,9 +21,9 @@ public class Aim : MonoBehaviour
         transform.Translate(val / (200 - sensitivity));
     }
 
-    public void OnShot()
+    public void OnShoot()
     {
-        Debug.Log("일단 발사");
+        curGun.Shoot(transform.position);
     }
 
 
