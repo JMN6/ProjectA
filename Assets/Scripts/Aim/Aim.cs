@@ -8,10 +8,18 @@ public class Aim : MonoBehaviour
 
     [SerializeField] private Gun curGun;
 
+    private SpriteRenderer sprite;
+
     public void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        sprite = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        Show();
+
+        curGun = new Sniper();
     }
 
     public void OnSnipe(InputValue input)
@@ -26,5 +34,24 @@ public class Aim : MonoBehaviour
         curGun.Shoot(transform.position);
     }
 
+    public void OnRecharge()
+    {
+        curGun.Recharge();
+    }
 
+    public void Hide()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        sprite.enabled = false;
+    }
+
+    public void Show()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        sprite.enabled = true;
+    }
 }
