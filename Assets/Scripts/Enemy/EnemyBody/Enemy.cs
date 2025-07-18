@@ -30,9 +30,9 @@ public class Enemy : Entity, IDamagalbe
 
     public void GetDamaged(int damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
         
-        if(currentHealth < 0)
+        if(currentHealth <= 0)
         {
             fsmManager.ChangeState(FSMState.Death);
         }
