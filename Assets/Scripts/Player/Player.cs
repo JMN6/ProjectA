@@ -1,14 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : Entity, IDamagalbe
 {
     [SerializeField] private float jumpPower;
 
     private Rigidbody2D rigid;
-    private int moveDirect;
+    private float moveDirect;
     private int curJumpCount;
-    private int maxJumpCount;
+    [SerializeField] private int maxJumpCount = 1;
 
     private void Awake()
     {
@@ -17,10 +18,16 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputValue input)
     {
-        float val = input.Get<float>();
-
-        if (val < 0) moveDirect = -1;
-        else moveDirect = 1;
+        moveDirect = input.Get<float>();
+        return;
+        if(input.isPressed == true)
+        {
+            float val = input.Get<float>();
+            Debug.Log(val);
+            moveDirect = Convert.ToInt32(Mathf.Sign(val));
+            return;
+        }
+        moveDirect = 0;
     }
 
     public void OnJump()
@@ -35,7 +42,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        rigid.velocity = new Vector2(moveDirect, rigid.velocity.y);
+        rigid.velocity = new Vector2(moveDirect * speed, rigid.velocity.y);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -45,5 +52,9 @@ public class Player : MonoBehaviour
         {
             curJumpCount = 0;
         }
+    }
+
+    public void GetDamaged(int damage)
+    {
     }
 }

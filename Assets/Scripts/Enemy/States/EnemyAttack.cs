@@ -9,10 +9,13 @@ namespace EnemeyFSM
         private IDamagalbe target;
         private float elpasedTime = 0f;
         private bool isAttacking = false;
+
+        private float sqrRange;
         
 
         public override void OnEnter()
         {
+            sqrRange = enemy.AttackRange * enemy.AttackRange;
             target = enemy.Target.GetComponent<IDamagalbe>();
             if(target == null)
             {
@@ -37,6 +40,11 @@ namespace EnemeyFSM
             }
 
             CoolTime();
+
+            if(isTargetFarAway() == true)
+            {
+                manager.ChangeState(FSMState.Chase);
+            }
         }
 
         private void Attack()
@@ -54,6 +62,11 @@ namespace EnemeyFSM
                 elpasedTime = 0;
                 isAttacking = true;
             }
+        }
+
+        private bool isTargetFarAway()
+        {
+            return ((Vector2)enemy.Target.transform.position - enemy.Rigid.position).sqrMagnitude > sqrRange;
         }
 
 
