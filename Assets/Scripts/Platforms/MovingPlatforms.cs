@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatforms : MonoBehaviour, IActivatable
+public class MovingPlatforms : InteractableObj
 {
     [Header("Components")]
     [SerializeField] private Rigidbody2D rigid;
@@ -49,12 +49,12 @@ public class MovingPlatforms : MonoBehaviour, IActivatable
         rigid.MovePosition(newPosition);
     }
 
-    public void Activate()
+    public override void Activate()
     {
         isMoving = true;
     }
 
-    public void Deactivate()
+    public override void Deactivate()
     {
         isMoving = false;
     }

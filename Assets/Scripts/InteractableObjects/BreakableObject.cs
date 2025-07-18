@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BreakableObject : MonoBehaviour, IDamagalbe
 {
-    [SerializeField] private IActivatable[] connectedObjects = new IActivatable[0];
+    [SerializeField] private InteractableObj[] connectedObjects = new InteractableObj[0];
 
     public void GetDamaged(int damage)
     {
