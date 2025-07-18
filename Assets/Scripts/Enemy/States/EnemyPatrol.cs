@@ -26,13 +26,13 @@ namespace EnemeyFSM
 
             elapsedTime = 0f;
 
-            rigid.MovePosition(startPos); // 초기값 세팅
+            enemy.transform.position = startPos;
         }
 
-        public override void OnUpdate()
+        public override void OnFixedUpdate()
         {
-            Vector2 newPosition = rigid.position + dir * enemy.Speed * Time.deltaTime;
-            if((newPosition - endPos).sqrMagnitude <= 0.5f)
+            Vector2 newPosition = rigid.position + dir * enemy.Speed * 0.05f;
+            if((newPosition - endPos).sqrMagnitude <= 0.01f)
             {
                 newPosition = endPos;
                 Vector2 temp = endPos;
@@ -42,6 +42,10 @@ namespace EnemeyFSM
             }
 
             rigid.MovePosition(newPosition);
+        }
+
+        public override void OnUpdate()
+        { 
         }
 
         public override void OnExit()
