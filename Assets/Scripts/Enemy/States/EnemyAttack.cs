@@ -52,6 +52,7 @@ namespace EnemeyFSM
             target.GetDamaged(enemy.Damage);
             // todo. 디버그 코드 지우기
             Debug.Log("Attack");
+            isAttacking = false;
         }
 
         private void CoolTime()
