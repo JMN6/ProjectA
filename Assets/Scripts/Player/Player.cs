@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,15 +18,6 @@ public class Player : Entity, IDamagalbe
     public void OnMove(InputValue input)
     {
         moveDirect = input.Get<float>();
-        return;
-        if(input.isPressed == true)
-        {
-            float val = input.Get<float>();
-            Debug.Log(val);
-            moveDirect = Convert.ToInt32(Mathf.Sign(val));
-            return;
-        }
-        moveDirect = 0;
     }
 
     public void OnJump()
