@@ -23,9 +23,13 @@ namespace EnemeyFSM
             targetDirection = 0;
         }
 
-        public override void OnUpdate()
+        public override void OnFixedUpdate()
         {
             ChaseTarget();
+        }
+
+        public override void OnUpdate()
+        {
 
             if(isTargetCloseEnough())
             {
@@ -46,8 +50,8 @@ namespace EnemeyFSM
                 enemy.spriteRenderer.flipX = newDir == 0;
             }
 
-            Vector2 newPosition = rigid.position + 
-                Vector2.right * newDir * enemy.Speed * Time.deltaTime;
+            Vector2 newPosition = rigid.position +
+                Vector2.right * newDir * enemy.Speed * 0.05f;
             rigid.MovePosition(newPosition);
         }
 
