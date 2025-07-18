@@ -13,6 +13,7 @@ public class Sniper : Gun
         {
             RaycastHit2D hit = Physics2D.Raycast(position, position);
 
+            if (!hit) return;
             if (hit.collider.TryGetComponent(out IDamagalbe target)) {
                 target.GetDamaged(1);
             }
