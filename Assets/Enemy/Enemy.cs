@@ -1,10 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EnemeyFSM;
 
 public class Enemy : Entity, IDamagalbe
 {
+    [field: SerializeField] public int Damage { get; private set; } // °ø°Ý·Â
+    [field: SerializeField] public string Id { get; private set; }
+    [field: SerializeField] public float AttackRange { get; private set; }
+    [field: SerializeField] public float AttackDelay { get; private set; }
+    [field: SerializeField] public float SightRange { get; private set; }
+
+    public float Speed { get; private set; }
+
+    [Header("Components")]
+    [SerializeField] private CircleCollider2D chaseRange;
+    [field: SerializeField] public Rigidbody2D Rigid { get; private set; }
+    [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
+
+    [SerializeField] private EnemyFSMManager fsmManager;
+
+    public GameObject Target { get; set; }
+
+    private void Awake()
+    {
+        chaseRange.radius = SightRange;
+        Speed = base.speed;
+    }
+
     public void GetDamaged(int damage)
     {
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        
+        if(currentHealth < 0)
+        {
+            fsmManager.ChangeState(FSMState.Death);
+        }
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }
