@@ -36,19 +36,25 @@ public class Enemy : Entity, IDamagalbe
 
     public bool isDead { get; set; }
 
-    private void Start()
+    private Vector2 originPosition;
+
+    protected virtual void Awake()
     {
         chaseRange.radius = SightRange;
         Speed = base.speed;
+
+        originPosition = transform.position;
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         currentHealth = maxHealth;
         SetAnimationTrigger(EnemyAnimation.Idle);
 
         Target = null;
         isParried = false;
+
+        transform.position = originPosition;
     }
 
     public void GetDamaged(int damage)

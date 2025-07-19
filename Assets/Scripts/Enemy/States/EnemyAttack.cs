@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace EnemeyFSM
 {
     public class EnemyAttack : EnemyFSMState
@@ -11,7 +12,8 @@ namespace EnemeyFSM
         private bool isAttacking = false;
 
         private float sqrRange;
-        
+
+        private bool isCheckAble = false;
 
         public override void OnEnter()
         {
@@ -28,15 +30,17 @@ namespace EnemeyFSM
                 return;
             }
 
+            Debug.Log(enemy.name + " " + isCheckAble);
             elpasedTime = 0f;
             isAttacking = true;
+            isCheckAble = false;
         }
 
         public override void OnUpdate()
         {
             CoolTime();
 
-            if(isTargetFarAway() == true)
+            if(isCheckAble == true && isTargetFarAway() == true)
             {
                 manager.ChangeState(FSMState.Chase);
             }
@@ -61,10 +65,17 @@ namespace EnemeyFSM
 
         private void CoolTime()
         {
+            elpasedTime += Time.deltaTime;
+
+            if (elpasedTime >= 0.75f)
+            {
+                isCheckAble = true;
+                return;
+            }
+
             if (isAttacking == true)
                 return;
 
-            elpasedTime += Time.deltaTime;
             if(elpasedTime >= enemy.AttackDelay)
             {
                 elpasedTime = 0;

@@ -41,10 +41,10 @@ namespace EnemeyFSM
 
         private EnemyFSMState currentStateScript = null;
 
-        private FSMState currentState = FSMState.MAX;
+        [SerializeField] private FSMState currentState = FSMState.MAX;
         private FSMState prevState;
 
-        private void Start()
+        private void Awake()
         {
             foreach (var _ in fsmStates)
             {
@@ -55,18 +55,17 @@ namespace EnemeyFSM
             }
 
             currentState = FSMState.MAX;
-            ChangeState(startState);
         }
 
         private void OnEnable()
         {
-            if (fsmStateDict.Count <= 0)
-                return;
             ChangeState(startState);
         }
 
         public void ChangeState(FSMState _newState)
         {
+            enemy.Rigid.velocity = Vector2.zero;
+
             if (currentState != FSMState.MAX)
             {
                 currentStateScript.OnExit();

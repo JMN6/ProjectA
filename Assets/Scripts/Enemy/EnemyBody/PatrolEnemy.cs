@@ -10,6 +10,24 @@ public class PatrolEnemy : Enemy
 
     [field: SerializeField] public float PatrolSpeed { get; private set; } = 0.2f;
 
-    public Transform StartPos { get { return startPos; } }
-    public Transform EndPos { get { return endPos;} }
+    [field: SerializeField] public Vector2 StartPos { get; private set; }
+    [field: SerializeField] public Vector2 EndPos { get; private set; }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        StartPos = startPos.position;
+        EndPos = endPos.position;
+    }
+
+
+    protected override void OnEnable()
+    {
+        currentHealth = maxHealth;
+        SetAnimationTrigger(EnemyAnimation.Idle);
+
+        Target = null;
+        isParried = false;
+    }
 }

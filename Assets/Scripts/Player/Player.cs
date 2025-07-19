@@ -23,12 +23,27 @@ public class Player : Entity
 
     private AudioSource audioSource;
 
+    private bool isInteractable = false;
+    private DialogTrigger trigger;
+
+    private bool isDied = false;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        ResetPlayer();
+    }
+
+    public void ResetPlayer()
+    {
+        isDied = false;
+        isInteractable = false;
+
+        animator.SetBool("IsDead", false);
     }
 
     public void OnMove(InputValue input)
@@ -62,7 +77,14 @@ public class Player : Entity
 
     public void OnInteract()
     {
+        if(isInteractable == false)
+        {
+            return;
+        }
 
+        trigger.Interact();
+        isInteractable = false;
+        trigger = null;
     }
 
     public void OnParry()
@@ -111,7 +133,7 @@ public class Player : Entity
 
             if (hit)
             {
-                Debug.Log("¹Ù´ÚÀÓ");
+                
                 curJumpCount = 0;
                 animator.SetBool("IsFalling", false);
 
@@ -133,6 +155,9 @@ public class Player : Entity
 
     public bool TryAttack()
     {
+        if (isDied == true)
+            return true;
+        
         if (isParrying)
         {
             StopCoroutine(parryCoroutine);
@@ -144,11 +169,20 @@ public class Player : Entity
         }
         else
         {
+            isDied = true;
+            GameManager.Instance.GameOver();
+
             animator.SetBool("IsDead", true);
 
             SoundManager.Instance.PlayOneShot(deathSFX);
 
             return true;
         }
+    }
+
+    public void CanInteract(bool _val, DialogTrigger _trigger = null)
+    {
+        isInteractable = _val;
+        trigger = _trigger;
     }
 }
