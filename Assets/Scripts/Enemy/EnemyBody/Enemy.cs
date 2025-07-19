@@ -48,7 +48,7 @@ public class Enemy : Entity, IDamagalbe
 
     public void GetDamaged(int damage)
     {
-        EffectManager.Instance.PlayParticle(0, transform.position);
+        EffectManager.Instance.PlayParticle(0, transform.position + Vector3.up);
 
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
         
