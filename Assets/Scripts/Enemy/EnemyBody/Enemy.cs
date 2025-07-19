@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using EnemeyFSM;
 
@@ -29,6 +27,11 @@ public class Enemy : Entity, IDamagalbe
     [SerializeField] private Animator anim;
 
     [SerializeField] private EnemyFSMManager fsmManager;
+
+    [field: SerializeField] public AudioClip WalkSFX { get; private set; }
+    [field: SerializeField] public AudioClip IdleSFX { get; private set; }
+    [field: SerializeField] public AudioClip AttackSFX { get; private set; }
+    [field: SerializeField] public AudioClip DeadSFX { get; private set; }
 
     public GameObject Target { get; set; }
 
@@ -69,8 +72,8 @@ public class Enemy : Entity, IDamagalbe
         }
 
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
-        
-        if(currentHealth <= 0)
+
+        if (currentHealth <= 0)
         {
             fsmManager.ChangeState(FSMState.Death);
             isDead = true;

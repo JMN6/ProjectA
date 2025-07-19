@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 
 namespace EnemeyFSM
@@ -49,6 +46,8 @@ namespace EnemeyFSM
 
         private void Attack()
         {
+            SoundManager.Instance.PlaySFX(enemy.AttackSFX);
+
             if (isTargetFarAway() == true)
                 return;
 
@@ -56,14 +55,13 @@ namespace EnemeyFSM
 
             if(!res)
             {
+                // parried by player
                 enemy.isParried = true;
                 enemy.GetDamaged(3);
                 EffectManager.Instance.PlayParticle(1, enemy.transform.position + Vector3.up);
             }
             else
             {
-                // todo. 디버그 코드 지우기
-                Debug.Log("Attack");
                 isAttacking = false;
             }
         }

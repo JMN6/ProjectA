@@ -332,6 +332,10 @@ MonoBehaviour:
   <spriteRenderer>k__BackingField: {fileID: 744932277728913840}
   anim: {fileID: 939810182529166768}
   fsmManager: {fileID: 6640240152435585871}
+  <WalkSFX>k__BackingField: {fileID: 8300000, guid: d15bde0091a1b3d43864f481859d5249, type: 3}
+  <IdleSFX>k__BackingField: {fileID: 8300000, guid: 26d4856364a213a4dadcbe4bcf402f7e, type: 3}
+  <AttackSFX>k__BackingField: {fileID: 8300000, guid: d5b11306c21a5eb4c90854660f9ceab5, type: 3}
+  <DeadSFX>k__BackingField: {fileID: 8300000, guid: dbce1f2c879c8c7479b26bd888f43ea3, type: 3}
 --- !u!114 &6640240152435585871
 MonoBehaviour:
   m_ObjectHideFlags: 0
