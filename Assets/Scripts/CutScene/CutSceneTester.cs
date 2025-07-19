@@ -10,6 +10,6 @@ public class CutSceneTester : MonoBehaviour
     private void Start()
     {
 
-        player.StartDialog(CutSceneParser.Convert(fileName));
+        player.StartCutScene(CutSceneParser.Convert(fileName));
     }
 }

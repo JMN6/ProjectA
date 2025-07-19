@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BreakableObject : MonoBehaviour, IDamagalbe
 {
+    [SerializeField] private SpriteRenderer sp;
+    [SerializeField] private Sprite OnSprite;
+    [SerializeField] private Sprite OffSprite;
     [SerializeField] private InteractableObj[] connectedObjects = new InteractableObj[0];
 
     private void Start()
@@ -13,7 +16,8 @@ public class BreakableObject : MonoBehaviour, IDamagalbe
 
     private void OnEnable()
     {
-        // todo. 여기에서 다시 초기화 세팅 진행 해야함
+        sp.sprite = OnSprite;
+
         foreach (var _ in connectedObjects)
         {
             _.Deactivate();
@@ -37,7 +41,6 @@ public class BreakableObject : MonoBehaviour, IDamagalbe
 
     private void ShowEffect()
     {
-        // todo. 부셔지는 이펙트 추가해야함
-        gameObject.SetActive(false);
+        sp.sprite = OffSprite;
     }
 }
