@@ -113,7 +113,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 672c63e4-2c36-4473-b3d1-ca46ed0ae347
+  m_DefaultActionMap: Aim
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &5369508322153586805
@@ -128,4 +128,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423ae5d4e195d0d4e89378e4a3b2b6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 0
+  sensitivity: 36.5
+  shootSFX: {fileID: 8300000, guid: 54deab9476169034082d03f07345cf1b, type: 3}
