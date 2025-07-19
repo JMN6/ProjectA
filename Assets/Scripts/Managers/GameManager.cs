@@ -39,6 +39,18 @@ public class GameManager : MonoSingleton<GameManager>
 
     private float tempTimeScale = 1;
 
+    public void Start()
+    {
+        InputManager.Instance.ShowCursor();
+        InputManager.Instance.SetInputs(false);
+
+        cutScenePlayer.StartCutScene(CutSceneParser.Convert(ClearCutScene), () =>
+        {
+            InputManager.Instance.HideCursor();
+            InputManager.Instance.SetPlayerInput(true);
+            InputManager.Instance.SetAimInput(false);
+        });
+    }
 
 
     public void OnESC()
