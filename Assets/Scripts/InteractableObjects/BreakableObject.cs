@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class BreakableObject : MonoBehaviour, IDamagalbe
 {
-    [SerializeField] private SpriteRenderer sp;
-    [SerializeField] private Animation anim;
-    [SerializeField] private AnimationClip clip;
-   
-    private void Start()
+    [SerializeField] private Animator anim;
+    [SerializeField] private Collider2D col;
+
+    private void Awake()
     {
         gameObject.layer = LayerMask.NameToLayer("InteractableObject");
     }
 
     private void OnEnable()
     {
+        anim.SetBool("IsBroken", false);
+        col.enabled = true;
     }
 
     public void GetDamaged(int damage)
@@ -24,5 +25,7 @@ public class BreakableObject : MonoBehaviour, IDamagalbe
 
     private void ShowEffect()
     {
+        anim.SetBool("IsBroken", true);
+        col.enabled = false;
     }
 }
