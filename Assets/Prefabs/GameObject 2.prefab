@@ -4631,7 +4631,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 2486392786419991438}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a6126cb47e2470a4b84df827f903fda5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4694,7 +4694,7 @@ CompositeCollider2D:
   m_GameObject: {fileID: 2486392786419991438}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a6126cb47e2470a4b84df827f903fda5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
