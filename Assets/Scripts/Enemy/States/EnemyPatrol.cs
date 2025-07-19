@@ -32,7 +32,7 @@ namespace EnemeyFSM
         public override void OnFixedUpdate()
         {
             Vector2 newPosition = rigid.position + dir * enemy.Speed * 0.05f;
-            if((newPosition - endPos).sqrMagnitude <= 0.01f)
+            if((newPosition - endPos).sqrMagnitude <= 0.05f)
             {
                 newPosition = endPos;
                 Vector2 temp = endPos;
@@ -42,6 +42,18 @@ namespace EnemeyFSM
             }
 
             rigid.MovePosition(newPosition);
+        }
+
+
+        public override void OnTriggerEnter(Collider2D collision)
+        {
+            if (collision.gameObject.layer != playerLayer)
+            {
+                return;
+            }
+
+            enemy.Target = collision.gameObject;
+            manager.ChangeState(FSMState.Chase);
         }
 
         public override void OnUpdate()
