@@ -128,7 +128,7 @@ TextureImporter:
         serializedVersion: 2
         x: 16
         y: 8
-        width: 21
+        width: 20
         height: 27
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -149,8 +149,8 @@ TextureImporter:
         serializedVersion: 2
         x: 66
         y: 8
-        width: 21
-        height: 27
+        width: 20
+        height: 29
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,10 +168,10 @@ TextureImporter:
       name: Zombie Attack_2
       rect:
         serializedVersion: 2
-        x: 113
+        x: 114
         y: 8
-        width: 21
-        height: 28
+        width: 20
+        height: 31
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,10 +189,10 @@ TextureImporter:
       name: Zombie Attack_3
       rect:
         serializedVersion: 2
-        x: 160
+        x: 161
         y: 8
-        width: 21
-        height: 27
+        width: 20
+        height: 33
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,9 +210,9 @@ TextureImporter:
       name: Zombie Attack_4
       rect:
         serializedVersion: 2
-        x: 208
+        x: 210
         y: 8
-        width: 21
+        width: 20
         height: 27
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -231,10 +231,10 @@ TextureImporter:
       name: Zombie Attack_5
       rect:
         serializedVersion: 2
-        x: 256
+        x: 258
         y: 8
-        width: 21
-        height: 27
+        width: 20
+        height: 29
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,10 +252,10 @@ TextureImporter:
       name: Zombie Attack_6
       rect:
         serializedVersion: 2
-        x: 304
+        x: 306
         y: 8
         width: 20
-        height: 27
+        height: 28
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,8 +275,8 @@ TextureImporter:
         serializedVersion: 2
         x: 354
         y: 8
-        width: 21
-        height: 29
+        width: 20
+        height: 24
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,132 +286,6 @@ TextureImporter:
       bones: []
       spriteID: 844402e45dfd68f4e98623a476ddb4ed
       internalID: -1918791044
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie Attack_8
-      rect:
-        serializedVersion: 2
-        x: 402
-        y: 8
-        width: 21
-        height: 31
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de379f080da465e418942209d51cf3df
-      internalID: 553889513
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie Attack_9
-      rect:
-        serializedVersion: 2
-        x: 450
-        y: 8
-        width: 21
-        height: 29
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c36321a4ffcc9b4188d86142f560431
-      internalID: 1715465957
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie Attack_10
-      rect:
-        serializedVersion: 2
-        x: 498
-        y: 8
-        width: 21
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 580520b8e1cee9c45b62fc7d4438f966
-      internalID: -1684119318
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie Attack_11
-      rect:
-        serializedVersion: 2
-        x: 546
-        y: 8
-        width: 21
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6bc7b3f6b894e9b47bcf2965ff65bac3
-      internalID: -207048015
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie Attack_12
-      rect:
-        serializedVersion: 2
-        x: 594
-        y: 8
-        width: 21
-        height: 27
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c53890044c67004fbc5253b5026c86c
-      internalID: 1007458016
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie Attack_13
-      rect:
-        serializedVersion: 2
-        x: 642
-        y: 8
-        width: 21
-        height: 27
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 407c395c7920a3049a1c66ede0fb0078
-      internalID: 1326414744
       vertices: []
       indices: 
       edges: []
@@ -429,18 +303,12 @@ TextureImporter:
     nameFileIdTable:
       Zombie Attack_0: -2063952929
       Zombie Attack_1: 845863181
-      Zombie Attack_10: -1684119318
-      Zombie Attack_11: -207048015
-      Zombie Attack_12: 1007458016
-      Zombie Attack_13: 1326414744
       Zombie Attack_2: 472523395
       Zombie Attack_3: 497037652
       Zombie Attack_4: -1667188918
       Zombie Attack_5: 532960778
       Zombie Attack_6: -1727603251
       Zombie Attack_7: -1918791044
-      Zombie Attack_8: 553889513
-      Zombie Attack_9: 1715465957
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoSingleton<InputManager>
 {
-    [SerializeField] private List<PlayerInput> inputs = new List<PlayerInput>();
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private PlayerInput aimInput;
 
     public void ShowCursor()
     {
@@ -21,9 +20,17 @@ public class InputManager : MonoSingleton<InputManager>
 
     public void SetInputs(bool _val)
     {
-        foreach(var _ in inputs)
-        {
-            _.enabled = _val;
-        }
+        playerInput.enabled = _val;
+        aimInput.enabled = _val;
+    }
+
+    public void SetPlayerInput(bool _val)
+    {
+        playerInput.enabled = _val;
+    }
+
+    public void SetAimInput(bool _val)
+    {
+        aimInput.enabled = _val;
     }
 }

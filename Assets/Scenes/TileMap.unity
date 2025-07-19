@@ -240,9 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 737128205f626634d9994055f4db2ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputs:
-  - {fileID: 1812461640}
-  - {fileID: 1900996669}
+  playerInput: {fileID: 1812461640}
+  aimInput: {fileID: 1900996669}
 --- !u!4 &8588528
 Transform:
   m_ObjectHideFlags: 0
@@ -2540,7 +2539,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2614,7 +2613,7 @@ MonoBehaviour:
   padding: {x: 2, y: 1.2}
   bottom: {fileID: 176043171}
   top: {fileID: 264644773}
-  camFunc: {fileID: 1231952788}
+  camFunc: {fileID: 0}
 --- !u!114 &1231952788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27406,6 +27405,10 @@ PrefabInstance:
     - target: {fileID: 3817006084746797995, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187031100326390299, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5739630756427667615, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
       propertyPath: maxHealth

@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class Sniper : Gun
 {
+    public Sniper(float cooltime, int bullets) : base(cooltime, bullets)
+    {
+    }
+
     public override void Recharge()
     {
         CurBullets = MaxBullets;
@@ -9,20 +13,18 @@ public class Sniper : Gun
 
     public override void Shoot(Vector2 position)
     {
-        if (CurBullets == 0)
-        {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(position, position, TargetLayerMask);
+        CurBullets--;
 
-            foreach (var hit in hits)
+        RaycastHit2D[] hits = Physics2D.RaycastAll(position, position, TargetLayerMask);
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider.TryGetComponent(out IDamagalbe target))
             {
-                if (hit.collider.TryGetComponent(out IDamagalbe target))
-                {
-                    target.GetDamaged(1);
-                    return;
-                }
+                target.GetDamaged(1);
+                return;
             }
         }
     }
-
 
 }

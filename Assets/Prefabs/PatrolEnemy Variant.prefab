@@ -70,6 +70,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 744932277728913840, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1524987722, guid: f3efad688b2f39249a0151b62b342f66, type: 3}
     - target: {fileID: 3817006084746797995, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.15
@@ -110,9 +114,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4800507100103719686, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.1875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800507100103719686, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.6875
+      objectReference: {fileID: 0}
     - target: {fileID: 5024718325898104607, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
       propertyPath: m_Radius
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187031100326390299, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6640240152435585871, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
       propertyPath: enemy

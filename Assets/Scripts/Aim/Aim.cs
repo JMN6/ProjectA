@@ -7,13 +7,24 @@ public class Aim : MonoBehaviour
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip shootSFX;
+    [SerializeField] private AudioClip notEnoughBulletSFX;
+    [SerializeField] private AudioClip reloadSFX;
 
+    private float cooldown;
 
     private void Start()
     {
         Show();
 
-        CurGun = new Sniper();
+        CurGun = new Sniper(1f, 5);
+    }
+
+    private void Update()
+    {
+        if(cooldown > 0)
+        {
+            cooldown -= Time.deltaTime;
+        }
     }
 
     public void OnSnipe(InputValue input)
@@ -21,20 +32,31 @@ public class Aim : MonoBehaviour
         var val = input.Get<Vector2>();
         var sensitivity = GameManager.Instance.Option.MouseSensitivity;
 
-        transform.Translate(val * sensitivity * sensitivity * 0.01f);
+        transform.Translate(val * sensitivity * sensitivity * 0.03f);
     }
 
     public void OnShoot()
     {
-        CurGun.Shoot(transform.position);
+        if (CurGun.CurBullets > 0)
+        {
+            if (cooldown <= 0.01f)
+            {
+                cooldown = CurGun.Cooltime;
 
-        // HAVETOMOVE
-        SoundManager.Instance.PlayOneShot(shootSFX);
+                CurGun.Shoot(transform.position);
+                SoundManager.Instance.PlayOneShot(shootSFX);
+            }
+        }
+        else
+        {
+            SoundManager.Instance.PlaySFX(notEnoughBulletSFX);
+        }
     }
 
     public void OnRecharge()
     {
         CurGun.Recharge();
+        SoundManager.Instance.PlaySFX(reloadSFX);
     }
 
     public void Hide()
@@ -47,7 +69,7 @@ public class Aim : MonoBehaviour
         InputManager.Instance.HideCursor();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         float camHalfHeight = Camera.main.orthographicSize;
         float camHalfWidth = camHalfHeight * Camera.main.aspect;

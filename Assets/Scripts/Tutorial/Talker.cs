@@ -19,7 +19,7 @@ public class Talker : MonoBehaviour
 
     public void Talk(string dialogue)
     {
-        StopCoroutine(coroutine);
+        if(coroutine != null) StopCoroutine(coroutine);
 
         speechBubble.gameObject.SetActive(true);
 
