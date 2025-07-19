@@ -16,6 +16,8 @@ namespace EnemeyFSM
 
         public override void OnEnter()
         {
+            enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Run);
+
             rigid = enemy.Rigid;
             targetTrasnform = enemy.Target.transform;
 
@@ -43,11 +45,11 @@ namespace EnemeyFSM
             int newDir = Convert.ToInt32(Mathf.Sign(dir)) * -1;
 
             // 스프라이트 방향 바꾸기
-            if(targetDirection != newDir && targetDirection != 0)
+            if(targetDirection != newDir && newDir != 0)
             {
                 targetDirection = newDir;
 
-                enemy.spriteRenderer.flipX = newDir == 0;
+                enemy.spriteRenderer.flipX = newDir < 0f;
             }
 
             Vector2 newPosition = rigid.position +

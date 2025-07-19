@@ -28,6 +28,7 @@ public class MovingPlatforms : InteractableObj
         transform.position = start;
     }
 
+
     private void FixedUpdate()
     {
         if (isMoving == false)

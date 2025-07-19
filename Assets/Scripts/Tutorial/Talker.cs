@@ -13,6 +13,8 @@ public class Talker : MonoBehaviour
     private void Awake()
     {
         talkTerm = new WaitForSeconds(0.2f / talkSpeed);
+
+        speechBubble.gameObject.SetActive(false);
     }
 
     public void Talk(string dialogue)
