@@ -9,14 +9,14 @@ public class Aim : MonoBehaviour
 
     [SerializeField] private Gun curGun;
 
-    private SpriteRenderer sprite;
+    //private SpriteRenderer sprite;
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip shootSFX;
 
     public void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        //sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -47,17 +47,13 @@ public class Aim : MonoBehaviour
 
     public void Hide()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        sprite.enabled = false;
+        InputManager.Instance.ShowCursor();
+        //sprite.enabled = false;
     }
 
     public void Show()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        sprite.enabled = true;
+        InputManager.Instance.HideCursor();
+        //sprite.enabled = true;
     }
 }

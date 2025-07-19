@@ -21,6 +21,9 @@ public class DialogTrigger : MonoBehaviour
         if (collision.gameObject.layer != playerMask)
             return;
 
+        InputManager.Instance.ShowCursor();
+        InputManager.Instance.SetInputs(false);
+
         player.StartDialog(info);
     }
 }

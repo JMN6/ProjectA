@@ -101,6 +101,9 @@ public class DialogPlayer : MonoBehaviour
     private void DialogEnd()
     {
         panel.SetActive(false);
+
+        InputManager.Instance.HideCursor();
+        InputManager.Instance.SetInputs(true);
     }
 
     public void OnNextBtnClick()
