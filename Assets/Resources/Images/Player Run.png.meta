@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8b1cb0c22df60d145a4cdfa64f8ea7c3
+guid: c31f7b9304f205c41b4f178585be5c0f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,17 +106,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player Jump_0
+      name: Player Run_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 4
-        width: 20
-        height: 34
+        x: 9
+        y: 8
+        width: 24
+        height: 31
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ddc29c02ba16884da8ecafeac4fb76a
-      internalID: 982185064
+      spriteID: cd4103dcd7a8a36459ff6c57f4eb725e
+      internalID: 7398695
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player Jump_1
+      name: Player Run_1
       rect:
         serializedVersion: 2
-        x: 60
-        y: 4
-        width: 19
-        height: 34
+        x: 64
+        y: 8
+        width: 15
+        height: 29
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9cb06b07a7ba7945853c8932328bc05
-      internalID: 886647638
+      spriteID: 49cb714d655ee3142a8501c2b8f20846
+      internalID: 1979172579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player Jump_2
+      name: Player Run_2
       rect:
         serializedVersion: 2
-        x: 107
-        y: 4
-        width: 20
-        height: 34
+        x: 106
+        y: 8
+        width: 24
+        height: 29
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +179,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49d94d7daa0068444a5c00f4f4540297
-      internalID: -2001741307
+      spriteID: f975886bc41930f49880fddb92d59e6b
+      internalID: 126830011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player Jump_3
+      name: Player Run_3
       rect:
         serializedVersion: 2
-        x: 152
-        y: 4
+        x: 154
+        y: 8
+        width: 27
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f13173fab968dcc4da193d5c0c092481
+      internalID: -100363839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player Run_4
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 8
         width: 25
-        height: 34
+        height: 30
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4f1f1d66ba4fc744b51e00a85356606
-      internalID: -1303377860
+      spriteID: 01b8749bd48bafc4c8bda1e8f987814b
+      internalID: 493309038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player Jump_4
+      name: Player Run_5
       rect:
         serializedVersion: 2
-        x: 200
-        y: 4
-        width: 25
-        height: 34
+        x: 256
+        y: 8
+        width: 15
+        height: 28
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 251191c607687b749932133e7b92bcef
-      internalID: 1850351288
+      spriteID: cb321135cc9356647a32cee1613679f1
+      internalID: 1721018413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player Jump_5
+      name: Player Run_6
       rect:
         serializedVersion: 2
-        x: 248
-        y: 4
-        width: 23
-        height: 34
+        x: 299
+        y: 8
+        width: 24
+        height: 29
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,8 +263,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a55c5d98e8a020e4285dcf20eb86c600
-      internalID: 931284392
+      spriteID: ab70194beb6ba36478cdaadfc896936f
+      internalID: -90337005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player Run_7
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 8
+        width: 27
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9305875d7c0526c4583f9e241c8aac61
+      internalID: 2046058738
       vertices: []
       indices: 
       edges: []
@@ -246,13 +301,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player Jump_0: 982185064
-      Player Jump_1: 886647638
-      Player Jump_2: -2001741307
-      Player Jump_3: -1303377860
-      Player Jump_4: 1850351288
-      Player Jump_5: 931284392
-      Player Jump_6: -55825603
+      Player Run_0: 7398695
+      Player Run_1: 1979172579
+      Player Run_2: 126830011
+      Player Run_3: -100363839
+      Player Run_4: 493309038
+      Player Run_5: 1721018413
+      Player Run_6: -90337005
+      Player Run_7: 2046058738
+      Player Run_8: 1492900424
+      Player Run_9: -576130238
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
