@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,9 @@ public class Aim : MonoBehaviour
     [SerializeField] private Gun curGun;
 
     private SpriteRenderer sprite;
+
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip shootSFX;
 
     public void Awake()
     {
@@ -32,6 +36,8 @@ public class Aim : MonoBehaviour
     public void OnShoot()
     {
         curGun.Shoot(transform.position);
+
+        SoundManager.Instance.PlayOneShot(shootSFX);
     }
 
     public void OnRecharge()

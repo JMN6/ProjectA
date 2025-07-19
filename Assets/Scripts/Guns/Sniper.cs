@@ -11,7 +11,7 @@ public class Sniper : Gun
     {
         if (isBulletEnough)
         {
-            RaycastHit2D hit = Physics2D.Raycast(position, position);
+            RaycastHit2D hit = Physics2D.Raycast(position, position, TargetLayerMask);
 
             if (!hit) return;
             if (hit.collider.TryGetComponent(out IDamagalbe target)) {
