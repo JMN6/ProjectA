@@ -54,11 +54,14 @@ namespace EnemeyFSM
                 fsmStateDict.Add(_.StateName, script);
             }
 
+            currentState = FSMState.MAX;
             ChangeState(startState);
         }
 
         private void OnEnable()
         {
+            if (fsmStateDict.Count <= 0)
+                return;
             ChangeState(startState);
         }
 
