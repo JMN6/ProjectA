@@ -46,4 +46,21 @@ public class Aim : MonoBehaviour
     {
         InputManager.Instance.HideCursor();
     }
+
+    private void Update()
+    {
+        float camHalfHeight = Camera.main.orthographicSize;
+        float camHalfWidth = camHalfHeight * Camera.main.aspect;
+        Vector3 camPos = Camera.main.transform.position;
+
+        float minX = camPos.x - camHalfWidth;
+        float maxX = camPos.x + camHalfWidth;
+        float minY = camPos.y - camHalfHeight;
+        float maxY = camPos.y + camHalfHeight;
+
+        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+        float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
+
+        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+    }
 }
