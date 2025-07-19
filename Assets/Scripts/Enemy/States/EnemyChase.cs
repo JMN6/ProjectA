@@ -17,6 +17,7 @@ namespace EnemeyFSM
         public override void OnEnter()
         {
             enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Run);
+            enemy.StopLookingForPlayer();
 
             rigid = enemy.Rigid;
             targetTrasnform = enemy.Target.transform;

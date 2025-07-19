@@ -7,8 +7,8 @@ using StringUtility;
 
 public class DialogPlayer : MonoBehaviour
 {
-    private static readonly string FName = "나연";
-    private static readonly string MName = "용복";
+    private static readonly string FName = "엘리";
+    private static readonly string MName = "데이브";
 
     private static readonly string FPicPath = "Images/Dialog/F{0}";
     private static readonly string MPicPath = "Images/Dialog/M{0}";
