@@ -29,6 +29,7 @@ public class PatrolEnemy : Enemy
 
         Target = null;
         isParried = false;
+        isDead = false;
 
         chaseRange.gameObject.SetActive(true);
     }

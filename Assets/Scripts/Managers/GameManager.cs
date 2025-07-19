@@ -27,6 +27,7 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("CutScene")]
     [SerializeField] private string ClearCutScene = "TempCutScene";
     [SerializeField] private CutScenePlayer cutScenePlayer;
+    [SerializeField] private bool isCutScenePlay = false;
 
     [Header("Camara")]
     [SerializeField] private CameraFunctions camFunc;
@@ -41,6 +42,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void Start()
     {
+#if UNITY_EDITOR
+        if (isCutScenePlay == false)
+            return;
+#endif
+
         InputManager.Instance.ShowCursor();
         InputManager.Instance.SetInputs(false);
 
