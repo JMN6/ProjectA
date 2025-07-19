@@ -23,7 +23,7 @@ public class Enemy : Entity, IDamagalbe
     public float Speed { get; private set; }
 
     [Header("Components")]
-    [SerializeField] private CircleCollider2D chaseRange;
+    [SerializeField] protected CircleCollider2D chaseRange;
     [field: SerializeField] public Rigidbody2D Rigid { get; private set; }
     [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
     [SerializeField] private Animator anim;
