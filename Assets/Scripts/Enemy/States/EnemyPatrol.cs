@@ -26,6 +26,7 @@ namespace EnemeyFSM
             speed = e.PatrolSpeed;
 
             dir = (endPos - startPos).normalized;
+            enemy.spriteRenderer.flipX = dir.x < 0;
 
             rigid = e.Rigid;
 
