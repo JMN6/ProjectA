@@ -11,7 +11,7 @@ public class OptionUI : MonoBehaviour
 
     private void Awake()
     {
-        closeBtn.onClick.AddListener(Toggle);
+        closeBtn.onClick.AddListener(GameManager.Instance.OnESC);
     }
 
     private void OnEnable()
@@ -25,10 +25,16 @@ public class OptionUI : MonoBehaviour
     private void Update()
     {
         GameManager.Instance.ChangeOption(new OptionSO.Option(mouseSensitivity.value, bgmVolume.value, sfxVolume.value));
+
+        SoundManager.Instance.SetBGMVolume(bgmVolume.value);
     }
 
-    public void Toggle()
+    public void Show()
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        gameObject.SetActive(true);
+    }
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

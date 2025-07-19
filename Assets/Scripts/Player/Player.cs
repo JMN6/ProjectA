@@ -53,8 +53,6 @@ public class Player : Entity, IDamagalbe
             animator.SetTrigger("Jump");
             SoundManager.Instance.PlayOneShot(jumpSFX);
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-
-            vehicleRB = null;
         }
     }
 
@@ -64,7 +62,7 @@ public class Player : Entity, IDamagalbe
         
         if (vehicleRB)
         {
-            rigid.velocity = new Vector2(movementDirection * speed, rigid.velocity.y) + vehicleRB.velocity;
+            rigid.velocity = new Vector2(movementDirection * speed + vehicleRB.velocity.x, rigid.velocity.y);
         }
         else
         {
@@ -91,12 +89,16 @@ public class Player : Entity, IDamagalbe
             else
             {
                 animator.SetBool("IsFalling", true);
+
+                vehicleRB = null;
             }
         }
     }
 
     public void GetDamaged(int damage)
     {
+        animator.SetBool("IsDead", true);
+
         SoundManager.Instance.PlayOneShot(deathSFX);
     }
 }

@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 namespace StringUtility
 {
     public class Typing
     {
         public static IEnumerator CoTextTyping(string _targetString, TextMeshProUGUI _text, 
-            WaitForSeconds _wfTypeInterval)
+            WaitForSeconds _wfTypeInterval, Action callback = null)
         {
             var builder = new System.Text.StringBuilder();
 
@@ -18,6 +19,8 @@ namespace StringUtility
                 _text.text = builder.ToString();
                 yield return _wfTypeInterval;
             }
+
+            callback?.Invoke();
         }
     }
 }

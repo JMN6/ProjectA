@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform follow;
-
+    [SerializeField] private Vector3 offset;
     [SerializeField] private Vector2 padding;
 
     public void SetFollow(Transform transform)
@@ -41,5 +41,7 @@ public class CameraFollow : MonoBehaviour
         {
             Debug.LogError("Follow is null!!!!!!!!!!!!!!!!!!!");
         }
+
+        transform.position += offset;
     }
 }

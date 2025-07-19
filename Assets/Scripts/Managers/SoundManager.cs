@@ -43,9 +43,15 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void PlayBGM()
     {
+        _bgmSource.Stop();
         _bgmSource.volume = GameManager.Instance.Option.BgmVolume;
         _bgmSource.clip = _bgm;
         _bgmSource.Play();
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        _bgmSource.volume = volume;
     }
 
     public void PlayOneShot(AudioClip clip)
@@ -54,7 +60,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         {
             if (!audio.isPlaying)
             {
-                audio.volume = GameManager.Instance.Option.BgmVolume;
+                audio.volume = GameManager.Instance.Option.SfxVolume;
                 audio.PlayOneShot(clip);
                 return;
             }
@@ -67,6 +73,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         {
             if (!audio.isPlaying)
             {
+                audio.volume = GameManager.Instance.Option.SfxVolume;
                 audio.clip = clip;
                 audio.Play();
                 return;

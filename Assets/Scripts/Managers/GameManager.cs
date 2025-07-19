@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
@@ -10,14 +11,20 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void OnESC()
     {
-        optionUI.Toggle();
-
         if (Time.timeScale == 0)
         {
+            optionUI.Hide();
+
+            InputManager.Instance.HideCursor();
+            InputManager.Instance.SetInputs(true);
             Time.timeScale = tempTimeScale;
         }
         else
         {
+            optionUI.Show();
+
+            InputManager.Instance.ShowCursor();
+            InputManager.Instance.SetInputs(false);
             Time.timeScale = 0;
         }
     }
