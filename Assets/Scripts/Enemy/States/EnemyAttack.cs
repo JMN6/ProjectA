@@ -49,6 +49,9 @@ namespace EnemeyFSM
 
         private void Attack()
         {
+            if (isTargetFarAway() == true)
+                return;
+
             var res = target.TryAttack();
 
             if(!res)

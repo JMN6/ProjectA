@@ -54,6 +54,8 @@ public class Enemy : Entity, IDamagalbe
         Target = null;
         isParried = false;
 
+        isDead = false;
+
         transform.position = originPosition;
         chaseRange.gameObject.SetActive(true);
 
