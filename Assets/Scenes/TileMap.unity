@@ -273,6 +273,10 @@ PrefabInstance:
       propertyPath: validParryingTime
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 5228912894686045361, guid: e4a990aab70565a4b808f7e7df1e8edc, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2ea06be64eb9b8b40a2b2f773fe0f22b, type: 2}
     - target: {fileID: 9065752412336314827, guid: e4a990aab70565a4b808f7e7df1e8edc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -22.3
