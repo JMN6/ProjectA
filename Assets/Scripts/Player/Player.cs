@@ -10,6 +10,7 @@ public class Player : Entity, IDamagalbe
     private Animator animator;
     private float movementDirection;
     private int curJumpCount;
+    private Rigidbody2D vehicleRB;
     [SerializeField] private int maxJumpCount = 1;
 
     [Header("Audio Clips")]
@@ -52,14 +53,24 @@ public class Player : Entity, IDamagalbe
             animator.SetTrigger("Jump");
             SoundManager.Instance.PlayOneShot(jumpSFX);
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+
+            vehicleRB = null;
         }
     }
 
     private void Update()
     {
-        Debug.Log(curJumpCount);
-        rigid.velocity = new Vector2(movementDirection * speed, rigid.velocity.y);
         animator.SetBool("IsWalking", movementDirection != 0);
+        
+        if (vehicleRB)
+        {
+            rigid.velocity = new Vector2(movementDirection * speed, rigid.velocity.y) + vehicleRB.velocity;
+        }
+        else
+        {
+            rigid.velocity = new Vector2(movementDirection * speed, rigid.velocity.y);
+        }
+
 
         if (rigid.velocity.y < 0.01f)
         {
@@ -69,6 +80,13 @@ public class Player : Entity, IDamagalbe
             {
                 curJumpCount = 0;
                 animator.SetBool("IsFalling", false);
+
+                if (!vehicleRB)
+                {
+                    if (hit.collider.TryGetComponent(out Rigidbody2D rb)) {
+                        vehicleRB = rb;
+                    }
+                }
             }
             else
             {

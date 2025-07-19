@@ -26,9 +26,6 @@ public class MovingPlatforms : InteractableObj
         dir = (end - start).normalized;
 
         transform.position = start;
-        rigid.MovePosition(start);
-
-        speed *= 0.05f;
     }
 
     private void FixedUpdate()
@@ -36,17 +33,15 @@ public class MovingPlatforms : InteractableObj
         if (isMoving == false)
             return;
 
-        Vector2 newPosition = rigid.position + dir * speed;
-        if ((newPosition - end).sqrMagnitude <= 0.03f)
+        rigid.velocity = dir * speed;
+
+        if ((rigid.position - end).sqrMagnitude <= 0.03f)
         {
-            newPosition = end;
             Vector2 temp = end;
             end = start;
             start = temp;
             dir = (end - start).normalized;
         }
-
-        rigid.MovePosition(newPosition);
     }
 
     public override void Activate()
