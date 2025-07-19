@@ -24,7 +24,7 @@ public class Player : Entity
     private AudioSource audioSource;
 
     private bool isInteractable = false;
-    private DialogTrigger trigger;
+    private IInteractable trigger;
 
     private bool isDied = false;
     private CameraFunctions cameraFunctions;
@@ -199,7 +199,7 @@ public class Player : Entity
         }
     }
 
-    public void CanInteract(bool _val, DialogTrigger _trigger = null)
+    public void CanInteract(bool _val, IInteractable _trigger = null)
     {
         isInteractable = _val;
         trigger = _trigger;

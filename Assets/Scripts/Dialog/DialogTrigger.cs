@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogTrigger : MonoBehaviour
+public class DialogTrigger : MonoBehaviour, IInteractable
 {
     [SerializeField] private DialogPlayer dialogPlayer;
     [SerializeField] private string dialogFileName = "TempDialog";

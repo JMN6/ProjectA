@@ -81,12 +81,12 @@ public class CutScenePlayer : MonoBehaviour
 
     private void CutEnd()
     {
+        callBack?.Invoke();
+
         panel.SetActive(false);
 
         InputManager.Instance.HideCursor();
         InputManager.Instance.SetInputs(true);
-
-        callBack?.Invoke();
     }
 
     private void onCutShown()
