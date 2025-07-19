@@ -29,7 +29,6 @@ public class SoundManager : MonoSingleton<SoundManager>
 
         _bgmSource = new GameObject($"Music").AddComponent<AudioSource>();
         _bgmSource.transform.SetParent(rootObj);
-        _bgmSource.volume = 0.2f;
         _bgmSource.loop = true;
         _bgmSource.playOnAwake = false;
 
@@ -42,23 +41,26 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
     }
 
+    public void PlayBGM()
+    {
+        _bgmSource.volume = GameManager.Instance.Option.BgmVolume;
+        _bgmSource.clip = _bgm;
+        _bgmSource.Play();
+    }
+
     public void PlayOneShot(AudioClip clip)
     {
         foreach (var audio in _sfxAudio)
         {
             if (!audio.isPlaying)
             {
+                audio.volume = GameManager.Instance.Option.BgmVolume;
                 audio.PlayOneShot(clip);
                 return;
             }
         }
     }
 
-    public void PlayBGM()
-    {
-        _bgmSource.clip = _bgm;
-        _bgmSource.Play();
-    }
     public void PlaySFX(AudioClip clip)
     {
         foreach (var audio in _sfxAudio)
