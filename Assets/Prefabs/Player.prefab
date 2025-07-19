@@ -235,6 +235,7 @@ MonoBehaviour:
   validParryingTime: 0.3
   jumpSFX: {fileID: 8300000, guid: 68ed1452f12979244ae1e13f3003fd9c, type: 3}
   deathSFX: {fileID: 8300000, guid: 316347070ee3f4342acca25841e9d8b8, type: 3}
+  parrySFX: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
 --- !u!82 &6589169683409846705
 AudioSource:
   m_ObjectHideFlags: 0

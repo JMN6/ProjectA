@@ -58,6 +58,7 @@ public class Player : Entity
 
     public void OnMove(InputValue input)
     {
+
         movementDirection = input.Get<float>();
 
         if(movementDirection == 0)
@@ -79,6 +80,11 @@ public class Player : Entity
         {
             ++curJumpCount;
 
+            rigid.velocity *= Vector2.right;
+
+            audioSource.Stop();
+
+            vehicleRB = null;
             animator.SetTrigger("Jump");
             SoundManager.Instance.PlayOneShot(jumpSFX);
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
@@ -127,41 +133,53 @@ public class Player : Entity
 
     private void Update()
     {
-        if(invincibleTimer > 0) invincibleTimer -= Time.deltaTime;
+        if (invincibleTimer > 0) invincibleTimer -= Time.deltaTime;
 
         animator.SetBool("IsWalking", movementDirection != 0);
         
         if (vehicleRB)
         {
-            rigid.velocity = new Vector2(movementDirection * speed + vehicleRB.velocity.x, rigid.velocity.y);
+            rigid.velocity = new Vector2(movementDirection * speed + vehicleRB.velocity.x, vehicleRB.velocity.y);
+
+            var hit = Physics2D.OverlapCircle(transform.position, 0.3f, 1 << LayerMask.NameToLayer("Ground"));
+
+            if (!hit)
+            {
+                ++curJumpCount;
+                vehicleRB = null;
+                audioSource.Stop();
+            }
         }
         else
         {
             rigid.velocity = new Vector2(movementDirection * speed, rigid.velocity.y);
-        }
 
 
-        if (rigid.velocity.y < 0.051f)
-        {
-            var hit = Physics2D.OverlapCircle(transform.position, 0.5f, 1 << LayerMask.NameToLayer("Ground"));
-
-            if (hit)
+            if (rigid.velocity.y < 0.051f)
             {
-                curJumpCount = 0;
-                animator.SetBool("IsFalling", false);
+                var hit = Physics2D.OverlapCircle(transform.position, 0.3f, 1 << LayerMask.NameToLayer("Ground"));
 
-                if (!vehicleRB)
+                if (hit)
                 {
-                    if (hit.TryGetComponent(out Rigidbody2D rb)) {
-                        vehicleRB = rb;
+                    if (movementDirection != 0) audioSource.Play();
+
+                    curJumpCount = 0;
+                    animator.SetBool("IsFalling", false);
+
+                    if (!vehicleRB)
+                    {
+                        if (hit.TryGetComponent(out Rigidbody2D rb))
+                        {
+                            vehicleRB = rb;
+                        }
                     }
                 }
-            }
-            else
-            {
-                animator.SetBool("IsFalling", true);
+                else
+                {
+                    animator.SetBool("IsFalling", true);
 
-                vehicleRB = null;
+                    vehicleRB = null;
+                }
             }
         }
     }
