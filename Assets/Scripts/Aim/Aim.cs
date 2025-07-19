@@ -34,6 +34,8 @@ public class Aim : MonoBehaviour
     {
         curGun.Shoot(transform.position);
 
+        EffectManager.Instance.PlayParticle(0, transform.position);
+
         SoundManager.Instance.PlayOneShot(shootSFX);
     }
 
