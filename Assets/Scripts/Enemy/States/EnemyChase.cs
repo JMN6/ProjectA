@@ -27,13 +27,14 @@ namespace EnemeyFSM
 
         public override void OnFixedUpdate()
         {
-            ChaseTarget();
+            //ChaseTarget();
         }
 
         public override void OnUpdate()
         {
+            ChaseTarget();
 
-            if(isTargetCloseEnough())
+            if (isTargetCloseEnough())
             {
                 manager.ChangeState(FSMState.Attack);
             }
@@ -52,9 +53,8 @@ namespace EnemeyFSM
                 enemy.spriteRenderer.flipX = newDir < 0f;
             }
 
-            Vector2 newPosition = rigid.position +
-                Vector2.right * newDir * enemy.Speed * 0.05f;
-            rigid.MovePosition(newPosition);
+            rigid.velocity = Vector2.right * newDir * enemy.Speed + 
+                Vector2.up * rigid.velocity.y; 
         }
 
         private bool isTargetCloseEnough()
