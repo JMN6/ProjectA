@@ -66,8 +66,6 @@ public class Enemy : Entity, IDamagalbe
             return;
         }
 
-        EffectManager.Instance.PlayParticle(0, transform.position + Vector3.up);
-
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
         
         if(currentHealth <= 0)

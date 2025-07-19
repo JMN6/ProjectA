@@ -20,6 +20,7 @@ public class Player : Entity
     [Header("Audio Clips")]
     [SerializeField] private AudioClip jumpSFX;
     [SerializeField] private AudioClip deathSFX;
+    [SerializeField] private AudioClip parrySFX;
 
     private AudioSource audioSource;
 
@@ -179,7 +180,7 @@ public class Player : Entity
             StopCoroutine(parryCoroutine);
             isParrying = false;
             cameraFunctions?.Shake();
-            SoundManager.Instance.PlaySFX(jumpSFX);
+            SoundManager.Instance.PlaySFX(parrySFX);
             invincibleTimer = invincibleDuration;
 
             animator.SetBool("IsParrying", false);

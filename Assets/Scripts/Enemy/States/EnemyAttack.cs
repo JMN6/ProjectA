@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 
 namespace EnemeyFSM
@@ -54,6 +55,7 @@ namespace EnemeyFSM
             {
                 enemy.isParried = true;
                 enemy.GetDamaged(3);
+                EffectManager.Instance.PlayParticle(1, enemy.transform.position + Vector3.up);
             }
             else
             {
