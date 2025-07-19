@@ -5,6 +5,12 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform follow;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector2 padding;
+    private Rigidbody2D rigid;
+
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+    }
 
     public void SetFollow(Transform transform)
     {
@@ -36,12 +42,11 @@ public class CameraFollow : MonoBehaviour
                 transform.Translate(0, padding.y - dy, 0);
             }
 
+            transform.position += offset;
         }
         else
         {
             Debug.LogError("Follow is null!!!!!!!!!!!!!!!!!!!");
         }
-
-        transform.position += offset;
     }
 }
