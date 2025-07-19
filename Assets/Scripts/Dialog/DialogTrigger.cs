@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class DialogTrigger : MonoBehaviour
 {
+    [SerializeField] private DialogPlayer player;
+    [SerializeField] private string dialogFileName = "TempDialog";
+    private List<DialogRow> info;
+
+    private LayerMask playerMask;
+
+    private void Start()
+    {
+        info = DialogParser.Convert(dialogFileName);
+        playerMask = LayerMask.NameToLayer("Player");
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // todo. 다이얼로그 출력하기
-        Debug.Log("Dialog Text");
+        if (collision.gameObject.layer != playerMask)
+            return;
+
+        player.StartDialog(info);
     }
 }

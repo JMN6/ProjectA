@@ -22,7 +22,7 @@ public class Enemy : Entity, IDamagalbe
 
     public GameObject Target { get; set; }
 
-    private void Awake()
+    private void Start()
     {
         chaseRange.radius = SightRange;
         Speed = base.speed;
