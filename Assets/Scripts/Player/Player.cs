@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,8 @@ public class Player : Entity, IDamagalbe
     private int curJumpCount;
     private Rigidbody2D vehicleRB;
     [SerializeField] private int maxJumpCount = 1;
+    [SerializeField] private float validParryingTime = 0.3f;
+    private bool isParrying;
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip jumpSFX;
@@ -56,6 +59,34 @@ public class Player : Entity, IDamagalbe
         }
     }
 
+    public void OnInteract()
+    {
+
+    }
+
+    public void OnParry()
+    {
+        StartCoroutine(nameof(CoPrepareParrying));
+    }
+
+    public IEnumerator CoPrepareParrying()
+    {
+        animator.SetBool("IsParrying", true);
+        isParrying = true;
+
+        float timer = 0f;
+
+        while (timer < validParryingTime)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // ½ÇÆÐ
+        animator.SetBool("IsParrying", false);
+        isParrying = false;
+    }
+
     private void Update()
     {
         animator.SetBool("IsWalking", movementDirection != 0);
@@ -97,8 +128,15 @@ public class Player : Entity, IDamagalbe
 
     public void GetDamaged(int damage)
     {
-        animator.SetBool("IsDead", true);
+        if (isParrying)
+        {
 
-        SoundManager.Instance.PlayOneShot(deathSFX);
+        }
+        else
+        {
+            animator.SetBool("IsDead", true);
+
+            SoundManager.Instance.PlayOneShot(deathSFX);
+        }
     }
 }

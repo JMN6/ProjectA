@@ -3,23 +3,17 @@ using UnityEngine.InputSystem;
 
 public class Aim : MonoBehaviour
 {
-    [SerializeField] private Gun curGun;
-
-    //private SpriteRenderer sprite;
+    public Gun CurGun { get; private set; }
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip shootSFX;
 
-    public void Awake()
-    {
-        //sprite = GetComponent<SpriteRenderer>();
-    }
 
     private void Start()
     {
         Show();
 
-        curGun = new Sniper();
+        CurGun = new Sniper();
     }
 
     public void OnSnipe(InputValue input)
@@ -32,27 +26,24 @@ public class Aim : MonoBehaviour
 
     public void OnShoot()
     {
-        curGun.Shoot(transform.position);
+        CurGun.Shoot(transform.position);
 
-        EffectManager.Instance.PlayParticle(0, transform.position);
-
+        // HAVETOMOVE
         SoundManager.Instance.PlayOneShot(shootSFX);
     }
 
     public void OnRecharge()
     {
-        curGun.Recharge();
+        CurGun.Recharge();
     }
 
     public void Hide()
     {
         InputManager.Instance.ShowCursor();
-        //sprite.enabled = false;
     }
 
     public void Show()
     {
         InputManager.Instance.HideCursor();
-        //sprite.enabled = true;
     }
 }

@@ -4,12 +4,12 @@ public class Sniper : Gun
 {
     public override void Recharge()
     {
-        curBullets = maxBullets;
+        CurBullets = MaxBullets;
     }
 
     public override void Shoot(Vector2 position)
     {
-        if (isBulletEnough)
+        if (CurBullets > 0)
         {
             RaycastHit2D hit = Physics2D.Raycast(position, position, TargetLayerMask);
 
@@ -17,10 +17,6 @@ public class Sniper : Gun
             if (hit.collider.TryGetComponent(out IDamagalbe target)) {
                 target.GetDamaged(1);
             }
-        }
-        else
-        {
-            Recharge();
         }
     }
 
