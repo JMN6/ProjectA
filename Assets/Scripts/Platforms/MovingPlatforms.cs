@@ -15,18 +15,20 @@ public class MovingPlatforms : InteractableObj
     [SerializeField] private bool isMoving = true;
     [SerializeField] private float speed;
 
+    private Vector2 initialStart, initialEnd;
     private Vector2 start, end;
     private Vector2 dir;
 
     private void Awake()
     {
-        start = startPos.position;
-        end = endPos.position;
+        start = initialStart = startPos.position;
+        end = initialEnd = endPos.position;
 
         dir = (end - start).normalized;
 
         transform.position = start;
     }
+
 
     private void FixedUpdate()
     {
@@ -52,5 +54,12 @@ public class MovingPlatforms : InteractableObj
     public override void Deactivate()
     {
         isMoving = false;
+
+        start = initialStart = startPos.position;
+        end = initialEnd = endPos.position;
+
+        dir = (end - start).normalized;
+
+        transform.position = start;
     }
 }

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2295489442415680568}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.87, y: -0.51, z: 0}
+  m_LocalPosition: {x: 2.87, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 3438282856367885419}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.16, y: -0.51, z: 0}
+  m_LocalPosition: {x: -5.16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,7 +76,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3817006084746797995, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.51
+      value: -4.39
       objectReference: {fileID: 0}
     - target: {fileID: 3817006084746797995, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
       propertyPath: m_LocalPosition.z
@@ -128,7 +128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8930495063069487502, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5739630756427667615, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
@@ -173,9 +173,11 @@ MonoBehaviour:
   chaseRange: {fileID: 6671725167173813093}
   <Rigid>k__BackingField: {fileID: 3898875011844823680}
   <spriteRenderer>k__BackingField: {fileID: 8643738160213163674}
+  anim: {fileID: 8117981987950394010}
   fsmManager: {fileID: 2415304642021434469}
   startPos: {fileID: 9146673853212794169}
   endPos: {fileID: 7110805067359624497}
+  <PatrolSpeed>k__BackingField: 0.8
 --- !u!114 &2415304642021434469 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6640240152435585871, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
@@ -200,6 +202,11 @@ Transform:
 --- !u!58 &6671725167173813093 stripped
 CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 2392686054698292303, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
+  m_PrefabInstance: {fileID: 9052866348564043562}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8117981987950394010 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 939810182529166768, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
   m_PrefabInstance: {fileID: 9052866348564043562}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &8643738160213163674 stripped

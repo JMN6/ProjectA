@@ -6,11 +6,12 @@ namespace EnemeyFSM
 {
     public class EnemyStatic : EnemyFSMState
     {
-        public override void OnEnter() { }
+        public override void OnEnter() {
+            enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Idle);
+        }
 
         public override void OnUpdate()
         {
-            // todo. 局聪皋捞记 贸府
         }
 
         public override void OnTriggerEnter(Collider2D collision)

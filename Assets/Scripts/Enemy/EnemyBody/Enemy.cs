@@ -7,6 +7,7 @@ public class Enemy : Entity, IDamagalbe
 {
     public enum EnemyAnimation
     {
+        Idle,
         Patrol,
         Run,
         Attack,
@@ -35,6 +36,14 @@ public class Enemy : Entity, IDamagalbe
     {
         chaseRange.radius = SightRange;
         Speed = base.speed;
+    }
+
+    private void OnEnable()
+    {
+        currentHealth = maxHealth;
+        SetAnimationTrigger(EnemyAnimation.Idle);
+
+        Target = null;
     }
 
     public void GetDamaged(int damage)

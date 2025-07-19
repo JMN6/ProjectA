@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using StringUtility;
+using System;
 
 public class CutScenePlayer : MonoBehaviour
 {
@@ -22,19 +23,23 @@ public class CutScenePlayer : MonoBehaviour
     private List<CutSceneRow> cutSceneInfo = null;
     private int currentRow = -1;
 
+    private Action callBack = null;
+
     private void Start()
     {
         wfTextInterval = new WaitForSeconds(textShowIntervalSpeed);
         wfNextCut = new WaitForSeconds(moveToNextCutSpeed);
     }
 
-    public void StartDialog(in List<CutSceneRow> rows)
+    public void StartCutScene(in List<CutSceneRow> rows, Action callback = null)
     {
         cutSceneInfo = rows;
         if (cutSceneInfo.Count <= 0)
         {
             return;
         }
+
+        this.callBack = callback;
 
         panel.SetActive(true);
 
@@ -80,6 +85,8 @@ public class CutScenePlayer : MonoBehaviour
 
         InputManager.Instance.HideCursor();
         InputManager.Instance.SetInputs(true);
+
+        callBack?.Invoke();
     }
 
     private void onCutShown()

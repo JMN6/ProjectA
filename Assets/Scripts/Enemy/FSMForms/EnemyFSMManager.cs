@@ -57,6 +57,11 @@ namespace EnemeyFSM
             ChangeState(startState);
         }
 
+        private void OnEnable()
+        {
+            ChangeState(startState);
+        }
+
         public void ChangeState(FSMState _newState)
         {
             if (currentState != FSMState.MAX)

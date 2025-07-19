@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class BreakableObject : MonoBehaviour, IDamagalbe
 {
+    [SerializeField] private SpriteRenderer sp;
+    [SerializeField] private Sprite OnSprite;
+    [SerializeField] private Sprite OffSprite;
     [SerializeField] private InteractableObj[] connectedObjects = new InteractableObj[0];
 
     private void Start()
     {
         gameObject.layer = LayerMask.NameToLayer("InteractableObject");
+    }
+
+    private void OnEnable()
+    {
+        sp.sprite = OnSprite;
+
+        foreach (var _ in connectedObjects)
+        {
+            _.Deactivate();
+        }
     }
 
     public void GetDamaged(int damage)
@@ -28,7 +41,6 @@ public class BreakableObject : MonoBehaviour, IDamagalbe
 
     private void ShowEffect()
     {
-        // todo. 부셔지는 이펙트 추가해야함
-        gameObject.SetActive(false);
+        sp.sprite = OffSprite;
     }
 }
