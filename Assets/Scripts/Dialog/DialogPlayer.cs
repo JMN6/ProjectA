@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using StringUtility;
 
 public class DialogPlayer : MonoBehaviour
 {
@@ -77,20 +78,8 @@ public class DialogPlayer : MonoBehaviour
 
     private void ShowText()
     {
-        StartCoroutine(CoShowText());
-    }
-
-    private IEnumerator CoShowText()
-    {
-        string newText = string.Empty;
-        string targetText = dialogInfo[currentRow].Text;
-        foreach(var _ in targetText)
-        {
-            newText += _;
-            text.text = newText;
-
-            yield return wfTextInterval;
-        }
+        StartCoroutine(Typing.CoTextTyping(
+            dialogInfo[currentRow].Text, text, wfTextInterval));
     }
 
     private void StopText()
