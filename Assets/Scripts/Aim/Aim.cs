@@ -1,12 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Aim : MonoBehaviour
 {
-    [Range(0, 99)]
-    [SerializeField] private float sensitivity;
-
     [SerializeField] private Gun curGun;
 
     //private SpriteRenderer sprite;
@@ -29,8 +25,9 @@ public class Aim : MonoBehaviour
     public void OnSnipe(InputValue input)
     {
         var val = input.Get<Vector2>();
+        var sensitivity = GameManager.Instance.Option.MouseSensitivity;
 
-        transform.Translate(val / (200 - sensitivity));
+        transform.Translate(val * sensitivity * sensitivity * 0.01f);
     }
 
     public void OnShoot()
