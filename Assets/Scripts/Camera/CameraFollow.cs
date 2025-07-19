@@ -12,10 +12,16 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform bottom;
     [SerializeField] private Transform top;
 
+    [SerializeField] private CameraFunctions camFunc;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         cam = GetComponent<Camera>();
+    }
+
+    private void Start()
+    {
     }
 
     public void SetFollow(Transform transform)

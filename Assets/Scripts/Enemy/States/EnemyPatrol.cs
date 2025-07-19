@@ -21,8 +21,8 @@ namespace EnemeyFSM
             enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Patrol);
 
             PatrolEnemy e = enemy as PatrolEnemy;
-            startPos = e.StartPos.position;
-            endPos = e.EndPos.position;
+            startPos = e.StartPos;
+            endPos = e.EndPos;
             speed = e.PatrolSpeed;
 
             dir = (endPos - startPos).normalized;
@@ -32,6 +32,8 @@ namespace EnemeyFSM
             elapsedTime = 0f;
 
             enemy.transform.position = startPos;
+
+            enemy.Rigid.velocity = Vector2.zero;
         }
 
         public override void OnFixedUpdate()

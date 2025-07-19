@@ -23,12 +23,27 @@ public class Player : Entity
 
     private AudioSource audioSource;
 
+    private bool isInteractable = false;
+    private DialogTrigger trigger;
+
+    private bool isDied = false;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        ResetPlayer();
+    }
+
+    public void ResetPlayer()
+    {
+        isDied = false;
+        isInteractable = false;
+
+        animator.SetBool("IsDead", false);
     }
 
     public void OnMove(InputValue input)
@@ -62,13 +77,22 @@ public class Player : Entity
 
     public void OnInteract()
     {
+        if(isInteractable == false)
+        {
+            return;
+        }
 
+        trigger.Interact();
+        isInteractable = false;
+        trigger = null;
     }
 
     public void OnParry()
     {
         if(!isParrying)
         {
+            InputManager.Instance.SetPlayerInput(false);
+
             parryCoroutine = StartCoroutine(CoPrepareParrying());
         }
     }
@@ -87,6 +111,7 @@ public class Player : Entity
         }
 
         // ½ÇÆÐ
+        InputManager.Instance.SetPlayerInput(true);
         animator.SetBool("IsParrying", false);
         isParrying = false;
     }
@@ -132,26 +157,37 @@ public class Player : Entity
 
     public bool TryAttack()
     {
+        if (isDied == true)
+            return true;
+        
         if (isParrying)
         {
             animator.SetTrigger("Parry");
-
-            animator.SetBool("IsParrying", false);
-
             StopCoroutine(parryCoroutine);
+            isParrying = false;
             //speed = 5;
             SoundManager.Instance.PlaySFX(jumpSFX);
-            isParrying = false;
 
+            animator.SetBool("IsParrying", false);
+            InputManager.Instance.SetPlayerInput(true);
             return false;
         }
         else
         {
+            isDied = true;
+            GameManager.Instance.GameOver();
+
             animator.SetBool("IsDead", true);
 
             SoundManager.Instance.PlayOneShot(deathSFX);
 
             return true;
         }
+    }
+
+    public void CanInteract(bool _val, DialogTrigger _trigger = null)
+    {
+        isInteractable = _val;
+        trigger = _trigger;
     }
 }
