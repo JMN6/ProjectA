@@ -328,6 +328,7 @@ MonoBehaviour:
   <AttackDelay>k__BackingField: 1
   <SightRange>k__BackingField: 3
   chaseRange: {fileID: 2392686054698292303}
+  attackRange: {fileID: 5187031100326390299}
   <Rigid>k__BackingField: {fileID: 5456581334746467754}
   <spriteRenderer>k__BackingField: {fileID: 744932277728913840}
   anim: {fileID: 939810182529166768}

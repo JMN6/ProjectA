@@ -5,8 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class GameStarter : MonoBehaviour
 {
+    [SerializeField] private CutScenePlayer cutScenePlayer;
+    [SerializeField] private string ClearCutScene = "TempCutScene";
+    private void Awake()
+    {
+        InputManager.Instance.ShowCursor();
+    }
+
     public void GameStart()
     {
-        SceneManager.LoadScene(1);
+        cutScenePlayer.StartCutScene(CutSceneParser.Convert(ClearCutScene),
+            () => SceneManager.LoadScene(1));
+        
     }
 }

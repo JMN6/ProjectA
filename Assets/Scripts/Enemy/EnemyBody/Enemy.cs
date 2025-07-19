@@ -22,6 +22,7 @@ public class Enemy : Entity, IDamagalbe
 
     [Header("Components")]
     [SerializeField] protected CircleCollider2D chaseRange;
+    [SerializeField] protected BoxCollider2D attackRange;
     [field: SerializeField] public Rigidbody2D Rigid { get; private set; }
     [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
     [SerializeField] private Animator anim;
@@ -43,6 +44,7 @@ public class Enemy : Entity, IDamagalbe
 
     protected virtual void Awake()
     {
+        attackRange.size = attackRange.size * AttackRange;
         chaseRange.radius = SightRange;
         Speed = base.speed;
 

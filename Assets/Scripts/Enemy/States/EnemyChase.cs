@@ -43,15 +43,15 @@ namespace EnemeyFSM
 
         private void ChaseTarget()
         {
-            float dir = rigid.position.x - targetTrasnform.position.x;
-            int newDir = Convert.ToInt32(Mathf.Sign(dir)) * -1;
+            float dir = (targetTrasnform.position - rigid.transform.position).x;
+            int newDir = Convert.ToInt32(Mathf.Sign(dir));
 
             // 스프라이트 방향 바꾸기
             if(targetDirection != newDir && newDir != 0)
             {
                 targetDirection = newDir;
 
-                enemy.spriteRenderer.flipX = newDir < 0f;
+                enemy.spriteRenderer.flipX = dir < 0f;
             }
 
             rigid.velocity = Vector2.right * newDir * enemy.Speed + 
