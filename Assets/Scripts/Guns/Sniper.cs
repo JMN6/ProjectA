@@ -9,7 +9,7 @@ public class Sniper : Gun
 
     public override void Shoot(Vector2 position)
     {
-        if (CurBullets > 0)
+        if (CurBullets == 0)
         {
             RaycastHit2D hit = Physics2D.Raycast(position, position, TargetLayerMask);
 
