@@ -105,13 +105,12 @@ public class Player : Entity
         }
 
 
-        if (rigid.velocity.y < 0.05f)
+        if (rigid.velocity.y < 0.051f)
         {
             var hit = Physics2D.OverlapCircle(transform.position, 0.5f, 1 << LayerMask.NameToLayer("Ground"));
 
             if (hit)
             {
-                Debug.Log("¹Ù´ÚÀÓ");
                 curJumpCount = 0;
                 animator.SetBool("IsFalling", false);
 
@@ -135,6 +134,10 @@ public class Player : Entity
     {
         if (isParrying)
         {
+            animator.SetTrigger("Parry");
+
+            animator.SetBool("IsParrying", false);
+
             StopCoroutine(parryCoroutine);
             //speed = 5;
             SoundManager.Instance.PlaySFX(jumpSFX);
