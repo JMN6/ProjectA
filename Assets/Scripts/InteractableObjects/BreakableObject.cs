@@ -11,6 +11,15 @@ public class BreakableObject : MonoBehaviour, IDamagalbe
         gameObject.layer = LayerMask.NameToLayer("InteractableObject");
     }
 
+    private void OnEnable()
+    {
+        // todo. 여기에서 다시 초기화 세팅 진행 해야함
+        foreach (var _ in connectedObjects)
+        {
+            _.Deactivate();
+        }
+    }
+
     public void GetDamaged(int damage)
     {
         ShowEffect();
