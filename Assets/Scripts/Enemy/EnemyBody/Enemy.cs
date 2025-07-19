@@ -55,6 +55,8 @@ public class Enemy : Entity, IDamagalbe
         isParried = false;
 
         transform.position = originPosition;
+        chaseRange.gameObject.SetActive(true);
+
     }
 
     public void GetDamaged(int damage)
@@ -73,6 +75,11 @@ public class Enemy : Entity, IDamagalbe
             fsmManager.ChangeState(FSMState.Death);
             isDead = true;
         }
+    }
+
+    public void StopLookingForPlayer()
+    {
+        chaseRange.gameObject.SetActive(false);
     }
 
     public void DestroySelf()
