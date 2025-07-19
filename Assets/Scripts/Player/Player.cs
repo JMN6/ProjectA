@@ -72,7 +72,7 @@ public class Player : Entity, IDamagalbe
 
         if (rigid.velocity.y < 0.01f)
         {
-            RaycastHit2D hit = Physics2D.Raycast(rigid.position, Vector2.down, 0.1f, 1 << LayerMask.NameToLayer("Ground")); // ¶¥ ·¹ÀÌ¾î¸¸
+            RaycastHit2D hit = Physics2D.Raycast(rigid.position, Vector2.down, 0.5f, 1 << LayerMask.NameToLayer("Ground")); // ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾î¸¸
 
             if (hit)
             {
