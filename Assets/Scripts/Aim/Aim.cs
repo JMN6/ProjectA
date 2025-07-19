@@ -10,6 +10,7 @@ public class Aim : MonoBehaviour
     [SerializeField] private AudioClip notEnoughBulletSFX;
     [SerializeField] private AudioClip reloadSFX;
 
+    private CameraFunctions cameraFunctions;
     private float cooldown;
 
     private void Start()
@@ -17,6 +18,8 @@ public class Aim : MonoBehaviour
         Show();
 
         CurGun = new Sniper(1f, 5);
+
+        cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
     }
 
     private void Update()
@@ -44,6 +47,7 @@ public class Aim : MonoBehaviour
                 cooldown = CurGun.Cooltime;
 
                 CurGun.Shoot(transform.position);
+                cameraFunctions.Shake();
                 SoundManager.Instance.PlayOneShot(shootSFX);
             }
         }

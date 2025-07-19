@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -44,5 +43,10 @@ public class CameraFunctions : MonoBehaviour
         _callback?.Invoke();
     }
 
-
+    public void Shake()
+    {
+        Zoom(0.08f, 1.05f,
+            () => Zoom(0.05f, 0.9f,
+            () => Zoom(0.05f, 1f)));
+    }
 }

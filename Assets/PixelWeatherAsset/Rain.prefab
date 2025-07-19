@@ -14533,7 +14533,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 92f7e0f12bb8eff418abfeb9d0eaf2d4, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24278,7 +24277,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 6e5cf14a6fd73e044bd6a6d2cccb290d, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24400,6 +24398,10 @@ PrefabInstance:
     - target: {fileID: 1850119321979732563, guid: 045c8e5bc6551a240a347694d638aee5, type: 3}
       propertyPath: m_Name
       value: LightningBolt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999503930892561534, guid: 045c8e5bc6551a240a347694d638aee5, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1999503930892561534, guid: 045c8e5bc6551a240a347694d638aee5, type: 3}
       propertyPath: m_Materials.Array.data[0]

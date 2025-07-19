@@ -13,7 +13,7 @@ public class Player : Entity
     private int curJumpCount;
     private Rigidbody2D vehicleRB;
     [SerializeField] private int maxJumpCount = 1;
-    [SerializeField] private float validParryingTime = 1f;
+    [SerializeField] private float validParryingTime = 0.3f;
     private bool isParrying;
     private Coroutine parryCoroutine;
 
@@ -27,6 +27,10 @@ public class Player : Entity
     private DialogTrigger trigger;
 
     private bool isDied = false;
+    private CameraFunctions cameraFunctions;
+
+    private float invincibleTimer = 0f;
+    private float invincibleDuration = 0.3f;
 
     private void Awake()
     {
@@ -36,6 +40,11 @@ public class Player : Entity
         audioSource = GetComponent<AudioSource>();
 
         ResetPlayer();
+    }
+
+    private void Start()
+    {
+        cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
     }
 
     public void ResetPlayer()
@@ -110,7 +119,6 @@ public class Player : Entity
             yield return null;
         }
 
-        // ½ÇÆÐ
         InputManager.Instance.SetPlayerInput(true);
         animator.SetBool("IsParrying", false);
         isParrying = false;
@@ -118,6 +126,8 @@ public class Player : Entity
 
     private void Update()
     {
+        if(invincibleTimer > 0) invincibleTimer -= Time.deltaTime;
+
         animator.SetBool("IsWalking", movementDirection != 0);
         
         if (vehicleRB)
@@ -157,6 +167,9 @@ public class Player : Entity
 
     public bool TryAttack()
     {
+        if (invincibleTimer > 0)
+            return true;
+
         if (isDied == true)
             return true;
         
@@ -165,8 +178,9 @@ public class Player : Entity
             animator.SetTrigger("Parry");
             StopCoroutine(parryCoroutine);
             isParrying = false;
-            //speed = 5;
+            cameraFunctions?.Shake();
             SoundManager.Instance.PlaySFX(jumpSFX);
+            invincibleTimer = invincibleDuration;
 
             animator.SetBool("IsParrying", false);
             InputManager.Instance.SetPlayerInput(true);

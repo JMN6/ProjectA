@@ -53,7 +53,7 @@ namespace EnemeyFSM
             if(!res)
             {
                 enemy.isParried = true;
-                enemy.GetDamaged(2);
+                enemy.GetDamaged(3);
             }
             else
             {
