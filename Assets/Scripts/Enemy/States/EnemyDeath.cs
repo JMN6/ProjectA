@@ -14,7 +14,7 @@ namespace EnemeyFSM
             bool isLeft = enemy.spriteRenderer.flipX;
             Vector2 forceVec= (Vector2.up + (isLeft ? Vector2.right : Vector2.right * -1f)).normalized;
 
-            enemy.Rigid.AddForce(forceVec * 100f);
+            enemy.Rigid.AddForce(forceVec * 100f * (enemy.isParried ? 3f: 1f));
             enemy.SetAnimationTrigger(Enemy.EnemyAnimation.IsDead);
             elaspedTime = 0f;
         }

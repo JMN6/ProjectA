@@ -32,6 +32,8 @@ public class Enemy : Entity, IDamagalbe
 
     public GameObject Target { get; set; }
 
+    public bool isParried { get; set; }
+
     private void Start()
     {
         chaseRange.radius = SightRange;
@@ -44,6 +46,7 @@ public class Enemy : Entity, IDamagalbe
         SetAnimationTrigger(EnemyAnimation.Idle);
 
         Target = null;
+        isParried = false;
     }
 
     public void GetDamaged(int damage)

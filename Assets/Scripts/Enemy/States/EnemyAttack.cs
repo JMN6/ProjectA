@@ -34,13 +34,6 @@ namespace EnemeyFSM
 
         public override void OnUpdate()
         {
-            // todo. 공격 로직 수정
-            if(isAttacking == true)
-            {
-                Attack();
-                return;
-            }
-
             CoolTime();
 
             if(isTargetFarAway() == true)
@@ -55,6 +48,7 @@ namespace EnemeyFSM
 
             if(!res)
             {
+                enemy.isParried = true;
                 enemy.GetDamaged(2);
             }
             else
@@ -67,6 +61,9 @@ namespace EnemeyFSM
 
         private void CoolTime()
         {
+            if (isAttacking == true)
+                return;
+
             elpasedTime += Time.deltaTime;
             if(elpasedTime >= enemy.AttackDelay)
             {
@@ -75,11 +72,18 @@ namespace EnemeyFSM
             }
         }
 
+        public override void OnTriggerEnter(Collider2D collision)
+        {
+            if (isAttacking == true)
+            {
+                Attack();
+            }
+        }
+
         private bool isTargetFarAway()
         {
             return ((Vector2)enemy.Target.transform.position - enemy.Rigid.position).sqrMagnitude > sqrRange;
         }
-
 
         public override void OnExit()
         {

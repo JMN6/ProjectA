@@ -36,7 +36,6 @@ namespace EnemeyFSM
         public virtual void OnCollisionStay(Collision2D collision) { }
         public virtual void OnCollisionExit(Collision2D collision) { }
 
-
         public abstract void OnExit();
     }
 }
