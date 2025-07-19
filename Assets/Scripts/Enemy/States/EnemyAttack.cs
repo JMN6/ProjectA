@@ -6,7 +6,7 @@ namespace EnemeyFSM
 {
     public class EnemyAttack : EnemyFSMState
     {
-        private IDamagalbe target;
+        private Player target;
         private float elpasedTime = 0f;
         private bool isAttacking = false;
 
@@ -18,7 +18,7 @@ namespace EnemeyFSM
             enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Attack);
 
             sqrRange = enemy.AttackRange * enemy.AttackRange;
-            target = enemy.Target.GetComponent<IDamagalbe>();
+            target = enemy.Target.GetComponent<Player>();
             if(target == null)
             {
 #if UNITY_EDITOR
@@ -51,10 +51,18 @@ namespace EnemeyFSM
 
         private void Attack()
         {
-            target.GetDamaged(enemy.Damage);
-            // todo. 디버그 코드 지우기
-            Debug.Log("Attack");
-            isAttacking = false;
+            var res = target.TryAttack();
+
+            if(!res)
+            {
+                enemy.GetDamaged(2);
+            }
+            else
+            {
+                // todo. 디버그 코드 지우기
+                Debug.Log("Attack");
+                isAttacking = false;
+            }
         }
 
         private void CoolTime()

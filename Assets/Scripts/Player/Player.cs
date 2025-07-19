@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : Entity, IDamagalbe
+public class Player : Entity
 {
     [SerializeField] private float jumpPower;
 
@@ -13,8 +13,9 @@ public class Player : Entity, IDamagalbe
     private int curJumpCount;
     private Rigidbody2D vehicleRB;
     [SerializeField] private int maxJumpCount = 1;
-    [SerializeField] private float validParryingTime = 0.3f;
+    [SerializeField] private float validParryingTime = 1f;
     private bool isParrying;
+    private Coroutine parryCoroutine;
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip jumpSFX;
@@ -66,7 +67,10 @@ public class Player : Entity, IDamagalbe
 
     public void OnParry()
     {
-        StartCoroutine(nameof(CoPrepareParrying));
+        if(!isParrying)
+        {
+            parryCoroutine = StartCoroutine(CoPrepareParrying());
+        }
     }
 
     public IEnumerator CoPrepareParrying()
@@ -101,18 +105,19 @@ public class Player : Entity, IDamagalbe
         }
 
 
-        if (rigid.velocity.y < 0.01f)
+        if (rigid.velocity.y < 0.05f)
         {
-            RaycastHit2D hit = Physics2D.Raycast(rigid.position, Vector2.down, 0.5f, 1 << LayerMask.NameToLayer("Ground")); // ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾î¸¸
+            var hit = Physics2D.OverlapCircle(transform.position, 0.5f, 1 << LayerMask.NameToLayer("Ground"));
 
             if (hit)
             {
+                Debug.Log("¹Ù´ÚÀÓ");
                 curJumpCount = 0;
                 animator.SetBool("IsFalling", false);
 
                 if (!vehicleRB)
                 {
-                    if (hit.collider.TryGetComponent(out Rigidbody2D rb)) {
+                    if (hit.TryGetComponent(out Rigidbody2D rb)) {
                         vehicleRB = rb;
                     }
                 }
@@ -126,17 +131,24 @@ public class Player : Entity, IDamagalbe
         }
     }
 
-    public void GetDamaged(int damage)
+    public bool TryAttack()
     {
         if (isParrying)
         {
+            StopCoroutine(parryCoroutine);
+            //speed = 5;
+            SoundManager.Instance.PlaySFX(jumpSFX);
+            isParrying = false;
 
+            return false;
         }
         else
         {
             animator.SetBool("IsDead", true);
 
             SoundManager.Instance.PlayOneShot(deathSFX);
+
+            return true;
         }
     }
 }
