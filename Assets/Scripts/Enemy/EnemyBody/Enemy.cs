@@ -34,6 +34,8 @@ public class Enemy : Entity, IDamagalbe
 
     public bool isParried { get; set; }
 
+    public bool isDead { get; set; }
+
     private void Start()
     {
         chaseRange.radius = SightRange;
@@ -51,6 +53,11 @@ public class Enemy : Entity, IDamagalbe
 
     public void GetDamaged(int damage)
     {
+        if(isDead == true)
+        {
+            return;
+        }
+
         EffectManager.Instance.PlayParticle(0, transform.position + Vector3.up);
 
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
@@ -58,6 +65,7 @@ public class Enemy : Entity, IDamagalbe
         if(currentHealth <= 0)
         {
             fsmManager.ChangeState(FSMState.Death);
+            isDead = true;
         }
     }
 
