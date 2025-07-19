@@ -133,6 +133,8 @@ public class Player : Entity
 
     private void Update()
     {
+        audioSource.volume = GameManager.Instance.Option.SfxVolume;
+
         if (invincibleTimer > 0) invincibleTimer -= Time.deltaTime;
 
         animator.SetBool("IsWalking", movementDirection != 0);
