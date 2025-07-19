@@ -6,6 +6,11 @@ public class BreakableObject : MonoBehaviour, IDamagalbe
 {
     [SerializeField] private InteractableObj[] connectedObjects = new InteractableObj[0];
 
+    private void Start()
+    {
+        gameObject.layer = LayerMask.NameToLayer("InteractableObject");
+    }
+
     public void GetDamaged(int damage)
     {
         ShowEffect();
