@@ -11,11 +11,15 @@ public class Sniper : Gun
     {
         if (CurBullets == 0)
         {
-            RaycastHit2D hit = Physics2D.Raycast(position, position, TargetLayerMask);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(position, position, TargetLayerMask);
 
-            if (!hit) return;
-            if (hit.collider.TryGetComponent(out IDamagalbe target)) {
-                target.GetDamaged(1);
+            foreach (var hit in hits)
+            {
+                if (hit.collider.TryGetComponent(out IDamagalbe target))
+                {
+                    target.GetDamaged(1);
+                    return;
+                }
             }
         }
     }
