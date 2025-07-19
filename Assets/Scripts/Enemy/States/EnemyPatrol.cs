@@ -14,11 +14,16 @@ namespace EnemeyFSM
 
         private float elapsedTime = 0f;
 
+        private float speed;
+
         public override void OnEnter()
         {
+            enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Patrol);
+
             PatrolEnemy e = enemy as PatrolEnemy;
             startPos = e.StartPos.position;
             endPos = e.EndPos.position;
+            speed = e.PatrolSpeed;
 
             dir = (endPos - startPos).normalized;
 
@@ -31,14 +36,16 @@ namespace EnemeyFSM
 
         public override void OnFixedUpdate()
         {
-            Vector2 newPosition = rigid.position + dir * enemy.Speed * 0.05f;
-            if((newPosition - endPos).sqrMagnitude <= 0.05f)
+            Vector2 newPosition = rigid.position + dir * speed * 0.05f;
+            if((newPosition - endPos).sqrMagnitude <= 0.5f)
             {
                 newPosition = endPos;
                 Vector2 temp = endPos;
                 endPos = startPos;
                 startPos = temp;
                 dir = (endPos - startPos).normalized;
+
+                enemy.spriteRenderer.flipX = dir.x < 0;
             }
 
             rigid.MovePosition(newPosition);

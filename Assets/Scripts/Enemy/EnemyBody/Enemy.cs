@@ -5,6 +5,14 @@ using EnemeyFSM;
 
 public class Enemy : Entity, IDamagalbe
 {
+    public enum EnemyAnimation
+    {
+        Patrol,
+        Run,
+        Attack,
+        IsDead
+    }
+
     [field: SerializeField] public int Damage { get; private set; } // °ø°Ý·Â
     [field: SerializeField] public string Id { get; private set; }
     [field: SerializeField] public float AttackRange { get; private set; }
@@ -17,6 +25,7 @@ public class Enemy : Entity, IDamagalbe
     [SerializeField] private CircleCollider2D chaseRange;
     [field: SerializeField] public Rigidbody2D Rigid { get; private set; }
     [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
+    [SerializeField] private Animator anim;
 
     [SerializeField] private EnemyFSMManager fsmManager;
 
@@ -40,6 +49,12 @@ public class Enemy : Entity, IDamagalbe
 
     public void DestroySelf()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
+    }
+
+    public void SetAnimationTrigger(EnemyAnimation _trigger)
+    {
+        anim.SetTrigger(_trigger.ToString());
     }
 }

@@ -6,10 +6,17 @@ namespace EnemeyFSM
 {
     public class EnemyDeath : EnemyFSMState
     {
+        private static readonly float animationLength = 0.75f;
+        private float elaspedTime = 0f;
+
         public override void OnEnter()
         {
-            // todo: 임시 코드
-            enemy.DestroySelf();
+            bool isLeft = enemy.spriteRenderer.flipX;
+            Vector2 forceVec= (Vector2.up + (isLeft ? Vector2.right : Vector2.right * -1f)).normalized;
+
+            enemy.Rigid.AddForce(forceVec * 100f);
+            enemy.SetAnimationTrigger(Enemy.EnemyAnimation.IsDead);
+            elaspedTime = 0f;
         }
 
         public override void OnExit()
@@ -18,6 +25,11 @@ namespace EnemeyFSM
 
         public override void OnUpdate()
         {
+            elaspedTime += Time.deltaTime;
+            if(elaspedTime >= animationLength)
+            {
+                enemy.DestroySelf();
+            }
         }
     }
 }

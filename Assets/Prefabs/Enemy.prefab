@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1725802762888275454}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.05, y: 0.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 5456581334746467754}
   - component: {fileID: 5739630756427667615}
   - component: {fileID: 6640240152435585871}
+  - component: {fileID: 939810182529166768}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -145,7 +146,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -1524987722, guid: f3efad688b2f39249a0151b62b342f66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -188,18 +189,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: 0, y: 0.84375}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.1875, y: 1.6875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.1875, y: 1.6875}
   m_EdgeRadius: 0
 --- !u!50 &5456581334746467754
 Rigidbody2D:
@@ -242,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 2
-  speed: 5
+  speed: 1
   <Damage>k__BackingField: 1
   <Id>k__BackingField: id
   <AttackRange>k__BackingField: 1.5
@@ -251,6 +252,7 @@ MonoBehaviour:
   chaseRange: {fileID: 2392686054698292303}
   <Rigid>k__BackingField: {fileID: 5456581334746467754}
   <spriteRenderer>k__BackingField: {fileID: 744932277728913840}
+  anim: {fileID: 939810182529166768}
   fsmManager: {fileID: 6640240152435585871}
 --- !u!114 &6640240152435585871
 MonoBehaviour:
@@ -275,3 +277,24 @@ MonoBehaviour:
   - <StateName>k__BackingField: 3
     <ScriptsName>k__BackingField: 4
   startState: 0
+--- !u!95 &939810182529166768
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930495063069487502}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 53020425e27ba9c45b9c666d72c3cb14, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
