@@ -25,9 +25,8 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private StageDatas[] datas;
 
     [Header("CutScene")]
-    [SerializeField] private string ClearCutScene = "TempCutScene";
     [SerializeField] private CutScenePlayer cutScenePlayer;
-    [SerializeField] private bool isCutScenePlay = false;
+    //[SerializeField] private bool isCutScenePlay = false;
 
     [Header("Camara")]
     [SerializeField] private CameraFunctions camFunc;
@@ -39,24 +38,6 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private float zoomOutScale = 1f;
 
     private float tempTimeScale = 1;
-
-    public void Start()
-    {
-#if UNITY_EDITOR
-        if (isCutScenePlay == false)
-            return;
-#endif
-
-        InputManager.Instance.ShowCursor();
-        InputManager.Instance.SetInputs(false);
-
-        cutScenePlayer.StartCutScene(CutSceneParser.Convert(ClearCutScene), () =>
-        {
-            InputManager.Instance.HideCursor();
-            InputManager.Instance.SetPlayerInput(true);
-            InputManager.Instance.SetAimInput(false);
-        });
-    }
 
 
     public void OnESC()
@@ -98,12 +79,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void GameClear()
     {
-        cutScenePlayer.StartCutScene(CutSceneParser.Convert(ClearCutScene), ReturnToMain);
-    }
-
-    private void ReturnToMain()
-    {
-        // 여기서 엔딩 컷씬 이후 로직 추가
+        //cutScenePlayer.StartCutScene(CutSceneParser.Convert(ClearCutScene), ReturnToMain);
     }
 
     public void GameOver()
