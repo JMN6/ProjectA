@@ -91,6 +91,8 @@ public class Player : Entity
     {
         if(!isParrying)
         {
+            InputManager.Instance.SetPlayerInput(false);
+
             parryCoroutine = StartCoroutine(CoPrepareParrying());
         }
     }
@@ -109,6 +111,7 @@ public class Player : Entity
         }
 
         // ½ÇÆÐ
+        InputManager.Instance.SetPlayerInput(true);
         animator.SetBool("IsParrying", false);
         isParrying = false;
     }
@@ -127,13 +130,12 @@ public class Player : Entity
         }
 
 
-        if (rigid.velocity.y < 0.05f)
+        if (rigid.velocity.y < 0.051f)
         {
             var hit = Physics2D.OverlapCircle(transform.position, 0.5f, 1 << LayerMask.NameToLayer("Ground"));
 
             if (hit)
             {
-                
                 curJumpCount = 0;
                 animator.SetBool("IsFalling", false);
 
@@ -160,11 +162,14 @@ public class Player : Entity
         
         if (isParrying)
         {
+            animator.SetTrigger("Parry");
             StopCoroutine(parryCoroutine);
+            isParrying = false;
             //speed = 5;
             SoundManager.Instance.PlaySFX(jumpSFX);
-            isParrying = false;
 
+            animator.SetBool("IsParrying", false);
+            InputManager.Instance.SetPlayerInput(true);
             return false;
         }
         else
