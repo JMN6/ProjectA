@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace EnemeyFSM
@@ -54,8 +52,7 @@ namespace EnemeyFSM
                 enemy.spriteRenderer.flipX = dir < 0f;
             }
 
-            rigid.velocity = Vector2.right * newDir * enemy.Speed + 
-                Vector2.up * rigid.velocity.y; 
+            rigid.velocity = new Vector2 (newDir * enemy.Speed, rigid.velocity.y);
         }
 
         private bool isTargetCloseEnough()

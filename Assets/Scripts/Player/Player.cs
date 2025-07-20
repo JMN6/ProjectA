@@ -159,7 +159,7 @@ public class Player : Entity
 
             if (rigid.velocity.y < 0.051f)
             {
-                var hit = Physics2D.OverlapCircle(transform.position, 0.3f, 1 << LayerMask.NameToLayer("Ground"));
+                var hit = Physics2D.OverlapCircle(transform.position, 0.05f, 1 << LayerMask.NameToLayer("Ground"));
 
                 if (hit)
                 {

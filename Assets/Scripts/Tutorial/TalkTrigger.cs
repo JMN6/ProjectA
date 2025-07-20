@@ -4,7 +4,9 @@ using UnityEngine;
 public class TalkTrigger : MonoBehaviour
 {
     [SerializeField] private string dialogue;
+    [SerializeField] private Sprite Portrait;
     private bool isExecuted = false;
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,7 +15,7 @@ public class TalkTrigger : MonoBehaviour
             if (!isExecuted)
             {
                 isExecuted = true;
-                talker.Talk(dialogue);
+                talker.Talk(dialogue, Portrait);
             }
         }
     }

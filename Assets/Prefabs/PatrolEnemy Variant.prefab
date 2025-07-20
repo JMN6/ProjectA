@@ -192,6 +192,12 @@ MonoBehaviour:
   <spriteRenderer>k__BackingField: {fileID: 8643738160213163674}
   anim: {fileID: 8117981987950394010}
   fsmManager: {fileID: 2415304642021434469}
+  <WalkSFX>k__BackingField: {fileID: 8300000, guid: d15bde0091a1b3d43864f481859d5249, type: 3}
+  <IdleSFX>k__BackingField: {fileID: 8300000, guid: 26d4856364a213a4dadcbe4bcf402f7e, type: 3}
+  <AttackSFX>k__BackingField: {fileID: 8300000, guid: d5b11306c21a5eb4c90854660f9ceab5, type: 3}
+  <DeadSFX>k__BackingField: {fileID: 8300000, guid: dbce1f2c879c8c7479b26bd888f43ea3, type: 3}
+  <HurtSFX>k__BackingField: {fileID: 8300000, guid: f26b510e26af4dd4fb4932cb1f57ca03, type: 3}
+  <HurtSFX2>k__BackingField: {fileID: 8300000, guid: 5bac97dbd43a9684f8fb6b64e05ab4ba, type: 3}
   startPos: {fileID: 9146673853212794169}
   endPos: {fileID: 7110805067359624497}
   <PatrolSpeed>k__BackingField: 0.8

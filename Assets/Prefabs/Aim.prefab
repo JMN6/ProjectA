@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2761212260368338031
 Transform:
   m_ObjectHideFlags: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   shootSFX: {fileID: 8300000, guid: 54deab9476169034082d03f07345cf1b, type: 3}
   notEnoughBulletSFX: {fileID: 8300000, guid: 5602c5c8ac2148840bae6973b51f8cd6, type: 3}
   reloadSFX: {fileID: 8300000, guid: 16880705519c6c640850a8f64566d67a, type: 3}
+  isFixed: 1
 --- !u!1 &4623417473657493159
 GameObject:
   m_ObjectHideFlags: 0

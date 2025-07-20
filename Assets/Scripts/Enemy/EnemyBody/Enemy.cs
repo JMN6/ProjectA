@@ -9,7 +9,8 @@ public class Enemy : Entity, IDamagalbe
         Patrol,
         Run,
         Attack,
-        IsDead
+        IsDead,
+        Hurt
     }
 
     [field: SerializeField] public int Damage { get; private set; } // °ø°Ý·Â
@@ -33,6 +34,8 @@ public class Enemy : Entity, IDamagalbe
     [field: SerializeField] public AudioClip IdleSFX { get; private set; }
     [field: SerializeField] public AudioClip AttackSFX { get; private set; }
     [field: SerializeField] public AudioClip DeadSFX { get; private set; }
+    [field: SerializeField] public AudioClip HurtSFX { get; private set; }
+    [field: SerializeField] public AudioClip HurtSFX2 { get; private set; }
 
     public GameObject Target { get; set; }
 
@@ -42,6 +45,8 @@ public class Enemy : Entity, IDamagalbe
 
     private Vector2 originPosition;
 
+    private float timer;
+
     protected virtual void Awake()
     {
         attackRange.size = attackRange.size * AttackRange;
@@ -49,6 +54,17 @@ public class Enemy : Entity, IDamagalbe
         Speed = base.speed;
 
         originPosition = transform.position;
+    }
+
+    private void Update()
+    {
+        timer += Time.timeScale;
+
+        if (timer > 0.2f)
+        {
+            timer = 0;
+            Speed = 6 / Speed;
+        }
     }
 
     protected virtual void OnEnable()
@@ -79,6 +95,14 @@ public class Enemy : Entity, IDamagalbe
         {
             fsmManager.ChangeState(FSMState.Death);
             isDead = true;
+        }
+        else
+        {
+            if (Random.value > 0.5f) SoundManager.Instance.PlayOneShot(HurtSFX);
+            else SoundManager.Instance.PlayOneShot(HurtSFX2);
+
+            Rigid.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
+            SetAnimationTrigger(EnemyAnimation.Hurt);
         }
     }
 

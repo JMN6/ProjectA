@@ -1,9 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Talker : MonoBehaviour
 {
     [SerializeField] private GameObject speechBubble;
+    [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI dialogue;
     [SerializeField] private float talkSpeed;
 
@@ -17,9 +19,11 @@ public class Talker : MonoBehaviour
         speechBubble.gameObject.SetActive(false);
     }
 
-    public void Talk(string dialogue)
+    public void Talk(string dialogue, Sprite portrait = null)
     {
         if(coroutine != null) StopCoroutine(coroutine);
+
+        if(portrait) image.sprite = portrait;
 
         speechBubble.gameObject.SetActive(true);
 
