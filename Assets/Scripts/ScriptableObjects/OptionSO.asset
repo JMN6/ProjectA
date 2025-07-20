@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a9e99aa5b3c474ebd296b5fd1fec88, type: 3}
   m_Name: OptionSO
   m_EditorClassIdentifier: 
+  option:
+    MouseSensitivity: 0.7613959
+    BgmVolume: 0.23565093
+    SfxVolume: 0.63212436

@@ -6,6 +6,7 @@ public class CameraFunctions : MonoBehaviour
 {
     private Camera cam;
     [SerializeField] private float defaultSize;
+    [SerializeField] private Transform rain;
 
     private void Awake()
     {
@@ -25,13 +26,18 @@ public class CameraFunctions : MonoBehaviour
         float targetScale = defaultSize * _scale;
         float elapsedTime = 0f;
 
+        float startRainScale = rain.localScale.x;
+        float targetRainScale = _scale;
+
         while(true)
         {
             elapsedTime += Time.deltaTime;
             float newScale = Mathf.Lerp(startScale, targetScale, elapsedTime / _time);
             cam.orthographicSize = newScale;
+            rain.transform.localScale = Vector3.one * 
+                Mathf.Lerp(startRainScale, targetRainScale, elapsedTime / _time);
 
-            if(elapsedTime >= _time)
+            if (elapsedTime >= _time)
             {
                 cam.orthographicSize = newScale;
                 break;

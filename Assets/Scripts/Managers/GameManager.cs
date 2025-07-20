@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -26,9 +27,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     [Header("CutScene")]
     [SerializeField] private CutScenePlayer cutScenePlayer;
-    //[SerializeField] private bool isCutScenePlay = false;
 
     [Header("Camara")]
+    [SerializeField] private CameraFollow camFollow;
     [SerializeField] private CameraFunctions camFunc;
 
     [Header("DeadEffect")]
@@ -37,8 +38,16 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private float zoomOutTime = 0.5f;
     [SerializeField] private float zoomOutScale = 1f;
 
+    [Header("UIInputs")]
+    [SerializeField] private UnityEvent Skip;
+
+
     private float tempTimeScale = 1;
 
+    public void Start()
+    {
+        camFollow.OpenningSequence(player);
+    }
 
     public void OnESC()
     {
@@ -60,6 +69,12 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    public void OnSkip()
+    {
+        Skip?.Invoke();
+
+    }
+
     public void ChangeOption(OptionSO.Option option)
     {
         Option.ChangeOption(option);
@@ -73,8 +88,6 @@ public class GameManager : MonoSingleton<GameManager>
             GameClear();
             return;
         }
-
-
     }
 
     private void GameClear()

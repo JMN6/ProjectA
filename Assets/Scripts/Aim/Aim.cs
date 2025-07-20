@@ -13,6 +13,8 @@ public class Aim : MonoBehaviour
     private CameraFunctions cameraFunctions;
     private float cooldown;
 
+    [SerializeField] private bool isFixed = true;
+
     private void Start()
     {
         Show();
@@ -73,8 +75,31 @@ public class Aim : MonoBehaviour
         InputManager.Instance.HideCursor();
     }
 
+    private Transform fixedTarget;
+    private Vector3 offset;
+    public void Fixed(Transform _target, Vector3 _offset)
+    {
+        transform.position = _target.position + offset;
+        return;
+        isFixed = true;
+        fixedTarget = _target;
+        offset = _offset;
+    }
+
+    public void Free()
+    {
+        isFixed = false;
+    }
+
     private void LateUpdate()
     {
+        //if(isFixed)
+        //{
+        //    transform.position = fixedTarget.position + offset;
+
+        //    return;
+        //}
+
         float camHalfHeight = Camera.main.orthographicSize;
         float camHalfWidth = camHalfHeight * Camera.main.aspect;
         Vector3 camPos = Camera.main.transform.position;

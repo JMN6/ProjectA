@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.18, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8512380931875747241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -215,7 +215,7 @@ PrefabInstance:
       objectReference: {fileID: 4231265627145774812}
     - target: {fileID: 3737198112325663932, guid: 159a9a465c28495429ff38d59d7e349b, type: 3}
       propertyPath: m_Name
-      value: MovingPlatform Variant
+      value: ButtonMovingPlatform Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3737198112325663932, guid: 159a9a465c28495429ff38d59d7e349b, type: 3}
       propertyPath: m_IsActive
