@@ -25,7 +25,7 @@ public class CutScenePlayer : MonoBehaviour
 
     private Action callBack = null;
 
-    private void Start()
+    private void Awake()
     {
         wfTextInterval = new WaitForSeconds(textShowIntervalSpeed);
         wfNextCut = new WaitForSeconds(moveToNextCutSpeed);
@@ -71,7 +71,7 @@ public class CutScenePlayer : MonoBehaviour
     private void ShowText()
     {
         StartCoroutine(Typing.CoTextTyping(
-            cutSceneInfo[currentRow].Text, text, wfTextInterval, onCutShown));
+            cutSceneInfo[currentRow].Text, text, wfTextInterval, OnCutShown));
     }
 
     private void StopText()
@@ -86,7 +86,7 @@ public class CutScenePlayer : MonoBehaviour
         InputManager.Instance.HideCursor();
     }
 
-    private void onCutShown()
+    public void OnCutShown()
     {
         StartCoroutine(CoShowNext());
     }
