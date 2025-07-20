@@ -21,12 +21,17 @@ public class Talker : MonoBehaviour
 
     public void Talk(string dialogue, Sprite portrait = null)
     {
-        if(coroutine != null) StopCoroutine(coroutine);
+        if (coroutine != null) StopCoroutine(coroutine);
 
-        if(portrait) image.sprite = portrait;
+        if (portrait) image.sprite = portrait;
 
         speechBubble.gameObject.SetActive(true);
 
-        coroutine = StartCoroutine(StringUtility.Typing.CoTextTyping(dialogue, this.dialogue, talkTerm, () => speechBubble.gameObject.SetActive(false)));
+        coroutine = StartCoroutine(StringUtility.Typing.CoTextTyping(dialogue, this.dialogue, talkTerm, () => Invoke(nameof(HideBubble), 1f)));
+    }
+
+    public void HideBubble()
+    {
+        speechBubble.gameObject.SetActive(false);
     }
 }
