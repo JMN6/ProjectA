@@ -22,7 +22,6 @@ public class Sniper : Gun
             if (hit.collider.TryGetComponent(out IDamagalbe target))
             {
                 target.GetDamaged(1);
-                EffectManager.Instance.PlayParticle(0, position);
                 return;
             }
         }

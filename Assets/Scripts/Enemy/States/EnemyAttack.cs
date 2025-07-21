@@ -38,7 +38,7 @@ namespace EnemeyFSM
         {
             CoolTime();
 
-            if(isCheckAble == true && isTargetFarAway() == true)
+            if(isCheckAble == true && IsTargetFarAway() == true)
             {
                 manager.ChangeState(FSMState.Chase);
             }
@@ -48,7 +48,7 @@ namespace EnemeyFSM
         {
             SoundManager.Instance.PlaySFX(enemy.AttackSFX);
 
-            if (isTargetFarAway() == true)
+            if (IsTargetFarAway() == true)
                 return;
 
             var res = target.TryAttack();
@@ -94,10 +94,7 @@ namespace EnemeyFSM
             }
         }
 
-        private bool isTargetFarAway()
-        {
-            return ((Vector2)enemy.Target.transform.position - enemy.Rigid.position).sqrMagnitude > sqrRange;
-        }
+        private bool IsTargetFarAway() => ((Vector2)enemy.Target.transform.position - enemy.Rigid.position).sqrMagnitude > sqrRange;
 
         public override void OnExit()
         {

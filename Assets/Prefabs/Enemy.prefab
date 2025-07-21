@@ -361,6 +361,8 @@ MonoBehaviour:
     <ScriptsName>k__BackingField: 3
   - <StateName>k__BackingField: 3
     <ScriptsName>k__BackingField: 4
+  - <StateName>k__BackingField: 4
+    <ScriptsName>k__BackingField: 5
   startState: 0
   currentState: 4
 --- !u!95 &939810182529166768

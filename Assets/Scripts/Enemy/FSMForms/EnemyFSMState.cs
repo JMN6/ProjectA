@@ -13,7 +13,7 @@ namespace EnemeyFSM
         protected Enemy enemy;
         protected EnemyFSMManager manager;
 
-        public void init(Enemy _enemy, EnemyFSMManager _manager)
+        public virtual void init(Enemy _enemy, EnemyFSMManager _manager)
         {
             if (playerLayer == -1)
             {

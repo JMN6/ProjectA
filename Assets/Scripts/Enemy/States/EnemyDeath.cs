@@ -18,6 +18,7 @@ namespace EnemeyFSM
             enemy.Rigid.AddForce(forceVec * 100f * (enemy.isParried ? 3f: 1f));
             enemy.SetAnimationTrigger(Enemy.EnemyAnimation.IsDead);
             elaspedTime = 0f;
+            EffectManager.Instance.PlayParticle(0, enemy.transform.position + Vector3.up);
         }
 
         public override void OnExit()

@@ -10,6 +10,7 @@ namespace EnemeyFSM
         Idle,
         Chase,
         Attack,
+        Hurt,
         Death,
         MAX
     }
@@ -20,6 +21,7 @@ namespace EnemeyFSM
         EnemyPatrol,
         EnemyChase,
         EnemyAttack,
+        EnemyHurt,
         EnemyDeath,
         MAXs
     }
@@ -44,7 +46,7 @@ namespace EnemeyFSM
         [SerializeField] private FSMState currentState = FSMState.MAX;
         private FSMState prevState;
 
-        private void Awake()
+        public void StartFSM()
         {
             foreach (var _ in fsmStates)
             {
@@ -55,9 +57,11 @@ namespace EnemeyFSM
             }
 
             currentState = FSMState.MAX;
+
+            ChangeState(startState);
         }
 
-        private void OnEnable()
+        public void OnReset()
         {
             ChangeState(startState);
         }
@@ -76,6 +80,11 @@ namespace EnemeyFSM
             currentStateScript = fsmStateDict[currentState];
 
             currentStateScript.OnEnter();
+        }
+
+        public void ChangeToPrevState()
+        {
+            ChangeState(prevState);
         }
 
         private void FixedUpdate()

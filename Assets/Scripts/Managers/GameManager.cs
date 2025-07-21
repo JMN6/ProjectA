@@ -2,31 +2,33 @@ using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private Transform player;
-    private Player playerScript;
+    private Player _playerScript;
+    public Player PlayerScript
+    {
+        get
+        {
+            if (_playerScript == null)
+            {
+                _playerScript = player?.GetComponent<Player>();
+            }
+            return _playerScript;
+        }
+        set { _playerScript = value; }
+    }
 
     [Header("Option")]
     [SerializeField] private OptionUI optionUI;
 
     [field: SerializeField] public OptionSO Option { get; private set; }
 
-    [System.Serializable]
-    private class StageDatas
-    {
-        public Transform respawnPosition;
-        public GameObject[] ResetObjs;
-    }
-
-    [Header("Stage")]
-    [SerializeField] private int maxStage = 3;
-    [SerializeField] private int currentStage = 0;
-    [SerializeField] private StageDatas[] datas;
-
     [Header("CutScene")]
     [SerializeField] private CutScenePlayer cutScenePlayer;
+    [SerializeField] private string clearCutScene;
 
     [Header("Camara")]
     [SerializeField] private CameraFollow camFollow;
@@ -41,12 +43,18 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("UIInputs")]
     [SerializeField] private UnityEvent Skip;
 
+    [Header("Stage")]
+    [SerializeField] private StageManager stageManager;
+
+    [SerializeField] private int currentStage = 0;
+    private int maxStage;
 
     private float tempTimeScale = 1;
 
     public void Start()
     {
         camFollow.OpenningSequence(player);
+        maxStage = stageManager.StagetCount;
     }
 
     public void OnESC()
@@ -74,6 +82,7 @@ public class GameManager : MonoSingleton<GameManager>
         Skip?.Invoke();
 
     }
+    public IResetable[] ResetScripts;
 
     public void ChangeOption(OptionSO.Option option)
     {
@@ -83,7 +92,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void StageClear()
     {
         currentStage = Mathf.Clamp(currentStage + 1, 0, maxStage);
-        if(currentStage == maxStage)
+        if (currentStage == maxStage)
         {
             GameClear();
             return;
@@ -92,7 +101,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void GameClear()
     {
-        //cutScenePlayer.StartCutScene(CutSceneParser.Convert(ClearCutScene), ReturnToMain);
+        cutScenePlayer.StartCutScene(CutSceneParser.Convert(clearCutScene), ReturnToMain);
     }
 
     public void GameOver()
@@ -102,28 +111,23 @@ public class GameManager : MonoSingleton<GameManager>
         camFunc.Zoom(zoomInTime, zoomInScale, ResetGame);
     }
 
+    private void GameAllSet()
+    {
+        InputManager.Instance.SetInputs(true);
+    }
+
     private void ResetGame()
     {
-        if (playerScript == null)
-        {
-            playerScript = player.GetComponent<Player>();
-        }
+        PlayerScript.ResetPlayer(stageManager.GetRespawnPosition(currentStage), 
+            stageManager.GetRespawnFaceWay(currentStage) );
 
-        playerScript.ResetPlayer();
-
-        player.position = datas[currentStage].respawnPosition.position;
-
-        foreach (var _ in datas[currentStage].ResetObjs)
-        {
-            _.SetActive(false);
-            _.SetActive(true);
-        }
+        stageManager.ResetGame(currentStage);
 
         camFunc.Zoom(zoomOutTime, zoomOutScale, GameAllSet);
     }
 
-    private void GameAllSet()
+    private void ReturnToMain()
     {
-        InputManager.Instance.SetInputs(true);
+        SceneManager.LoadScene(0);
     }
 }

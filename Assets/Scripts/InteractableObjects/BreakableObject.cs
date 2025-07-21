@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakableObject : MonoBehaviour, IDamagalbe
+public class BreakableObject : MonoBehaviour, IDamagalbe, IResetable
 {
     [SerializeField] private Animator anim;
     [SerializeField] private Collider2D col;
+
+    private static readonly int IsBrokenAnimID = Animator.StringToHash("IsBroken");
 
     private void Awake()
     {
         gameObject.layer = LayerMask.NameToLayer("InteractableObject");
     }
 
-    private void OnEnable()
+    public void OnReset()
     {
-        anim.SetBool("IsBroken", false);
-        col.enabled = true;
+        anim.SetBool(IsBrokenAnimID, false);
     }
 
     public void GetDamaged(int damage)
@@ -25,7 +26,7 @@ public class BreakableObject : MonoBehaviour, IDamagalbe
 
     private void ShowEffect()
     {
-        anim.SetBool("IsBroken", true);
+        anim.SetBool(IsBrokenAnimID, true);
         col.enabled = false;
     }
 }

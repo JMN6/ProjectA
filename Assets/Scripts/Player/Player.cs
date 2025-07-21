@@ -40,7 +40,7 @@ public class Player : Entity
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
-        ResetPlayer();
+        ResetPlayer(transform.position, false);
     }
 
     private void Start()
@@ -48,18 +48,21 @@ public class Player : Entity
         cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
     }
 
-    public void ResetPlayer()
+    public void ResetPlayer(Vector3 _position, bool isLeft = true)
     {
         isDied = false;
         isInteractable = false;
 
+        sprite.flipX = isLeft;
+        transform.position = _position;
+
         animator.SetBool("IsDead", false);
     }
 
-    public void OnMove(InputValue input)
+    public void OnMove(InputValue _input)
     {
 
-        movementDirection = input.Get<float>();
+        movementDirection = _input.Get<float>();
 
         if(movementDirection == 0)
         {
