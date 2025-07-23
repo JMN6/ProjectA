@@ -15,16 +15,13 @@ public class Sniper : Gun
     {
         CurBullets--;
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(position, position, TargetLayerMask);
+        Collider2D hit = Physics2D.OverlapPoint(position, TargetLayerMask);
 
-        foreach (var hit in hits)
+        if (hit && hit.TryGetComponent(out IDamagalbe target))
         {
-            if (hit.collider.TryGetComponent(out IDamagalbe target))
-            {
-                target.GetDamaged(1);
-                EffectManager.Instance.PlayParticle(0, position);
-                return;
-            }
+            target.GetDamaged(1);
+            EffectManager.Instance.PlayParticle(0, position);
+            return;
         }
     }
 
