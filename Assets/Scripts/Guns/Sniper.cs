@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class Sniper : Gun
@@ -6,4 +7,13 @@ public class Sniper : Gun
     {
     }
 
+    protected override void Shoot(Vector2 position)
+    {
+        Collider2D hit = Physics2D.OverlapPoint(position, TargetLayerMask);
+
+        if (hit && hit.TryGetComponent(out IDamagalbe target))
+        {
+            target.GetDamaged(1);
+        }
+    }
 }

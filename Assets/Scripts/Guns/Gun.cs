@@ -18,24 +18,33 @@ public abstract class Gun
     protected static readonly int TargetLayerMask = LayerMask.GetMask("Enemy", "InteractableObject");
 
     private bool isCooldownReady => Time.time - lastShot >= Cooltime;
+    private bool isEmpty => CurBullets <= 0;
 
-    public void Shoot(Vector2 position)
+    public void Fire(Vector2 position)
     {
         if (!isCooldownReady) return;
 
-        Collider2D hit = Physics2D.OverlapPoint(position, TargetLayerMask);
-
-        if (hit && hit.TryGetComponent(out IDamagalbe target))
+        if (isEmpty)
         {
-            target.GetDamaged(1);
+            SoundManager.Instance.PlaySFX(Path.GunSFX.SniperSFX.Empty);
         }
+        else
+        {
+            Shoot(position);
 
-        CurBullets--;
-        lastShot = Time.time;
+            CurBullets--;
+            lastShot = Time.time;
+
+            SoundManager.Instance.PlaySFX(Path.GunSFX.SniperSFX.Shoot);
+        }
     }
 
-    public void Recharge()
+    public void Reload()
     {
+        SoundManager.Instance.PlaySFX(Path.GunSFX.SniperSFX.Reload);
+
         CurBullets = MaxBullets;
     }
+
+    protected abstract void Shoot(Vector2 position);
 }

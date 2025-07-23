@@ -30,13 +30,6 @@ public class Enemy : Entity, IDamagalbe, IResetable
 
     [SerializeField] private EnemyFSMManager fsmManager;
 
-    [field: SerializeField] public AudioClip WalkSFX { get; private set; }
-    [field: SerializeField] public AudioClip IdleSFX { get; private set; }
-    [field: SerializeField] public AudioClip AttackSFX { get; private set; }
-    [field: SerializeField] public AudioClip DeadSFX { get; private set; }
-    [field: SerializeField] public AudioClip HurtSFX { get; private set; }
-    [field: SerializeField] public AudioClip HurtSFX2 { get; private set; }
-
     public GameObject Target { get; set; }
 
     public bool isParried { get; set; }

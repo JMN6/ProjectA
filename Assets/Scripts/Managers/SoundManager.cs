@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
-    private const int SFXCHANNEL = 8;
-
     private AudioSource _bgmSource;
     private List<AudioSource> _sfxAudio;
 
     [SerializeField] private AudioClip _bgm;
 
+    private int sfxChannel = 8;
+
     private void Awake()
     {
         _sfxAudio = new();
 
-        CreateAudioSources(SFXCHANNEL);
+        CreateAudioSources(sfxChannel);
     }
 
     private void Start()
@@ -54,28 +54,32 @@ public class SoundManager : MonoSingleton<SoundManager>
         _bgmSource.volume = volume;
     }
 
-    public void PlayOneShot(AudioClip clip)
+    public void PlaySFX(string path, bool isOneShot = false)
     {
-        foreach (var audio in _sfxAudio)
-        {
-            if (!audio.isPlaying)
-            {
-                audio.volume = GameManager.Instance.Option.SfxVolume;
-                audio.PlayOneShot(clip);
-                return;
-            }
-        }
+        // TODO: Run with pooling in resource manager
+        AudioClip clip = Resources.Load<AudioClip>(path);
+
+        PlaySFX(clip, isOneShot);
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip clip, bool isOneShot = false)
     {
         foreach (var audio in _sfxAudio)
         {
             if (!audio.isPlaying)
             {
                 audio.volume = GameManager.Instance.Option.SfxVolume;
-                audio.clip = clip;
-                audio.Play();
+
+                if (isOneShot)
+                {
+                    audio.PlayOneShot(clip);
+                }
+                else
+                {
+                    audio.clip = clip;
+                    audio.Play();
+                }
+
                 return;
             }
         }
