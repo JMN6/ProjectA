@@ -156,7 +156,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Recharge",
+                    "name": "Reload",
                     "type": "Button",
                     "id": "18c470df-1bff-4fa2-9d4d-1c75dbe59b4e",
                     "expectedControlType": "Button",
@@ -195,7 +195,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Recharge",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
