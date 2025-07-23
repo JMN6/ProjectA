@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace EnemeyFSM
@@ -11,14 +9,14 @@ namespace EnemeyFSM
 
         public override void OnEnter()
         {
-            SoundManager.Instance.PlaySFX(enemy.DeadSFX);
+            SoundManager.Instance.PlaySFX(Path.ZombieSFX.Dead);
             bool isLeft = enemy.spriteRenderer.flipX;
             Vector2 forceVec= (Vector2.up + (isLeft ? Vector2.right : Vector2.right * -1f)).normalized;
 
             enemy.Rigid.AddForce(forceVec * 100f * (enemy.isParried ? 3f: 1f));
             enemy.SetAnimationTrigger(Enemy.EnemyAnimation.IsDead);
             elaspedTime = 0f;
-            EffectManager.Instance.PlayParticle(0, enemy.transform.position + Vector3.up);
+            EffectManager.Instance.PlayParticle(Effects.Blood, enemy.transform.position + Vector3.up);
         }
 
         public override void OnExit()

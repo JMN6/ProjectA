@@ -46,7 +46,7 @@ namespace EnemeyFSM
 
         private void Attack()
         {
-            SoundManager.Instance.PlaySFX(enemy.AttackSFX);
+            SoundManager.Instance.PlaySFX(Path.ZombieSFX.Attack);
 
             if (IsTargetFarAway() == true)
                 return;
@@ -58,7 +58,7 @@ namespace EnemeyFSM
                 // parried by player
                 enemy.isParried = true;
                 enemy.GetDamaged(3);
-                EffectManager.Instance.PlayParticle(1, enemy.transform.position + Vector3.up);
+                EffectManager.Instance.PlayParticle(Effects.Spit, enemy.transform.position + Vector3.up);
             }
             else
             {

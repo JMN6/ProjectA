@@ -17,11 +17,6 @@ public class Player : Entity
     private bool isParrying;
     private Coroutine parryCoroutine;
 
-    [Header("Audio Clips")]
-    [SerializeField] private AudioClip jumpSFX;
-    [SerializeField] private AudioClip deathSFX;
-    [SerializeField] private AudioClip parrySFX;
-
     private AudioSource audioSource;
 
     private bool isInteractable = false;
@@ -89,7 +84,7 @@ public class Player : Entity
 
             vehicleRB = null;
             animator.SetTrigger("Jump");
-            SoundManager.Instance.PlayOneShot(jumpSFX);
+            SoundManager.Instance.PlaySFX(Path.PlayerSFX.Jump, true);
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
     }
@@ -203,7 +198,7 @@ public class Player : Entity
             StopCoroutine(parryCoroutine);
             isParrying = false;
             cameraFunctions?.Shake();
-            SoundManager.Instance.PlaySFX(parrySFX);
+            SoundManager.Instance.PlaySFX(Path.PlayerSFX.Parry, true);
             invincibleTimer = invincibleDuration;
 
             animator.SetBool("IsParrying", false);
@@ -217,7 +212,7 @@ public class Player : Entity
 
             animator.SetBool("IsDead", true);
 
-            SoundManager.Instance.PlayOneShot(deathSFX);
+            SoundManager.Instance.PlaySFX(Path.PlayerSFX.Dead);
 
             return true;
         }

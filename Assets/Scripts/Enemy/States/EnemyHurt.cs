@@ -1,8 +1,4 @@
-using EnemeyFSM;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Enemy;
 
 namespace EnemeyFSM
@@ -15,13 +11,12 @@ namespace EnemeyFSM
         public override void OnEnter()
         {
             enemy.SetAnimationTrigger(EnemyAnimation.Hurt);
-            if (Random.value > 0.5f) SoundManager.Instance.PlayOneShot(enemy.HurtSFX);
-            else SoundManager.Instance.PlayOneShot(enemy.HurtSFX2);
+            SoundManager.Instance.PlaySFX(Path.ZombieSFX.Hurt, true);
 
             enemy.Rigid.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
             elapsedTime = 0f;
             animationTime = 0.333f;//enemy.GetCurrentAnimationLength();
-            EffectManager.Instance.PlayParticle(0, enemy.transform.position + Vector3.up);
+            EffectManager.Instance.PlayParticle(Effects.Blood, enemy.transform.position + Vector3.up);
         }
 
         public override void OnExit() { }

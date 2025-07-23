@@ -4,15 +4,6 @@ using UnityEngine.InputSystem;
 public class Aim : MonoBehaviour
 {
     public Gun CurGun { get; private set; }
-
-    [Header("Audio Clips")]
-    [SerializeField] private AudioClip shootSFX;
-    [SerializeField] private AudioClip notEnoughBulletSFX;
-    [SerializeField] private AudioClip reloadSFX;
-
-    private CameraFunctions cameraFunctions;
-    private float cooldown;
-
     [SerializeField] private bool isFixed = true;
 
     private void Start()
@@ -20,16 +11,6 @@ public class Aim : MonoBehaviour
         Show();
 
         CurGun = new Sniper(1f, 5);
-
-        cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
-    }
-
-    private void Update()
-    {
-        if(cooldown > 0)
-        {
-            cooldown -= Time.deltaTime;
-        }
     }
 
     public void OnSnipe(InputValue input)
@@ -42,27 +23,12 @@ public class Aim : MonoBehaviour
 
     public void OnShoot()
     {
-        if (CurGun.CurBullets > 0)
-        {
-            if (cooldown <= 0.01f)
-            {
-                cooldown = CurGun.Cooltime;
-
-                CurGun.Shoot(transform.position);
-                cameraFunctions.Shake();
-                SoundManager.Instance.PlayOneShot(shootSFX);
-            }
-        }
-        else
-        {
-            SoundManager.Instance.PlaySFX(notEnoughBulletSFX);
-        }
+        CurGun.Fire(transform.position);
     }
 
-    public void OnRecharge()
+    public void OnReload()
     {
-        CurGun.Recharge();
-        SoundManager.Instance.PlaySFX(reloadSFX);
+        CurGun.Reload();
     }
 
     public void Hide()
