@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatforms : InteractableObj
+public class MovingPlatforms : InteractableObj, IResetable
 {
     [Header("Components")]
     [SerializeField] private Rigidbody2D rigid;
@@ -15,11 +15,18 @@ public class MovingPlatforms : InteractableObj
     [SerializeField] private bool isMoving = true;
     [SerializeField] private float speed;
 
+    private bool isInit = false;
+
     private Vector2 initialStart, initialEnd;
     private Vector2 start, end;
     private Vector2 dir;
 
     private void Awake()
+    {
+        Init();
+    }
+
+    private void Init()
     {
         start = initialStart = startPos.position;
         end = initialEnd = endPos.position;
@@ -27,6 +34,18 @@ public class MovingPlatforms : InteractableObj
         dir = (end - start).normalized;
 
         transform.position = start;
+
+        isInit = true;
+    }
+
+    public void OnReset()
+    {
+        if(isInit == false)
+        {
+            Init();
+        }
+
+        transform.position = initialStart;
     }
 
 

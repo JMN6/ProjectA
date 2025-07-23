@@ -33,7 +33,7 @@ namespace EnemeyFSM
         {
             ChaseTarget();
 
-            if (isTargetCloseEnough())
+            if (IsTargetCloseEnough())
             {
                 manager.ChangeState(FSMState.Attack);
             }
@@ -55,11 +55,7 @@ namespace EnemeyFSM
             rigid.velocity = new Vector2 (newDir * enemy.Speed, rigid.velocity.y);
         }
 
-        private bool isTargetCloseEnough()
-        {
-            return (rigid.position - (Vector2)targetTrasnform.position).sqrMagnitude <
-                sqrAttackRange;
-        }
+        private bool IsTargetCloseEnough() => (rigid.position - (Vector2)targetTrasnform.position).sqrMagnitude < sqrAttackRange;
 
         public override void OnExit()
         {

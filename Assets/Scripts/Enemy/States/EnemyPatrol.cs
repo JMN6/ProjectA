@@ -16,11 +16,19 @@ namespace EnemeyFSM
 
         private float speed;
 
+        PatrolEnemy e;
+
+        public override void init(Enemy _enemy, EnemyFSMManager _manager)
+        {
+            base.init(_enemy, _manager);
+
+            e = _enemy as PatrolEnemy;
+        }
+
         public override void OnEnter()
         {
             enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Patrol);
 
-            PatrolEnemy e = enemy as PatrolEnemy;
             startPos = e.StartPos;
             endPos = e.EndPos;
             speed = e.PatrolSpeed;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonObject : MonoBehaviour, IDamagalbe
+public class ButtonObject : MonoBehaviour, IDamagalbe, IResetable
 {
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Sprite OnSprite;
@@ -14,7 +14,7 @@ public class ButtonObject : MonoBehaviour, IDamagalbe
         gameObject.layer = LayerMask.NameToLayer("InteractableObject");
     }
 
-    private void OnEnable()
+    public void OnReset()
     {
         sp.sprite = OnSprite;
 
@@ -22,6 +22,10 @@ public class ButtonObject : MonoBehaviour, IDamagalbe
         {
             _.Deactivate();
         }
+    }
+
+    private void OnEnable()
+    {
     }
 
     public void GetDamaged(int damage)

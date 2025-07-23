@@ -1,7 +1,7 @@
 using UnityEngine;
 using EnemeyFSM;
 
-public class Enemy : Entity, IDamagalbe
+public class Enemy : Entity, IDamagalbe, IResetable
 {
     public enum EnemyAnimation
     {
@@ -54,6 +54,9 @@ public class Enemy : Entity, IDamagalbe
         Speed = base.speed;
 
         originPosition = transform.position;
+        chaseRange.gameObject.SetActive(true);
+
+        fsmManager.StartFSM();
     }
 
     private void Update()
@@ -67,19 +70,26 @@ public class Enemy : Entity, IDamagalbe
         }
     }
 
-    protected virtual void OnEnable()
+    public virtual void OnReset()
     {
+        Init();
+
         currentHealth = maxHealth;
         SetAnimationTrigger(EnemyAnimation.Idle);
 
         Target = null;
         isParried = false;
-
         isDead = false;
 
-        transform.position = originPosition;
+        gameObject.SetActive(true);
         chaseRange.gameObject.SetActive(true);
 
+        fsmManager.OnReset();
+    }
+
+    public virtual void Init()
+    {
+        transform.position = originPosition;
     }
 
     public void GetDamaged(int damage)
@@ -98,11 +108,7 @@ public class Enemy : Entity, IDamagalbe
         }
         else
         {
-            if (Random.value > 0.5f) SoundManager.Instance.PlayOneShot(HurtSFX);
-            else SoundManager.Instance.PlayOneShot(HurtSFX2);
-
-            Rigid.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
-            SetAnimationTrigger(EnemyAnimation.Hurt);
+            fsmManager.ChangeState(FSMState.Hurt);
         }
     }
 
@@ -120,5 +126,10 @@ public class Enemy : Entity, IDamagalbe
     public void SetAnimationTrigger(EnemyAnimation _trigger)
     {
         anim.SetTrigger(_trigger.ToString());
+    }
+
+    public float GetCurrentAnimationLength()
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).length;
     }
 }
