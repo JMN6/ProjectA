@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Effects
+{
+    Blood,
+    Spit,
+
+} 
+
 public class EffectManager : MonoSingleton<EffectManager>
 {
     [SerializeField] private List<ParticleSystem> particlePrefabs;
@@ -16,11 +23,11 @@ public class EffectManager : MonoSingleton<EffectManager>
         }
     }
 
-    public void PlayParticle(int index, Vector3 position)
+    public void PlayParticle(Effects effect, Vector3 position)
     {
-        if (particlePrefabs.Count <= index) return;
+        if (particlePrefabs.Count <= (int)effect) return;
 
-        var particlePool = particlePools[index];
+        var particlePool = particlePools[(int)effect];
 
         foreach (var particle in particlePool)
         {
@@ -33,7 +40,7 @@ public class EffectManager : MonoSingleton<EffectManager>
             }
         }
 
-        ParticleSystem newParticle = Instantiate(particlePrefabs[index], transform);
+        ParticleSystem newParticle = Instantiate(particlePrefabs[(int)effect], transform);
         newParticle.transform.position = position;
         newParticle.Play();
         particlePool.Add(newParticle);

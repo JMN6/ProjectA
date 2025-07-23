@@ -8,6 +8,8 @@ public abstract class Gun
 
     private float lastShot;
 
+    private CameraFunctions cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
+
     public Gun(float cooltime, int bullets)
     {
         Cooltime = cooltime;
@@ -36,6 +38,7 @@ public abstract class Gun
             lastShot = Time.time;
 
             SoundManager.Instance.PlaySFX(Path.GunSFX.SniperSFX.Shoot);
+            cameraFunctions.Shake();
         }
     }
 
