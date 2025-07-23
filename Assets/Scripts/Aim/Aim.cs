@@ -11,7 +11,6 @@ public class Aim : MonoBehaviour
     [SerializeField] private AudioClip reloadSFX;
 
     private CameraFunctions cameraFunctions;
-    private float cooldown;
 
     [SerializeField] private bool isFixed = true;
 
@@ -22,14 +21,6 @@ public class Aim : MonoBehaviour
         CurGun = new Sniper(1f, 5);
 
         cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
-    }
-
-    private void Update()
-    {
-        if(cooldown > 0)
-        {
-            cooldown -= Time.deltaTime;
-        }
     }
 
     public void OnSnipe(InputValue input)
@@ -44,14 +35,9 @@ public class Aim : MonoBehaviour
     {
         if (CurGun.CurBullets > 0)
         {
-            if (cooldown <= 0.01f)
-            {
-                cooldown = CurGun.Cooltime;
-
-                CurGun.Shoot(transform.position);
-                cameraFunctions.Shake();
-                SoundManager.Instance.PlayOneShot(shootSFX);
-            }
+            CurGun.Shoot(transform.position);
+            cameraFunctions.Shake();
+            SoundManager.Instance.PlayOneShot(shootSFX);
         }
         else
         {
