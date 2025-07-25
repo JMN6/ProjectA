@@ -48,6 +48,7 @@ public class MovingPlatforms : InteractableObj, IResetable
         transform.position = initialStart;
     }
 
+    public Rigidbody2D GetBody() { return rigid; }
 
     private void FixedUpdate()
     {

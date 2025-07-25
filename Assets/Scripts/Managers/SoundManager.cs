@@ -59,10 +59,38 @@ public class SoundManager : MonoSingleton<SoundManager>
         // TODO: Run with pooling in resource manager
         AudioClip clip = Resources.Load<AudioClip>(path);
 
-        PlaySFX(clip, isOneShot);
+        if (isOneShot)
+        {
+            PlaySFXOneShot(clip);
+        }
+        else
+        {
+            PlaySFX(clip);
+        }
     }
 
-    public void PlaySFX(AudioClip clip, bool isOneShot = false)
+    private void PlaySFX(AudioClip clip)
+    {
+
+        foreach (var audio in _sfxAudio)
+        {
+
+            if (audio.isPlaying)
+            {
+                if (audio.clip == clip) return;
+            }
+            else
+            {
+                audio.volume = GameManager.Instance.Option.SfxVolume;
+                audio.clip = clip;
+                audio.Play();
+
+                return;
+            }
+        }
+    }
+
+    private void PlaySFXOneShot(AudioClip clip)
     {
         foreach (var audio in _sfxAudio)
         {
@@ -70,15 +98,23 @@ public class SoundManager : MonoSingleton<SoundManager>
             {
                 audio.volume = GameManager.Instance.Option.SfxVolume;
 
-                if (isOneShot)
-                {
-                    audio.PlayOneShot(clip);
-                }
-                else
-                {
-                    audio.clip = clip;
-                    audio.Play();
-                }
+                audio.PlayOneShot(clip);
+
+                return;
+            }
+        }
+    }
+
+    public void StopSFX(string path)
+    {
+        // TODO: Run with pooling in resource manager
+        AudioClip clip = Resources.Load<AudioClip>(path);
+
+        foreach (var audio in _sfxAudio)
+        {
+            if (audio.clip == clip)
+            {
+                audio.Stop();
 
                 return;
             }
