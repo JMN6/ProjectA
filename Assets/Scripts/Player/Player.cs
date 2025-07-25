@@ -78,28 +78,26 @@ public class Player : Entity
         }
     }
 
-    [SerializeField] private float jumpPower;
 
     private Rigidbody2D rigid;
     private SpriteRenderer sprite;
     private PlayerAnimator animator;
+
     private float movementDirection;
+    [SerializeField] private float jumpPower;
     private int curJumpCount;
-    private Rigidbody2D vehicleRB;
     [SerializeField] private int maxJumpCount = 1;
-    [SerializeField] private float validParryingTime = 0.3f;
+
     private bool isParrying;
     private Coroutine parryCoroutine;
+    private float invincibleTimer;
+    [SerializeField] private float invincibleDuration = 0.3f;
+    [SerializeField] private float validParryingTime = 0.5f;
 
-
-    private bool isInteractable = false;
     private IInteractable trigger;
+    private Rigidbody2D vehicleRB;
 
-    private bool isDied = false;
     private CameraFunctions cameraFunctions;
-
-    private float invincibleTimer = 0f;
-    private float invincibleDuration = 0.3f;
 
     private void Awake()
     {
@@ -117,8 +115,7 @@ public class Player : Entity
 
     public void ResetPlayer(Vector3 _position, bool isLeft = true)
     {
-        isDied = false;
-        isInteractable = false;
+        currentHealth = maxHealth;
 
         sprite.flipX = isLeft;
         transform.position = _position;
@@ -174,13 +171,12 @@ public class Player : Entity
 
     public void OnInteract()
     {
-        if (isInteractable == false)
+        if (trigger == null)
         {
             return;
         }
 
         trigger.Interact();
-        isInteractable = false;
         trigger = null;
     }
 
@@ -257,11 +253,8 @@ public class Player : Entity
 
     public bool TryAttack()
     {
-        if (invincibleTimer > 0)
-            return true;
-
-        if (isDied == true)
-            return true;
+        if (invincibleTimer > 0) return true;
+        if (currentHealth <= 0) return true;
 
         if (isParrying)
         {
@@ -279,7 +272,8 @@ public class Player : Entity
         }
         else
         {
-            isDied = true;
+            currentHealth = 0;
+
             GameManager.Instance.GameOver();
 
             animator.Play(PlayerAnimator.AnimState.Death, 0.25f);
@@ -292,7 +286,6 @@ public class Player : Entity
 
     public void CanInteract(bool _val, IInteractable _trigger = null)
     {
-        isInteractable = _val;
         trigger = _trigger;
     }
 }
