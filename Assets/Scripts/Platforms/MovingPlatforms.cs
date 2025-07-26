@@ -21,8 +21,12 @@ public class MovingPlatforms : InteractableObj, IResetable
     private Vector2 start, end;
     private Vector2 dir;
 
+    private ButtonObject btnObj;
+
     private void Awake()
     {
+        startPos.SetParent(null);
+        endPos.SetParent(null);
         Init();
     }
 
@@ -36,15 +40,24 @@ public class MovingPlatforms : InteractableObj, IResetable
         transform.position = start;
 
         isInit = true;
+
+        btnObj = GetComponentInChildren<ButtonObject>();
     }
 
     public void OnReset()
     {
+        if(btnObj != null)
+        {
+            btnObj.OnReset();
+            return;
+        }
+
         if(isInit == false)
         {
             Init();
         }
 
+        rigid.velocity = Vector2.zero;
         transform.position = initialStart;
     }
 
@@ -80,6 +93,7 @@ public class MovingPlatforms : InteractableObj, IResetable
 
         dir = (end - start).normalized;
 
+        rigid.velocity = Vector2.zero;
         transform.position = start;
     }
 }

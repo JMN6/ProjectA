@@ -5,7 +5,6 @@ namespace EnemeyFSM
 {
     public class EnemyChase : EnemyFSMState
     {
-        private Rigidbody2D rigid;
         private Transform targetTrasnform;
 
         private float sqrAttackRange;
@@ -14,10 +13,9 @@ namespace EnemeyFSM
 
         public override void OnEnter()
         {
-            enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Run);
+            anim.SetTrigger(Enemy.EnemyAnimation.Run.ToString());
             enemy.StopLookingForPlayer();
 
-            rigid = enemy.Rigid;
             targetTrasnform = enemy.Target.transform;
 
             sqrAttackRange = enemy.AttackRange * enemy.AttackRange;
@@ -41,7 +39,7 @@ namespace EnemeyFSM
 
         private void ChaseTarget()
         {
-            float dir = (targetTrasnform.position - rigid.transform.position).x;
+            float dir = (targetTrasnform.position - move.Rigid.transform.position).x;
             int newDir = Convert.ToInt32(Mathf.Sign(dir));
 
             // 스프라이트 방향 바꾸기
@@ -52,10 +50,10 @@ namespace EnemeyFSM
                 enemy.spriteRenderer.flipX = dir < 0f;
             }
 
-            rigid.velocity = new Vector2 (newDir * enemy.Speed, rigid.velocity.y);
+            move.SetVelocity(newDir * enemy.Speed, move.Rigid.velocity.y);
         }
 
-        private bool IsTargetCloseEnough() => (rigid.position - (Vector2)targetTrasnform.position).sqrMagnitude < sqrAttackRange;
+        private bool IsTargetCloseEnough() => (move.Rigid.position - (Vector2)targetTrasnform.position).sqrMagnitude < sqrAttackRange;
 
         public override void OnExit()
         {

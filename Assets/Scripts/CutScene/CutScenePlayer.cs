@@ -5,55 +5,30 @@ using UnityEngine.UI;
 using TMPro;
 using StringUtility;
 using System;
+using DataParseAndPlayer;
 
-public class CutScenePlayer : MonoBehaviour
+public class CutScenePlayer : DataPlayer<CutSceneRow>
 {
     private static readonly string PicPath = "Images/CutScene/{0}";
 
-    [SerializeField] private GameObject panel;
     [SerializeField] private Image bg;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private RectTransform textPosition;
+
     [SerializeField] private float textShowIntervalSpeed = 0.1f;
     private WaitForSeconds wfTextInterval = null;
+    
     [SerializeField] private float moveToNextCutSpeed = 1.5f;
     private WaitForSeconds wfNextCut = null;
 
-
-    private List<CutSceneRow> cutSceneInfo = null;
-    private int currentRow = -1;
-
-    private Action callBack = null;
-
-    private void Awake()
+    protected override void Init()
     {
         wfTextInterval = new WaitForSeconds(textShowIntervalSpeed);
         wfNextCut = new WaitForSeconds(moveToNextCutSpeed);
     }
 
-    public void StartCutScene(in List<CutSceneRow> rows, Action callback = null)
+    protected override void SetSceneInfo(CutSceneRow info)
     {
-        cutSceneInfo = rows;
-        if (cutSceneInfo.Count <= 0)
-        {
-            return;
-        }
-
-        this.callBack = callback;
-
-        panel.SetActive(true);
-
-        SetDialogView(0);
-    }
-
-    private void SetDialogView(int rowNum)
-    {
-        if (rowNum < 0 || rowNum >= cutSceneInfo.Count)
-            return;
-
-        currentRow = rowNum;
-        CutSceneRow info = cutSceneInfo[currentRow];
-
         // 배경 변경
         Sprite bgSprite = Resources.Load<Sprite>(string.Format(PicPath, info.Pic));
         bg.sprite = bgSprite;
@@ -64,29 +39,22 @@ public class CutScenePlayer : MonoBehaviour
         text.alignment = info.Align == 0 ? TextAlignmentOptions.Center :
             info.Align == -1 ? TextAlignmentOptions.Left : TextAlignmentOptions.Right;
         text.fontSize = info.FontSize;
-
-        ShowText();
     }
 
-    private void ShowText()
+    protected override void ShowText()
     {
         StartCoroutine(Typing.CoTextTyping(
-            cutSceneInfo[currentRow].Text, text, wfTextInterval, OnCutShown));
+            _sceneInfo[_currentRow].Text, text, wfTextInterval, OnShowNextScene));
     }
 
-    private void StopText()
+    protected override void OnSceneEnd()
     {
-        StopAllCoroutines();
-    }
-
-    private void CutEnd()
-    {
-        callBack?.Invoke();
+        base.OnSceneEnd();
 
         InputManager.Instance.HideCursor();
     }
 
-    public void OnCutShown()
+    public override void OnShowNextScene()
     {
         StartCoroutine(CoShowNext());
     }
@@ -94,11 +62,11 @@ public class CutScenePlayer : MonoBehaviour
     private IEnumerator CoShowNext()
     {
         yield return wfNextCut;
-        if (++currentRow >= cutSceneInfo.Count)
+        if (++_currentRow >= _sceneInfo.Count)
         {
-            CutEnd();
+            OnSceneEnd();
             yield break;
         }
-        SetDialogView(currentRow);
+        SetScene(_currentRow);
     }
 }

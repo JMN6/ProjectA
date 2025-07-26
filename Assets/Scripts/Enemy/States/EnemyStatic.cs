@@ -7,7 +7,7 @@ namespace EnemeyFSM
     public class EnemyStatic : EnemyFSMState
     {
         public override void OnEnter() {
-            enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Idle);
+            anim.SetTrigger(Enemy.EnemyAnimation.Idle.ToString());
         }
 
         public override void OnUpdate()

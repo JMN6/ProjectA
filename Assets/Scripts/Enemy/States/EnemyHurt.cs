@@ -10,10 +10,10 @@ namespace EnemeyFSM
 
         public override void OnEnter()
         {
-            enemy.SetAnimationTrigger(EnemyAnimation.Hurt);
+            anim.SetTrigger(EnemyAnimation.Hurt.ToString());
             SoundManager.Instance.PlaySFX(Path.ZombieSFX.Hurt, true);
 
-            enemy.Rigid.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
+            move.Rigid.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
             elapsedTime = 0f;
             animationTime = 0.333f;//enemy.GetCurrentAnimationLength();
             EffectManager.Instance.PlayParticle(Effects.Blood, enemy.transform.position + Vector3.up);

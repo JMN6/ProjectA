@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using DataParseAndPlayer;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -101,7 +102,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void GameClear()
     {
-        cutScenePlayer.StartCutScene(CutSceneParser.Convert(clearCutScene), ReturnToMain);
+        cutScenePlayer.StartScene(Parser<CutSceneRow>.Convert("CutScene", clearCutScene), ReturnToMain);
     }
 
     public void GameOver()

@@ -10,8 +10,6 @@ namespace EnemeyFSM
         private Vector2 endPos;
         private Vector2 dir;
 
-        private Rigidbody2D rigid;
-
         private float elapsedTime = 0f;
 
         private float speed;
@@ -27,7 +25,7 @@ namespace EnemeyFSM
 
         public override void OnEnter()
         {
-            enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Patrol);
+            anim.SetTrigger(Enemy.EnemyAnimation.Patrol.ToString());
 
             startPos = e.StartPos;
             endPos = e.EndPos;
@@ -35,8 +33,6 @@ namespace EnemeyFSM
 
             dir = (endPos - startPos).normalized;
             enemy.spriteRenderer.flipX = dir.x < 0;
-
-            rigid = e.Rigid;
 
             elapsedTime = 0f;
 
@@ -47,7 +43,7 @@ namespace EnemeyFSM
 
         public override void OnFixedUpdate()
         {
-            Vector2 newPosition = rigid.position + dir * speed * 0.05f;
+            Vector2 newPosition = move.Rigid.position + dir * speed * 0.05f;
             if((newPosition - endPos).sqrMagnitude <= 0.5f)
             {
                 newPosition = endPos;
@@ -59,7 +55,7 @@ namespace EnemeyFSM
                 enemy.spriteRenderer.flipX = dir.x < 0;
             }
 
-            rigid.MovePosition(newPosition);
+            move.MovePosition(newPosition);
         }
 
 

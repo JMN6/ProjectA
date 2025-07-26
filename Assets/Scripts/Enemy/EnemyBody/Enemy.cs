@@ -26,7 +26,8 @@ public class Enemy : Entity, IDamagalbe, IResetable
     [SerializeField] protected BoxCollider2D attackRange;
     [field: SerializeField] public Rigidbody2D Rigid { get; private set; }
     [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
-    [SerializeField] private Animator anim;
+    [field: SerializeField] public AnimationPlayer anim;
+    [field: SerializeField] public Movement move;
 
     [SerializeField] private EnemyFSMManager fsmManager;
 
@@ -68,7 +69,7 @@ public class Enemy : Entity, IDamagalbe, IResetable
         Init();
 
         currentHealth = maxHealth;
-        SetAnimationTrigger(EnemyAnimation.Idle);
+        anim.SetTrigger(EnemyAnimation.Idle.ToString());
 
         Target = null;
         isParried = false;
@@ -114,15 +115,5 @@ public class Enemy : Entity, IDamagalbe, IResetable
     {
         gameObject.SetActive(false);
         //Destroy(gameObject);
-    }
-
-    public void SetAnimationTrigger(EnemyAnimation _trigger)
-    {
-        anim.SetTrigger(_trigger.ToString());
-    }
-
-    public float GetCurrentAnimationLength()
-    {
-        return anim.GetCurrentAnimatorStateInfo(0).length;
     }
 }
