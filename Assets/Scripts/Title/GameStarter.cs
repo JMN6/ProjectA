@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DataParseAndPlayer;
 
 public class GameStarter : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GameStarter : MonoBehaviour
 
     public void GameStart()
     {
-        cutScenePlayer.StartCutScene(CutSceneParser.Convert(ClearCutScene),
+        cutScenePlayer.StartScene(Parser<CutSceneRow>.Convert("CutScene", ClearCutScene),
             () => SceneManager.LoadScene(1));
         
     }

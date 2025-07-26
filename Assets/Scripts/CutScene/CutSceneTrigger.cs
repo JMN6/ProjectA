@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DataParseAndPlayer;
 
 public class CutSceneTrigger : MonoBehaviour, IInteractable
 {
     [SerializeField] private CutScenePlayer player;
     [SerializeField] private string fileName = "TempCutScene 1";
+    private static readonly string folderName = "CutScene";
 
     private List<CutSceneRow> info;
 
@@ -18,7 +20,7 @@ public class CutSceneTrigger : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        info = CutSceneParser.Convert(fileName);
+        info = DataParseAndPlayer.Parser<CutSceneRow>.Convert(folderName, fileName);
         playerMask = LayerMask.NameToLayer("Player");
 
         isUsed = false;
@@ -44,7 +46,7 @@ public class CutSceneTrigger : MonoBehaviour, IInteractable
         InputManager.Instance.ShowCursor();
         InputManager.Instance.SetInputs(false);
 
-        player.StartCutScene(info, () =>
+        player.StartScene(info, () =>
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         });

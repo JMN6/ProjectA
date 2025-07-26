@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DataParseAndPlayer;
 
 public class DialogTrigger : MonoBehaviour, IInteractable
 {
     [SerializeField] private DialogPlayer dialogPlayer;
     [SerializeField] private string dialogFileName = "TempDialog";
+    private static readonly string folderName = "Dialog";
     private List<DialogRow> info;
 
     private LayerMask playerMask;
@@ -17,7 +19,7 @@ public class DialogTrigger : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        info = DialogParser.Convert(dialogFileName);
+        info = Parser<DialogRow>.Convert(folderName, dialogFileName);
         playerMask = LayerMask.NameToLayer("Player");
 
         isUsed = false;
@@ -43,7 +45,7 @@ public class DialogTrigger : MonoBehaviour, IInteractable
         InputManager.Instance.ShowCursor();
         InputManager.Instance.SetInputs(false);
 
-        dialogPlayer.StartDialog(info);
+        dialogPlayer.StartScene(info);
 
         isUsed = true;
     }
