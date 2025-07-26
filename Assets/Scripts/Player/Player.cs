@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Game.Input;
 
 public class Player : Entity
 {
@@ -78,24 +79,32 @@ public class Player : Entity
         }
     }
 
-
     private Rigidbody2D rigid;
     private SpriteRenderer sprite;
     private PlayerAnimator animator;
 
+    private Rigidbody2D vehicleRB;
+    private IInteractable trigger;
+
+
+    [Header("Run")]
     private float movementDirection;
+
+    [Header("Jump")]
+    [SerializeField] private float maxJumpHeight;
     [SerializeField] private float jumpPower;
     private int curJumpCount;
     [SerializeField] private int maxJumpCount = 1;
 
+    [Header("Parry")]
     private bool isParrying;
+    [SerializeField] private float validParryingTime = 0.5f;
     private Coroutine parryCoroutine;
+
+    [Header("Hurt")]
     private float invincibleTimer;
     [SerializeField] private float invincibleDuration = 0.3f;
-    [SerializeField] private float validParryingTime = 0.5f;
 
-    private IInteractable trigger;
-    private Rigidbody2D vehicleRB;
 
     private CameraFunctions cameraFunctions;
 
@@ -111,6 +120,17 @@ public class Player : Entity
     private void Start()
     {
         cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
+        SetupInput();
+    }
+
+    private void SetupInput()
+    {
+        var input = InputManager.Instance;
+
+        input.AddListener(Actions.Move, OnMove);
+        input.AddListener(Actions.Jump, OnJump);
+        input.AddListener(Actions.Interact, OnInteract);
+        input.AddListener(Actions.Parry, OnParry);
     }
 
     public void ResetPlayer(Vector3 _position, bool isLeft = true)
@@ -124,9 +144,9 @@ public class Player : Entity
         animator.Clear();
     }
 
-    public void OnMove(InputValue _input)
+    public void OnMove(InputAction.CallbackContext ctx)
     {
-        movementDirection = _input.Get<float>();
+        movementDirection = ctx.ReadValue<float>();
 
         if (movementDirection == 0)
         {
@@ -149,7 +169,7 @@ public class Player : Entity
         }
     }
 
-    public void OnJump()
+    public void OnJump(InputAction.CallbackContext ctx)
     {
         if (curJumpCount < maxJumpCount)
         {
@@ -169,7 +189,7 @@ public class Player : Entity
         }
     }
 
-    public void OnInteract()
+    public void OnInteract(InputAction.CallbackContext ctx)
     {
         if (trigger == null)
         {
@@ -180,11 +200,11 @@ public class Player : Entity
         trigger = null;
     }
 
-    public void OnParry()
+    public void OnParry(InputAction.CallbackContext ctx)
     {
         if (!isParrying)
         {
-            InputManager.Instance.SetPlayerInput(false);
+            InputManager.Instance.SetInputEnabled(Maps.Player, false);
 
             animator.Play(PlayerAnimator.AnimState.Parry);
             isParrying = true;
@@ -200,7 +220,7 @@ public class Player : Entity
         animator.Stop(PlayerAnimator.AnimState.Parry);
         animator.Stop(PlayerAnimator.AnimState.Kick);
 
-        InputManager.Instance.SetPlayerInput(true);
+        InputManager.Instance.SetInputEnabled(Maps.Player, true);
 
         Time.timeScale = 1;
     }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9065752412336314827}
   - component: {fileID: 5280281626794670922}
-  - component: {fileID: 1547070364316266946}
   - component: {fileID: 5758002820404970560}
   - component: {fileID: 3070771244626197172}
   - component: {fileID: 6440277166918347288}
@@ -92,36 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1547070364316266946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 813743718850938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ea5bea2d09c2ccd40a8071243e6d7d26, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!95 &5758002820404970560
 Animator:
   serializedVersion: 5
@@ -230,12 +199,11 @@ MonoBehaviour:
   maxHealth: 10
   currentHealth: 10
   speed: 5
+  maxJumpHeight: 0
   jumpPower: 10
   maxJumpCount: 1
   validParryingTime: 0.3
-  jumpSFX: {fileID: 8300000, guid: 68ed1452f12979244ae1e13f3003fd9c, type: 3}
-  deathSFX: {fileID: 8300000, guid: 316347070ee3f4342acca25841e9d8b8, type: 3}
-  parrySFX: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+  invincibleDuration: 0.3
 --- !u!82 &6589169683409846705
 AudioSource:
   m_ObjectHideFlags: 0

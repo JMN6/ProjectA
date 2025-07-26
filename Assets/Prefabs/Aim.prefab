@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2761212260368338031}
   - component: {fileID: 9106228205978769418}
-  - component: {fileID: 6748445934889447997}
   - component: {fileID: 3408882082170307674}
   m_Layer: 0
   m_Name: Aim
@@ -87,36 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6748445934889447997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4576565411940903135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ea5bea2d09c2ccd40a8071243e6d7d26, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Aim
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &3408882082170307674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,9 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423ae5d4e195d0d4e89378e4a3b2b6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootSFX: {fileID: 8300000, guid: 54deab9476169034082d03f07345cf1b, type: 3}
-  notEnoughBulletSFX: {fileID: 8300000, guid: 5602c5c8ac2148840bae6973b51f8cd6, type: 3}
-  reloadSFX: {fileID: 8300000, guid: 16880705519c6c640850a8f64566d67a, type: 3}
   isFixed: 1
 --- !u!1 &4623417473657493159
 GameObject:

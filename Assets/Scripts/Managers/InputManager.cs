@@ -12,9 +12,6 @@ public class InputManager : MonoSingleton<InputManager>
     private Dictionary<Maps, InputActionMap> _maps;
     private Dictionary<Actions, InputAction> _actions;
 
-    [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private PlayerInput aimInput;
-
     private void Awake()
     {
         _input = new InputActions();
@@ -39,8 +36,12 @@ public class InputManager : MonoSingleton<InputManager>
 
     public void AddListener(Actions input, Action<InputAction.CallbackContext> callback)
     {
-        if (_actions.TryGetValue(input, out InputAction action)) {
+        if (_actions.TryGetValue(input, out InputAction action))
+        {
+            action.started -= callback;
             action.started += callback;
+
+            action.canceled -= callback;
             action.canceled += callback;
         }
     }
@@ -77,6 +78,14 @@ public class InputManager : MonoSingleton<InputManager>
         }
     }
 
+    public void SetAllInputEnable(bool enabled)
+    {
+        foreach (var map in _maps.Keys)
+        {
+            SetInputEnabled(map, enabled);
+        }
+    }
+
     public void ShowCursor()
     {
         LockCursor(false);
@@ -89,17 +98,6 @@ public class InputManager : MonoSingleton<InputManager>
 
     public void SetInputs(bool _val)
     {
-        SetInputEnabled(Maps.Player, _val);
-        SetInputEnabled(Maps.Aim, _val);
-    }
-
-    public void SetPlayerInput(bool _val)
-    {
-        SetInputEnabled(Maps.Player, _val);
-    }
-
-    public void SetAimInput(bool _val)
-    {
-        SetInputEnabled(Maps.Aim, _val);
+        SetAllInputEnable(_val);
     }
 }
