@@ -159,6 +159,8 @@ GameObject:
   - component: {fileID: 5739630756427667615}
   - component: {fileID: 6640240152435585871}
   - component: {fileID: 939810182529166768}
+  - component: {fileID: 1680631124056191686}
+  - component: {fileID: 6088740706538768903}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -331,14 +333,9 @@ MonoBehaviour:
   attackRange: {fileID: 5187031100326390299}
   <Rigid>k__BackingField: {fileID: 5456581334746467754}
   <spriteRenderer>k__BackingField: {fileID: 744932277728913840}
-  anim: {fileID: 939810182529166768}
+  anim: {fileID: 6088740706538768903}
+  move: {fileID: 1680631124056191686}
   fsmManager: {fileID: 6640240152435585871}
-  <WalkSFX>k__BackingField: {fileID: 8300000, guid: d15bde0091a1b3d43864f481859d5249, type: 3}
-  <IdleSFX>k__BackingField: {fileID: 8300000, guid: 26d4856364a213a4dadcbe4bcf402f7e, type: 3}
-  <AttackSFX>k__BackingField: {fileID: 8300000, guid: d5b11306c21a5eb4c90854660f9ceab5, type: 3}
-  <DeadSFX>k__BackingField: {fileID: 8300000, guid: dbce1f2c879c8c7479b26bd888f43ea3, type: 3}
-  <HurtSFX>k__BackingField: {fileID: 8300000, guid: f26b510e26af4dd4fb4932cb1f57ca03, type: 3}
-  <HurtSFX2>k__BackingField: {fileID: 8300000, guid: 5bac97dbd43a9684f8fb6b64e05ab4ba, type: 3}
 --- !u!114 &6640240152435585871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,3 +383,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1680631124056191686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930495063069487502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74cb41618b0bdd64d9c98b145c2c390d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 5456581334746467754}
+--- !u!114 &6088740706538768903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930495063069487502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05afc19ec366bae4d94956c7f7de70cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 939810182529166768}

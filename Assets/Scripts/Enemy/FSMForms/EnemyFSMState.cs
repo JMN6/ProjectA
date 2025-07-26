@@ -13,6 +13,9 @@ namespace EnemeyFSM
         protected Enemy enemy;
         protected EnemyFSMManager manager;
 
+        protected AnimationPlayer anim => enemy.anim;
+        protected Movement move => enemy.move;
+
         public virtual void init(Enemy _enemy, EnemyFSMManager _manager)
         {
             if (playerLayer == -1)

@@ -15,7 +15,7 @@ namespace EnemeyFSM
 
         public override void OnEnter()
         {
-            enemy.SetAnimationTrigger(Enemy.EnemyAnimation.Attack);
+            anim.SetTrigger(Enemy.EnemyAnimation.Attack.ToString());
 
             sqrRange = enemy.AttackRange * enemy.AttackRange;
             target = enemy.Target.GetComponent<Player>();
