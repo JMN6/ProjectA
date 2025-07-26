@@ -17,6 +17,7 @@ public class BreakableObject : MonoBehaviour, IDamagalbe, IResetable
     public void OnReset()
     {
         anim.SetBool(IsBrokenAnimID, false);
+        col.enabled = true;
     }
 
     public void GetDamaged(int damage)
