@@ -6,7 +6,7 @@ using Game.Input;
 
 public class Player : Entity
 {
-    private class PlayerAnimator
+    public class PlayerAnimator
     {
         [Flags]
         public enum AnimState
@@ -34,7 +34,7 @@ public class Player : Entity
 
             foreach (AnimState state in Enum.GetValues(typeof(AnimState)))
             {
-                stateToHash.TryAdd(state, Animator.StringToHash(state.ToString()));
+                stateToHash.TryAdd(state, UnityEngine.Animator.StringToHash(state.ToString()));
             }
         }
 
@@ -51,7 +51,7 @@ public class Player : Entity
             }
         }
 
-        public void Stop(AnimState state)
+        public void Stop(AnimState state, float time = 0f)
         {
             stateFlag &= ~(int)state;
 
@@ -64,7 +64,8 @@ public class Player : Entity
 
             if (stateToHash.TryGetValue((AnimState)curFlag, out int hash))
             {
-                animator.Play(hash);
+                if (time == 0f) animator.Play(hash);
+                else animator.CrossFade(hash, time);
             }
         }
 
@@ -79,24 +80,11 @@ public class Player : Entity
         }
     }
 
-    private Rigidbody2D rigid;
     private SpriteRenderer sprite;
-    private PlayerAnimator animator;
+    public PlayerAnimator Animator { get; private set; }
 
     private Rigidbody2D vehicleRB;
     private IInteractable trigger;
-
-
-    [Header("Run")]
-    private float movementDirection;
-
-    [Header("Jump")]
-    [SerializeField] private float maxJumpHeight;
-    private float maxJumpPositionY;
-    [SerializeField] private float jumpPower;
-    private int curJumpCount;
-    [SerializeField] private int maxJumpCount = 1;
-    private Collider2D[] _groundHits = new Collider2D[1];
 
     [Header("Parry")]
     private bool isParrying;
@@ -112,9 +100,8 @@ public class Player : Entity
 
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-        animator = new(GetComponent<Animator>());
+        Animator = new(GetComponent<Animator>());
 
         ResetPlayer(transform.position, false);
     }
@@ -128,24 +115,12 @@ public class Player : Entity
     private void Update()
     {
         CheckInvincible();
-        CheckGround();
-        CheckJumpHeight();
-    }
-
-    private void LateUpdate()
-    {
-        float x = vehicleRB ? movementDirection * speed + vehicleRB.velocity.x : movementDirection * speed;
-        float y = vehicleRB ? vehicleRB.velocity.y : rigid.velocity.y;
-
-        rigid.velocity = Vector2.right * x + Vector2.up * y;
     }
 
     private void SetupInput()
     {
         var input = InputManager.Instance;
 
-        input.AddListener(Actions.Move, TriggerFlag.Performed | TriggerFlag.Canceled, OnMove);
-        input.AddListener(Actions.Jump, TriggerFlag.Started, OnJump);
         input.AddListener(Actions.Interact, TriggerFlag.Started, OnInteract);
         input.AddListener(Actions.Parry, TriggerFlag.Started, OnParry);
     }
@@ -158,54 +133,12 @@ public class Player : Entity
         transform.position = _position;
 
         vehicleRB = null;
-        animator.Clear();
+        Animator.Clear();
     }
 
-    public void OnMove(InputAction.CallbackContext ctx)
-    {
-        movementDirection = ctx.ReadValue<float>();
+    
 
-        if (movementDirection == 0)
-        {
-            // Anim
-            animator.Stop(PlayerAnimator.AnimState.Run);
-
-            // Sound
-            SoundManager.Instance.StopSFX(Path.PlayerSFX.Walk);
-        }
-        else
-        {
-            // Sprite
-            sprite.flipX = movementDirection < 0;
-
-            // Anim
-            animator.Play(PlayerAnimator.AnimState.Run, 0.1f);
-
-            // Sound
-            SoundManager.Instance.PlaySFX(Path.PlayerSFX.Walk);
-        }
-    }
-
-    public void OnJump(InputAction.CallbackContext ctx)
-    {
-        if (curJumpCount < maxJumpCount)
-        {
-            maxJumpPositionY = rigid.position.y + maxJumpHeight;
-            ++curJumpCount;
-            vehicleRB = null;
-
-            // remove y velocity
-            rigid.velocity *= Vector2.right;
-            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-
-            // Anim
-            animator.Play(PlayerAnimator.AnimState.Jump, 0.1f);
-
-            // Sound
-            SoundManager.Instance.StopSFX(Path.PlayerSFX.Walk);
-            SoundManager.Instance.PlaySFX(Path.PlayerSFX.Jump, true);
-        }
-    }
+    
 
     public void OnInteract(InputAction.CallbackContext ctx)
     {
@@ -224,7 +157,7 @@ public class Player : Entity
         {
             InputManager.Instance.SetInputEnabled(Maps.Player, false);
 
-            animator.Play(PlayerAnimator.AnimState.Parry);
+            Animator.Play(PlayerAnimator.AnimState.Parry);
             isParrying = true;
 
             Invoke(nameof(OnParryEnd), validParryingTime);
@@ -235,45 +168,15 @@ public class Player : Entity
     {
         isParrying = false;
 
-        animator.Stop(PlayerAnimator.AnimState.Parry);
-        animator.Stop(PlayerAnimator.AnimState.Kick);
+        Animator.Stop(PlayerAnimator.AnimState.Parry);
+        Animator.Stop(PlayerAnimator.AnimState.Kick);
 
         InputManager.Instance.SetInputEnabled(Maps.Player, true);
 
         Time.timeScale = 1;
     }
 
-    private void CheckGround()
-    {
-        if (rigid.velocity.y > 0.01f) return;
-
-        int hit = Physics2D.OverlapBoxNonAlloc(transform.position, new Vector2(0.65f, 0.01f), 0f, _groundHits, 1 << LayerMask.NameToLayer("Ground"));
-        
-        if (hit > 0)
-        {
-            if (vehicleRB) return;
-
-            if (_groundHits[0].TryGetComponent(out MovingPlatforms vehicle)) {
-                if (vehicle.transform.position.y < transform.position.y)
-                {
-                    vehicleRB = vehicle.GetBody();
-                }
-            }
-
-            if (movementDirection != 0) SoundManager.Instance.PlaySFX(Path.PlayerSFX.Walk);
-            animator.Stop(PlayerAnimator.AnimState.Jump);
-            animator.Stop(PlayerAnimator.AnimState.Fall);
-
-            curJumpCount = 0;
-        }
-        else
-        {
-            vehicleRB = null;
-
-            animator.Stop(PlayerAnimator.AnimState.Jump);
-            animator.Play(PlayerAnimator.AnimState.Fall);
-        }
-    }
+    
 
     public bool TryAttack()
     {
@@ -283,7 +186,7 @@ public class Player : Entity
         if (isParrying)
         {
             isParrying = false;
-            animator.Play(PlayerAnimator.AnimState.Kick);
+            Animator.Play(PlayerAnimator.AnimState.Kick);
             SoundManager.Instance.PlaySFX(Path.PlayerSFX.Parry, true);
             cameraFunctions?.Shake();
             invincibleTimer = invincibleDuration;
@@ -300,7 +203,7 @@ public class Player : Entity
 
             GameManager.Instance.GameOver();
 
-            animator.Play(PlayerAnimator.AnimState.Death, 0.25f);
+            Animator.Play(PlayerAnimator.AnimState.Death, 0.25f);
 
             SoundManager.Instance.PlaySFX(Path.PlayerSFX.Dead);
 
@@ -318,14 +221,5 @@ public class Player : Entity
         if (invincibleTimer > 0) invincibleTimer -= Time.deltaTime;
     }
 
-    private void CheckJumpHeight()
-    {
-        if (vehicleRB) return;
-        if (rigid.velocity.y < 0.01f) return;
-
-        if (rigid.position.y < maxJumpPositionY) return;
-
-        rigid.velocity *= Vector2.right;
-        rigid.AddForce(Vector2.down,ForceMode2D.Impulse);
-    }
+    
 }
