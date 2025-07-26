@@ -18,9 +18,9 @@ public class Aim : MonoBehaviour
     {
         var input = InputManager.Instance;
 
-        input.AddListener(Actions.Snipe, OnSnipe);
-        input.AddListener(Actions.Shoot, OnShoot);
-        input.AddListener(Actions.Reload, OnReload);
+        input.AddListener(Actions.Snipe, TriggerFlag.Performed, OnSnipe);
+        input.AddListener(Actions.Shoot, TriggerFlag.Started, OnShoot);
+        input.AddListener(Actions.Reload, TriggerFlag.Started, OnReload);
     }
 
     public void OnSnipe(InputAction.CallbackContext ctx)

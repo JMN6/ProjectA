@@ -92,9 +92,11 @@ public class Player : Entity
 
     [Header("Jump")]
     [SerializeField] private float maxJumpHeight;
+    private float maxJumpPositionY;
     [SerializeField] private float jumpPower;
     private int curJumpCount;
     [SerializeField] private int maxJumpCount = 1;
+    private Collider2D[] _groundHits = new Collider2D[1];
 
     [Header("Parry")]
     private bool isParrying;
@@ -123,14 +125,29 @@ public class Player : Entity
         SetupInput();
     }
 
+    private void Update()
+    {
+        CheckInvincible();
+        CheckGround();
+        CheckJumpHeight();
+    }
+
+    private void LateUpdate()
+    {
+        float x = vehicleRB ? movementDirection * speed + vehicleRB.velocity.x : movementDirection * speed;
+        float y = vehicleRB ? vehicleRB.velocity.y : rigid.velocity.y;
+
+        rigid.velocity = Vector2.right * x + Vector2.up * y;
+    }
+
     private void SetupInput()
     {
         var input = InputManager.Instance;
 
-        input.AddListener(Actions.Move, OnMove);
-        input.AddListener(Actions.Jump, OnJump);
-        input.AddListener(Actions.Interact, OnInteract);
-        input.AddListener(Actions.Parry, OnParry);
+        input.AddListener(Actions.Move, TriggerFlag.Performed | TriggerFlag.Canceled, OnMove);
+        input.AddListener(Actions.Jump, TriggerFlag.Started, OnJump);
+        input.AddListener(Actions.Interact, TriggerFlag.Started, OnInteract);
+        input.AddListener(Actions.Parry, TriggerFlag.Started, OnParry);
     }
 
     public void ResetPlayer(Vector3 _position, bool isLeft = true)
@@ -173,6 +190,7 @@ public class Player : Entity
     {
         if (curJumpCount < maxJumpCount)
         {
+            maxJumpPositionY = rigid.position.y + maxJumpHeight;
             ++curJumpCount;
             vehicleRB = null;
 
@@ -225,31 +243,17 @@ public class Player : Entity
         Time.timeScale = 1;
     }
 
-    private void Update()
-    {
-        if (invincibleTimer > 0) invincibleTimer -= Time.deltaTime;
-
-        CheckGround();
-
-        float x = vehicleRB ? movementDirection * speed + vehicleRB.velocity.x : movementDirection * speed;
-        float y = vehicleRB ? vehicleRB.velocity.y : rigid.velocity.y;
-
-        rigid.velocity = Vector2.right * x + Vector2.up * y;
-    }
-
     private void CheckGround()
     {
         if (rigid.velocity.y > 0.01f) return;
 
-        Collider2D[] hits = new Collider2D[1];
-
-        int hit = Physics2D.OverlapBoxNonAlloc(transform.position, new Vector2(0.65f, 0.01f), 0f, hits, 1 << LayerMask.NameToLayer("Ground"));
+        int hit = Physics2D.OverlapBoxNonAlloc(transform.position, new Vector2(0.65f, 0.01f), 0f, _groundHits, 1 << LayerMask.NameToLayer("Ground"));
         
         if (hit > 0)
         {
             if (vehicleRB) return;
 
-            if (hits[0].TryGetComponent(out MovingPlatforms vehicle)) {
+            if (_groundHits[0].TryGetComponent(out MovingPlatforms vehicle)) {
                 if (vehicle.transform.position.y < transform.position.y)
                 {
                     vehicleRB = vehicle.GetBody();
@@ -307,5 +311,21 @@ public class Player : Entity
     public void CanInteract(bool _val, IInteractable _trigger = null)
     {
         trigger = _trigger;
+    }
+
+    private void CheckInvincible()
+    {
+        if (invincibleTimer > 0) invincibleTimer -= Time.deltaTime;
+    }
+
+    private void CheckJumpHeight()
+    {
+        if (vehicleRB) return;
+        if (rigid.velocity.y < 0.01f) return;
+
+        if (rigid.position.y < maxJumpPositionY) return;
+
+        rigid.velocity *= Vector2.right;
+        rigid.AddForce(Vector2.down,ForceMode2D.Impulse);
     }
 }

@@ -6,7 +6,6 @@ using Game.Input;
 
 public class InputManager : MonoSingleton<InputManager>
 {
-
     private static InputActions _input;
 
     private Dictionary<Maps, InputActionMap> _maps;
@@ -34,24 +33,37 @@ public class InputManager : MonoSingleton<InputManager>
         }
     }
 
-    public void AddListener(Actions input, Action<InputAction.CallbackContext> callback)
+    public void AddListener(Actions input, TriggerFlag trigger, Action<InputAction.CallbackContext> callback)
     {
         if (_actions.TryGetValue(input, out InputAction action))
         {
-            action.started -= callback;
-            action.started += callback;
+            if ((trigger & TriggerFlag.Started) != 0)
+            {
+                action.started -= callback;
+                action.started += callback;
+            }
 
-            action.canceled -= callback;
-            action.canceled += callback;
+            if ((trigger & TriggerFlag.Canceled) != 0)
+            {
+                action.canceled -= callback;
+                action.canceled += callback;
+            }
+
+            if ((trigger & TriggerFlag.Performed) != 0)
+            {
+                action.performed -= callback;
+                action.performed += callback;
+            }
         }
     }
 
-    public void RemoveListener(Actions input, Action<InputAction.CallbackContext> callback)
+    public void RemoveListener(Actions input, TriggerFlag trigger, Action<InputAction.CallbackContext> callback)
     {
         if (_actions.TryGetValue(input, out InputAction action))
         {
-            action.started -= callback;
-            action.canceled -= callback;
+            if ((trigger & TriggerFlag.Started) != 0) action.started -= callback;
+            if ((trigger & TriggerFlag.Canceled) != 0) action.canceled -= callback;
+            if ((trigger & TriggerFlag.Performed) != 0) action.performed -= callback;
         }
     }
 

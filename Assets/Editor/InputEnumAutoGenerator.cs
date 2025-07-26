@@ -30,6 +30,14 @@ public class InputEnumAutoGenerator : AssetPostprocessor
 
         sb.AppendLine("namespace Game.Input");
         sb.AppendLine("{");
+        sb.AppendLine("    [System.Flags]");
+        sb.AppendLine("    public enum TriggerFlag");
+        sb.AppendLine("    {");
+        sb.AppendLine("        Started = 1 << 0,");
+        sb.AppendLine("        Performed = 1 << 1,");
+        sb.AppendLine("        Canceled = 1 << 2,");
+        sb.AppendLine("    }");
+        sb.AppendLine();
         sb.AppendLine("    public enum Maps");
         sb.AppendLine("    {");
 
