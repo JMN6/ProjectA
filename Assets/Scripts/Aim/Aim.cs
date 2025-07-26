@@ -1,3 +1,4 @@
+using Game.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,37 +9,36 @@ public class Aim : MonoBehaviour
 
     private void Start()
     {
-        Show();
-
         CurGun = new Sniper(1f, 5);
+
+        SetupInput();
     }
 
-    public void OnSnipe(InputValue input)
+    private void SetupInput()
     {
-        var val = input.Get<Vector2>();
+        var input = InputManager.Instance;
+
+        input.AddListener(Actions.Snipe, TriggerFlag.Performed, OnSnipe);
+        input.AddListener(Actions.Shoot, TriggerFlag.Started, OnShoot);
+        input.AddListener(Actions.Reload, TriggerFlag.Started, OnReload);
+    }
+
+    public void OnSnipe(InputAction.CallbackContext ctx)
+    {
+        var val = ctx.ReadValue<Vector2>();
         var sensitivity = GameManager.Instance.Option.MouseSensitivity;
 
         transform.Translate(val * sensitivity * sensitivity * 0.03f);
     }
 
-    public void OnShoot()
+    public void OnShoot(InputAction.CallbackContext ctx)
     {
         CurGun.Fire(transform.position);
     }
 
-    public void OnReload()
+    public void OnReload(InputAction.CallbackContext ctx)
     {
         CurGun.Reload();
-    }
-
-    public void Hide()
-    {
-        InputManager.Instance.ShowCursor();
-    }
-
-    public void Show()
-    {
-        InputManager.Instance.HideCursor();
     }
 
     private Transform fixedTarget;
