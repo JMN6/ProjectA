@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Game.Input;
 
-public class Player : Entity
+
+public class Player : MonoBehaviour
 {
     public class PlayerAnimator
     {
@@ -13,11 +14,13 @@ public class Player : Entity
         {
             Idle = 1 << 0,
             Run = 1 << 1,
-            Jump = 1 << 2,
-            Fall = 1 << 3,
-            Parry = 1 << 4,
-            Kick = 1 << 5,
-            Death = 1 << 6,
+            Parry = 1 << 2,
+            Kick = 1 << 3,
+            Jab = 1 << 4,
+            Cross = 1 << 5,
+            Jump = 1 << 6,
+            Fall = 1 << 7,
+            Death = 1 << 8,
         }
 
         private Animator animator;
@@ -29,7 +32,6 @@ public class Player : Entity
         public PlayerAnimator(Animator anim)
         {
             animator = anim;
-
             stateToHash = new();
 
             foreach (AnimState state in Enum.GetValues(typeof(AnimState)))
@@ -80,27 +82,26 @@ public class Player : Entity
         }
     }
 
-    private SpriteRenderer sprite;
     public PlayerAnimator Animator { get; private set; }
+    [SerializeField] Collider2D _attackCollider;
 
-    private Rigidbody2D vehicleRB;
     private IInteractable trigger;
 
+    [Header("Attack")]
+    [SerializeField] private float _comboAttackAllowTime = 0.5f;
+    private float _comboAttackTimer;
+
     [Header("Parry")]
-    private bool isParrying;
-    [SerializeField] private float validParryingTime = 0.5f;
-    private Coroutine parryCoroutine;
+    [SerializeField] private float _parryingAllowTime = 0.5f;
+    private float _parryingTimer;
 
     [Header("Hurt")]
-    private float invincibleTimer;
     [SerializeField] private float invincibleDuration = 0.3f;
-
-
-    private CameraFunctions cameraFunctions;
+    private float invincibleTimer;
+    private bool _isDead;
 
     private void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
         Animator = new(GetComponent<Animator>());
 
         ResetPlayer(transform.position, false);
@@ -108,13 +109,12 @@ public class Player : Entity
 
     private void Start()
     {
-        cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
         SetupInput();
     }
 
     private void Update()
     {
-        CheckInvincible();
+        CountTimers();
     }
 
     private void SetupInput()
@@ -123,22 +123,17 @@ public class Player : Entity
 
         input.AddListener(Actions.Interact, TriggerFlag.Started, OnInteract);
         input.AddListener(Actions.Parry, TriggerFlag.Started, OnParry);
+        input.AddListener(Actions.Attack, TriggerFlag.Started, OnAttack);
     }
 
     public void ResetPlayer(Vector3 _position, bool isLeft = true)
     {
-        currentHealth = maxHealth;
+        _isDead = false;
 
-        sprite.flipX = isLeft;
         transform.position = _position;
 
-        vehicleRB = null;
         Animator.Clear();
     }
-
-    
-
-    
 
     public void OnInteract(InputAction.CallbackContext ctx)
     {
@@ -151,23 +146,46 @@ public class Player : Entity
         trigger = null;
     }
 
-    public void OnParry(InputAction.CallbackContext ctx)
+    private void OnAttack(InputAction.CallbackContext ctx)
     {
-        if (!isParrying)
+        if (_comboAttackTimer <= 0)
         {
             InputManager.Instance.SetInputEnabled(Maps.Player, false);
-
-            Animator.Play(PlayerAnimator.AnimState.Parry);
-            isParrying = true;
-
-            Invoke(nameof(OnParryEnd), validParryingTime);
+            Animator.Play(PlayerAnimator.AnimState.Jab);
+            _comboAttackTimer = _comboAttackAllowTime;
+            Invoke(nameof(OnAttackEnd), 0.33f);
         }
+        else
+        {
+            InputManager.Instance.SetInputEnabled(Maps.Player, false);
+            CancelInvoke(nameof(OnAttackEnd));
+            Animator.Play(PlayerAnimator.AnimState.Cross);
+            _comboAttackTimer = 0f;
+            Invoke(nameof(OnAttackEnd), 0.33f);
+        }
+    }
+
+    private void OnAttackEnd()
+    {
+        InputManager.Instance.SetInputEnabled(Maps.Player, true);
+        Animator.Stop(PlayerAnimator.AnimState.Jab);
+        Animator.Stop(PlayerAnimator.AnimState.Cross);
+    }
+
+    public void OnParry(InputAction.CallbackContext ctx)
+    {
+        if (_parryingTimer > 0) return;
+
+        InputManager.Instance.SetInputEnabled(Maps.Player, false);
+
+        Animator.Play(PlayerAnimator.AnimState.Parry);
+        _parryingTimer = _parryingAllowTime;
+
+        Invoke(nameof(OnParryEnd), _parryingAllowTime);
     }
 
     private void OnParryEnd()
     {
-        isParrying = false;
-
         Animator.Stop(PlayerAnimator.AnimState.Parry);
         Animator.Stop(PlayerAnimator.AnimState.Kick);
 
@@ -181,16 +199,14 @@ public class Player : Entity
     public bool TryAttack()
     {
         if (invincibleTimer > 0) return true;
-        if (currentHealth <= 0) return true;
+        if (_isDead) return true;
 
-        if (isParrying)
+        if (_parryingTimer > 0)
         {
-            isParrying = false;
+            _parryingTimer = 0f;
             Animator.Play(PlayerAnimator.AnimState.Kick);
             SoundManager.Instance.PlaySFX(Path.PlayerSFX.Parry, true);
-            cameraFunctions?.Shake();
             invincibleTimer = invincibleDuration;
-
 
             Time.timeScale = 0.5f;
             CancelInvoke(nameof(OnParryEnd));
@@ -199,7 +215,7 @@ public class Player : Entity
         }
         else
         {
-            currentHealth = 0;
+            _isDead = true;
 
             GameManager.Instance.GameOver();
 
@@ -216,10 +232,18 @@ public class Player : Entity
         trigger = _trigger;
     }
 
-    private void CheckInvincible()
+    private void CountTimers()
     {
-        if (invincibleTimer > 0) invincibleTimer -= Time.deltaTime;
+        invincibleTimer -= Time.deltaTime;
+        _parryingTimer -= Time.deltaTime;
+        _comboAttackTimer -= Time.deltaTime;
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out IDamagalbe target))
+        {
+            target.GetDamaged(1);
+        }
+    }
 }
