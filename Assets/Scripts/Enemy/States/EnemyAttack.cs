@@ -18,11 +18,11 @@ namespace EnemeyFSM
             anim.SetTrigger(Enemy.EnemyAnimation.Attack.ToString());
 
             sqrRange = enemy.AttackRange * enemy.AttackRange;
-            target = enemy.Target.GetComponent<Player>();
+            target = enemy.Target.GetComponentInParent<Player>();
             if(target == null)
             {
 #if UNITY_EDITOR
-                Debug.LogError("Rong target Detacted");
+                Debug.LogError("Wrong target Detacted");
 #endif
                 manager.ChangeState(FSMState.Idle);
                 return;
