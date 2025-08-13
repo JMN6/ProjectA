@@ -109,11 +109,20 @@ public class PlayerMovement : MonoBehaviour
             var acc = _isGrounded ? _groundAcceleration : _airAcceleration;
 
             _horizontalVelocity = Mathf.Lerp(_horizontalVelocity, _moveDirection * _maxMoveSpeed, acc * Time.deltaTime);
+
+            // Sound
+            if (_isGrounded)
+                SoundManager.Instance.PlaySFX(Path.PlayerSFX.Walk);
+            else
+                SoundManager.Instance.StopSFX(Path.PlayerSFX.Walk);
         }
         else
         {
             var dec = _isGrounded ? _groundDeceleration : _airDeceleration;
             _horizontalVelocity = Mathf.Lerp(_horizontalVelocity, 0f, dec * Time.deltaTime);
+
+            // Sound
+            SoundManager.Instance.StopSFX(Path.PlayerSFX.Walk);
         }
     }
 
@@ -129,18 +138,11 @@ public class PlayerMovement : MonoBehaviour
 
             // Anim
             _player.Animator.Play(PlayerAnimator.AnimState.Run, _runTransitionInDuration);
-
-            // Sound
-            if (_isGrounded)
-                SoundManager.Instance.PlaySFX(Path.PlayerSFX.Walk);
         }
         else
         {
             // Anim
             _player.Animator.Stop(PlayerAnimator.AnimState.Run, _runTransitionOutDuration);
-
-            // Sound
-            SoundManager.Instance.StopSFX(Path.PlayerSFX.Walk);
         }
     }
 
