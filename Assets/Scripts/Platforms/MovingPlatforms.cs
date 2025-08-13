@@ -57,7 +57,7 @@ public class MovingPlatforms : InteractableObj, IResetable
             Init();
         }
 
-        rigid.velocity = Vector2.zero;
+        rigid.linearVelocity = Vector2.zero;
         transform.position = initialStart;
     }
 
@@ -68,7 +68,7 @@ public class MovingPlatforms : InteractableObj, IResetable
         if (isMoving == false)
             return;
 
-        rigid.velocity = dir * speed;
+        rigid.linearVelocity = dir * speed;
 
         if ((rigid.position - end).sqrMagnitude <= 0.03f)
         {
@@ -93,7 +93,7 @@ public class MovingPlatforms : InteractableObj, IResetable
 
         dir = (end - start).normalized;
 
-        rigid.velocity = Vector2.zero;
+        rigid.linearVelocity = Vector2.zero;
         transform.position = start;
     }
 }

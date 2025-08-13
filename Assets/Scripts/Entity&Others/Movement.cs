@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
 
     public void SetVelocity(Vector2 dir)
     {
-        rigid.velocity = dir;
+        rigid.linearVelocity = dir;
     }
 
     public void MovePosition(Vector2 pos)

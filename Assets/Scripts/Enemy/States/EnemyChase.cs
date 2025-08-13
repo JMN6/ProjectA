@@ -42,7 +42,7 @@ namespace EnemeyFSM
             float dir = (targetTrasnform.position - move.Rigid.transform.position).x;
             int newDir = Convert.ToInt32(Mathf.Sign(dir));
 
-            // ½ºÇÁ¶óÀÌÆ® ¹æÇâ ¹Ù²Ù±â
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù±ï¿½
             if(targetDirection != newDir && newDir != 0)
             {
                 targetDirection = newDir;
@@ -50,7 +50,7 @@ namespace EnemeyFSM
                 enemy.spriteRenderer.flipX = dir < 0f;
             }
 
-            move.SetVelocity(newDir * enemy.Speed, move.Rigid.velocity.y);
+            move.SetVelocity(newDir * enemy.Speed, move.Rigid.linearVelocityY);
         }
 
         private bool IsTargetCloseEnough() => (move.Rigid.position - (Vector2)targetTrasnform.position).sqrMagnitude < sqrAttackRange;

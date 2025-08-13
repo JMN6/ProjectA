@@ -90,14 +90,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (!_isJumping && _vehicle)
         {
-            moveVelocity = new Vector2(_horizontalVelocity + _vehicle.velocity.x, _vehicle.velocity.y);
+            moveVelocity = new Vector2(_horizontalVelocity + _vehicle.linearVelocityX, _vehicle.linearVelocityY);
         }
         else
         {
             moveVelocity = new Vector2(_horizontalVelocity, _verticalVelocity);
         }
         
-        _rigid.velocity = moveVelocity;
+        _rigid.linearVelocity = moveVelocity;
     }
 
 

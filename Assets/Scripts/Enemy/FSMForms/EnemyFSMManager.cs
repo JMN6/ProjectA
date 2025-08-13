@@ -68,7 +68,7 @@ namespace EnemeyFSM
 
         public void ChangeState(FSMState _newState)
         {
-            enemy.Rigid.velocity = Vector2.zero;
+            enemy.Rigid.linearVelocity = Vector2.zero;
 
             if (currentState != FSMState.MAX)
             {

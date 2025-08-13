@@ -38,7 +38,7 @@ namespace EnemeyFSM
 
             enemy.transform.position = startPos;
 
-            enemy.Rigid.velocity = Vector2.zero;
+            enemy.Rigid.linearVelocity = Vector2.zero;
         }
 
         public override void OnFixedUpdate()
