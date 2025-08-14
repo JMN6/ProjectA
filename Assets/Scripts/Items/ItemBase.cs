@@ -32,5 +32,7 @@ public abstract class ItemBase : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Use();
+
+        Destroy(gameObject);
     }
 }
