@@ -9,7 +9,7 @@ namespace EnemeyFSM
 
         public override void OnEnter()
         {
-            SoundManager.Instance.PlaySFX(Path.ZombieSFX.Dead);
+            SoundManager.Instance.PlaySFX(Path.SFX.Zombie.Dead);
             bool isLeft = enemy.spriteRenderer.flipX;
             Vector2 forceVec= (Vector2.up + (isLeft ? Vector2.right : Vector2.right * -1f)).normalized;
 

@@ -3,61 +3,48 @@ using Game.Input;
 using UnityEngine.InputSystem;
 using static Player;
 
+public class PlayerMovementModifier
+{
+    public float MaxMoveSpeed;
+}
+
 [RequireComponent(typeof(Player), typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Render")]
-    [SerializeField] private bool _isFacingRight;
+    [SerializeField] PlayerStatsSO _stat;
+    PlayerMovementModifier _statModifier;
+
     private Player _player;
     private Rigidbody2D _rigid;
 
     [Header("Collision Checks")]
     [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private Collider2D _feetCollider;
-    [SerializeField] private LayerMask _groundMask;
     ContactFilter2D _filter;
-    [SerializeField] private float _collisionDetectionLength;
     private RaycastHit2D[] _castHits = new RaycastHit2D[1];
     private Rigidbody2D _vehicle;
 
-    [Header("Run")]
-    [Range(1f, 100f), SerializeField] private float _maxMoveSpeed;
-    [Range(0.25f, 50f), SerializeField] private float _groundAcceleration;
-    [Range(0.25f, 50f), SerializeField] private float _groundDeceleration;
-    [Range(0.25f, 50f), SerializeField] private float _airAcceleration;
-    [Range(0.25f, 50f), SerializeField] private float _airDeceleration;
-    [Range(0f, 3f), SerializeField] private float _runTransitionInDuration;
-    [Range(0f, 3f), SerializeField] private float _runTransitionOutDuration;
+    //[Header("Run")]
     private float _moveDirection;
     private float _horizontalVelocity;
 
-    [Header("Jump")]
-    [SerializeField] private float _jumpPower;
-    [SerializeField] private float _gravity;
+    //[Header("Jump")]
     private bool _isGrounded;
     private bool _isJumping;
     private bool _isFalling;
     private float _verticalVelocity;
 
-    [Header("More Jump")]
-    [SerializeField] private int _maxJumpCount = 1;
-    [Range(0.01f, 1f), SerializeField] private float _apexThreshold;
-    [Range(0.01f, 3f), SerializeField] private float _apexHangTime;
+    //[Header("More Jump")]
     private int _curJumpCount;
     private float _apexPoint;
     private float _apexHangTimer;
     private bool _isInApex;
 
-    [Header("Better Jump")]
-    [Range(0.01f, 1f), SerializeField] private float _coyoteAllowTime;
-    [Range(0.01f, 1f), SerializeField] private float _jumpBufferAllowTime;
-    [Range(1f, 100f), SerializeField] private float _maxFallSpeed;
+    //[Header("Better Jump")]
     private float _coyoteTimer;
     private float _jumpBufferTimer;
 
-    [Header("Jump Cut")]
-    [SerializeField] private float _fastFallPower;
-    [Range(1f, 3f), SerializeField] private float _fastFallSpeed;
+    //[Header("Jump Cut")]
     private bool _isFastFalling;
     private bool _isHeadBumped;
     private bool _isJumpReleased;
@@ -68,17 +55,9 @@ public class PlayerMovement : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
 
         _filter = new ContactFilter2D();
-        _filter.SetLayerMask(_groundMask); // 기존 레이어 마스크 적용
+        _filter.SetLayerMask(_stat.GroundMask); // 기존 레이어 마스크 적용
         _filter.useLayerMask = true;
         _filter.useTriggers = false; // 트리거 무시 (원하면 true로 변경)
-    }
-
-    private void Start()
-    {
-        var input = InputManager.Instance;
-
-        input.AddListener(Actions.Move, TriggerFlag.Performed | TriggerFlag.Canceled, OnMove);
-        input.AddListener(Actions.Jump, TriggerFlag.Performed | TriggerFlag.Canceled, OnJump);
     }
 
     private void Update()
@@ -106,63 +85,40 @@ public class PlayerMovement : MonoBehaviour
         _rigid.linearVelocity = moveVelocity;
     }
 
+    public void ChangeModifier(PlayerMovementModifier modifier)
+    {
+        _statModifier = modifier;
+    }
+
 
     #region Move
+
+    public void OnMove(float moveDirection)
+    {
+        _moveDirection = moveDirection;
+    }
+
     private void Move()
     {
         if (_moveDirection != 0)
         {
-            var acc = _isGrounded ? _groundAcceleration : _airAcceleration;
+            var acc = _isGrounded ? _stat.GroundAcceleration : _stat.AirAcceleration;
 
-            _horizontalVelocity = Mathf.Lerp(_horizontalVelocity, _moveDirection * _maxMoveSpeed, acc * Time.deltaTime);
+            _horizontalVelocity = Mathf.Lerp(_horizontalVelocity, _moveDirection * _stat.MaxMoveSpeed * _statModifier.MaxMoveSpeed, acc * Time.deltaTime);
 
             // Sound
             if (_isGrounded)
-                SoundManager.Instance.PlaySFX(Path.PlayerSFX.Walk);
+                SoundManager.Instance.PlaySFX(Path.SFX.Player.Walk);
             else
-                SoundManager.Instance.StopSFX(Path.PlayerSFX.Walk);
+                SoundManager.Instance.StopSFX(Path.SFX.Player.Walk);
         }
         else
         {
-            var dec = _isGrounded ? _groundDeceleration : _airDeceleration;
+            var dec = _isGrounded ? _stat.GroundDeceleration : _stat.AirDeceleration;
             _horizontalVelocity = Mathf.Lerp(_horizontalVelocity, 0f, dec * Time.deltaTime);
 
             // Sound
-            SoundManager.Instance.StopSFX(Path.PlayerSFX.Walk);
-        }
-    }
-
-    private void OnMove(InputAction.CallbackContext ctx)
-    {
-        _moveDirection = ctx.ReadValue<float>();
-
-        if (_moveDirection != 0)
-        {
-            // turn check
-            if (_isFacingRight && _moveDirection < 0) Turn(false);
-            else if (!_isFacingRight && _moveDirection > 0) Turn(true);
-
-            // Anim
-            _player.Animator.Play(PlayerAnimator.AnimState.Run, _runTransitionInDuration);
-        }
-        else
-        {
-            // Anim
-            _player.Animator.Stop(PlayerAnimator.AnimState.Run, _runTransitionOutDuration);
-        }
-    }
-
-    private void Turn(bool turnRight)
-    {
-        if (turnRight)
-        {
-            _isFacingRight = true;
-            transform.Rotate(0, 180f, 0);
-        }
-        else
-        {
-            _isFacingRight = false;
-            transform.Rotate(0, -180f, 0);
+            SoundManager.Instance.StopSFX(Path.SFX.Player.Walk);
         }
     }
     #endregion
@@ -173,18 +129,18 @@ public class PlayerMovement : MonoBehaviour
         _isJumping = true;
         _jumpBufferTimer = 0f;
         _coyoteTimer = 0f;
-        _verticalVelocity = _jumpPower;
+        _verticalVelocity = _stat.JumpPower;
         _curJumpCount++;
 
         _player.Animator.Stop(PlayerAnimator.AnimState.Fall);
         _player.Animator.Play(PlayerAnimator.AnimState.Jump);
-        SoundManager.Instance.PlaySFX(Path.PlayerSFX.Jump, true);
+        SoundManager.Instance.PlaySFX(Path.SFX.Player.Jump, true);
     }
 
     private void Jump()
     {
         // Jump Checks
-        if (_jumpBufferTimer > 0 && (_curJumpCount < _maxJumpCount || _isGrounded || _coyoteTimer > 0))
+        if (_jumpBufferTimer > 0 && (_curJumpCount < _stat.MaxJumpCount || _isGrounded || _coyoteTimer > 0))
         {
             DoJump();
         }
@@ -195,21 +151,21 @@ public class PlayerMovement : MonoBehaviour
             if (_isHeadBumped)
             {
                 _isFastFalling = true;
-                _verticalVelocity = -_fastFallPower;
+                _verticalVelocity = -_stat.FastFallPower;
             }
 
             if (_isJumpReleased)
             {
                 _isFastFalling = true;
-                _verticalVelocity -= _fastFallPower;
+                _verticalVelocity -= _stat.FastFallPower;
             }
 
-            _apexPoint = Mathf.InverseLerp(_jumpPower, 0, _verticalVelocity);
+            _apexPoint = Mathf.InverseLerp(_stat.JumpPower, 0, _verticalVelocity);
 
-            if (_apexPoint > _apexThreshold)
+            if (_apexPoint > _stat.ApexThreshold)
             {
                 _isInApex = true;
-                _apexHangTimer = _apexHangTime;
+                _apexHangTimer = _stat.ApexHangTime;
             }
         }
 
@@ -236,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
             _isFalling = false;
             _isFastFalling = false;
             _curJumpCount = 0;
+            _verticalVelocity = 0;
 
             _player.Animator.Stop(PlayerAnimator.AnimState.Jump);
             _player.Animator.Stop(PlayerAnimator.AnimState.Fall);
@@ -252,25 +209,25 @@ public class PlayerMovement : MonoBehaviour
         {
             if (_isFastFalling)
             {
-                _verticalVelocity += -_gravity * _fastFallSpeed * Time.deltaTime;
+                _verticalVelocity += -_stat.Gravity * _stat.FastFallSpeed * Time.deltaTime;
             }
             else
             {
-                _verticalVelocity += -_gravity * Time.deltaTime;
+                _verticalVelocity += -_stat.Gravity * Time.deltaTime;
             }
 
-            _verticalVelocity = Mathf.Clamp(_verticalVelocity, -_maxFallSpeed, 20f);
+            _verticalVelocity = Mathf.Clamp(_verticalVelocity, -_stat.MaxFallSpeed, 20f);
         }
     }
 
-    private void OnJump(InputAction.CallbackContext ctx)
+    public void OnJump(bool isPressed)
     {
-        if (ctx.started || ctx.performed)
+        if (isPressed)
         {
-            _jumpBufferTimer = _jumpBufferAllowTime;
+            _jumpBufferTimer = _stat.JumpBufferAllowTime;
             _isJumpReleased = false;
         }
-        else if (ctx.canceled)
+        else
         {
             _isJumpReleased = true;
         }
@@ -279,9 +236,9 @@ public class PlayerMovement : MonoBehaviour
     private void GroundChecks()
     {
         Vector2 boxCastOrigin = new Vector2(_feetCollider.bounds.center.x, _feetCollider.bounds.min.y);
-        Vector2 boxCastSize = new Vector2(_feetCollider.bounds.size.x, _collisionDetectionLength);
+        Vector2 boxCastSize = new Vector2(_feetCollider.bounds.size.x, _stat.CollisionDetectionLength);
 
-        int hits = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, Vector2.down, _filter, _castHits, _collisionDetectionLength);
+        int hits = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, Vector2.down, _filter, _castHits, _stat.CollisionDetectionLength);
 
         _isGrounded = false;
         _vehicle = null;
@@ -301,22 +258,13 @@ public class PlayerMovement : MonoBehaviour
                 _isGrounded = true;
             }
         }
-
-#if UNITY_EDITOR
-        Color rayColor = _isGrounded ? Color.green : Color.red;
-
-        Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y), Vector2.down * _collisionDetectionLength, rayColor);
-        Debug.DrawRay(new Vector2(boxCastOrigin.x + boxCastSize.x / 2, boxCastOrigin.y), Vector2.down * _collisionDetectionLength, rayColor);
-        Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y), Vector2.right * boxCastSize.x, rayColor);
-        Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y - _collisionDetectionLength), Vector2.right * boxCastSize.x, rayColor);
-#endif
     }
     private void CeilingChecks()
     {
         Vector2 boxCastOrigin = new Vector2(_bodyCollider.bounds.center.x, _bodyCollider.bounds.max.y);
-        Vector2 boxCastSize = new Vector2(_feetCollider.bounds.size.x, _collisionDetectionLength);
+        Vector2 boxCastSize = new Vector2(_feetCollider.bounds.size.x, _stat.CollisionDetectionLength);
 
-        int hits = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, Vector2.up, _filter, _castHits, _collisionDetectionLength);
+        int hits = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, Vector2.up, _filter, _castHits, _stat.CollisionDetectionLength);
 
         if (hits > 0 && !_castHits[0].transform.TryGetComponent(out PlatformEffector2D platform))
         {
@@ -326,15 +274,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _isHeadBumped = false;
         }
-
-#if UNITY_EDITOR
-        Color rayColor = _isHeadBumped ? Color.green : Color.red;
-
-        Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y), Vector2.up * _collisionDetectionLength, rayColor);
-        Debug.DrawRay(new Vector2(boxCastOrigin.x + boxCastSize.x / 2, boxCastOrigin.y), Vector2.up * _collisionDetectionLength, rayColor);
-        Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y), Vector2.right * boxCastSize.x, rayColor);
-        Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y + _collisionDetectionLength), Vector2.right * boxCastSize.x, rayColor);
-#endif
     }
     #endregion
 
@@ -345,7 +284,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_isGrounded)
         {
-            _coyoteTimer = _coyoteAllowTime;
+            _coyoteTimer = _stat.CoyoteAllowTime;
         }
         else
         {
