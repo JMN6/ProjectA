@@ -9,18 +9,18 @@ public class BreakableObject : MonoBehaviour, IDamagalbe, IResetable
 
     private static readonly int IsBrokenAnimID = Animator.StringToHash("IsBroken");
 
-    private void Awake()
+    protected virtual void Awake()
     {
         gameObject.layer = LayerMask.NameToLayer("InteractableObject");
     }
 
-    public void OnReset()
+    public virtual void OnReset()
     {
         anim.SetBool(IsBrokenAnimID, false);
         col.enabled = true;
     }
 
-    public void GetDamaged(int damage)
+    public virtual void GetDamaged(int damage)
     {
         ShowEffect();
     }
