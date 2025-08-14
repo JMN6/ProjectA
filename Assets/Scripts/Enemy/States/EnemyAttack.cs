@@ -6,11 +6,12 @@ namespace EnemeyFSM
     public class EnemyAttack : EnemyFSMState
     {
         private Player target;
-        private float elpasedTime = 0f;
+        private float attackElpasedTime = 0f;
         private bool isAttacking = false;
 
         private float sqrRange;
 
+        private float checkElapsedTime = 0f;
         private bool isCheckAble = false;
 
         public override void OnEnter()
@@ -29,7 +30,7 @@ namespace EnemeyFSM
             }
 
             Debug.Log(enemy.name + " " + isCheckAble);
-            elpasedTime = 0f;
+            attackElpasedTime = 0f;
             isAttacking = true;
             isCheckAble = false;
         }
@@ -44,6 +45,11 @@ namespace EnemeyFSM
             }
         }
 
+        public override void OnLateUpdate()
+        {
+            isAttacking = true;
+        }
+
         private void Attack()
         {
             SoundManager.Instance.PlaySFX(Path.ZombieSFX.Attack);
@@ -52,6 +58,7 @@ namespace EnemeyFSM
                 return;
 
             var res = target.TryAttack();
+            Debug.Log("attak");
 
             if(!res)
             {
@@ -60,29 +67,21 @@ namespace EnemeyFSM
                 enemy.GetDamaged(3);
                 EffectManager.Instance.PlayParticle(Effects.Spit, enemy.transform.position + Vector3.up);
             }
-            else
-            {
-                isAttacking = false;
-            }
+
+            isAttacking = false;
         }
 
         private void CoolTime()
         {
-            elpasedTime += Time.deltaTime;
-
-            if (elpasedTime >= 0.75f)
+            if(isCheckAble == false)
             {
-                isCheckAble = true;
-                return;
-            }
+                checkElapsedTime += Time.deltaTime;
 
-            if (isAttacking == true)
-                return;
-
-            if(elpasedTime >= enemy.AttackDelay)
-            {
-                elpasedTime = 0;
-                isAttacking = true;
+                if (checkElapsedTime >= 0.75f)
+                {
+                    isCheckAble = true;
+                    checkElapsedTime = 0f;
+                }
             }
         }
 

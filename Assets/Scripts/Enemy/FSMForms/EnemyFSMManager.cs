@@ -97,7 +97,10 @@ namespace EnemeyFSM
             currentStateScript?.OnUpdate();
         }
 
-
+        private void LateUpdate()
+        {
+            currentStateScript?.OnLateUpdate();
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

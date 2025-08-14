@@ -30,6 +30,7 @@ namespace EnemeyFSM
 
         public abstract void OnUpdate();
         public virtual void OnFixedUpdate() { }
+        public virtual void OnLateUpdate() { }
 
         public virtual void OnTriggerEnter(Collider2D collision) { }
         public virtual void OnTriggerStay(Collider2D collision) { }
