@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fad839622ba7a54f8c0035e7ad7287c, type: 3}
+  m_Name: PlayerStatsSO
+  m_EditorClassIdentifier: 
+  <DefaultMaxHP>k__BackingField: 0
+  <UpgradableMaxHP>k__BackingField: 0
+  <MagazineCapacity>k__BackingField: 0
+  <MaxAmmo>k__BackingField: 0
+  <GroundMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 0
+  <CollisionDetectionLength>k__BackingField: 0
+  <MaxMoveSpeed>k__BackingField: 0
+  <GroundAcceleration>k__BackingField: 0
+  <GroundDeceleration>k__BackingField: 0
+  <AirAcceleration>k__BackingField: 0
+  <AirDeceleration>k__BackingField: 0
+  <RunTransitionInDuration>k__BackingField: 0
+  <RunTransitionOutDuration>k__BackingField: 0
+  <JumpPower>k__BackingField: 0
+  <Gravity>k__BackingField: 0
+  <MaxJumpCount>k__BackingField: 0
+  <ApexThreshold>k__BackingField: 0
+  <ApexHangTime>k__BackingField: 0
+  <CoyoteAllowTime>k__BackingField: 0
+  <JumpBufferAllowTime>k__BackingField: 0
+  <MaxFallSpeed>k__BackingField: 0
+  <FastFallPower>k__BackingField: 0
+  <FastFallSpeed>k__BackingField: 0

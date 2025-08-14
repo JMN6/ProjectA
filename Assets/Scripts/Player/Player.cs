@@ -1,12 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Game.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Game.Input;
 
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ILightSensitive
 {
+    [SerializeField] PlayerStatsSO _stat;
+    int _curHP;
+    int _maxHP;
+
     public class PlayerAnimator
     {
         [Flags]
@@ -81,34 +87,42 @@ public class Player : MonoBehaviour
             }
         }
     }
+    [SerializeField] PlayerMovement _movement;
 
     public PlayerAnimator Animator { get; private set; }
-    [SerializeField] Collider2D _attackCollider;
+    [SerializeField] SpriteRenderer _sprite;
+    [SerializeField] Animator _animator;
 
-    private IInteractable trigger;
+    [SerializeField] bool _isFacingRight;
 
-    [Header("Attack")]
-    [SerializeField] private float _comboAttackAllowTime = 0.5f;
-    private float _comboAttackTimer;
+    private IInteractable _trigger;
 
     [Header("Parry")]
     [SerializeField] private float _parryingAllowTime = 0.5f;
     private float _parryingTimer;
+    CancellationTokenSource _parryingTokenSource; 
 
     [Header("Hurt")]
-    [SerializeField] private float invincibleDuration = 0.3f;
-    private float invincibleTimer;
+    [SerializeField] private float _invincibleDuration = 0.3f;
+    private float _invincibleTimer;
     private bool _isDead;
+
+    bool _isInLight = false;
+
+    public event Action<int> onPlayerHPChanged;
+
 
     private void Awake()
     {
         Animator = new(GetComponent<Animator>());
 
-        ResetPlayer(transform.position, false);
     }
 
     private void Start()
     {
+        _maxHP = _stat.DefaultMaxHP;
+        ResetPlayer(transform.position, false);
+
         SetupInput();
     }
 
@@ -123,11 +137,18 @@ public class Player : MonoBehaviour
 
         input.AddListener(Actions.Interact, TriggerFlag.Started, OnInteract);
         input.AddListener(Actions.Parry, TriggerFlag.Started, OnParry);
-        input.AddListener(Actions.Attack, TriggerFlag.Started, OnAttack);
+        input.AddListener(Actions.Move, TriggerFlag.Started | TriggerFlag.Canceled, OnMove);
+        input.AddListener(Actions.Jump, TriggerFlag.Started | TriggerFlag.Canceled, OnJump);
     }
 
     public void ResetPlayer(Vector3 _position, bool isLeft = true)
     {
+        _curHP = _maxHP;
+        onPlayerHPChanged?.Invoke(_curHP);
+
+        _isFacingRight = true;
+        _sprite.transform.rotation = Quaternion.identity;
+
         _isDead = false;
 
         transform.position = _position;
@@ -135,57 +156,87 @@ public class Player : MonoBehaviour
         Animator.Clear();
     }
 
+    #region Input
+
+    private void OnMove(InputAction.CallbackContext ctx)
+    {
+        var moveDir = ctx.ReadValue<float>();
+
+        if (moveDir != 0)
+        {
+            // turn check
+            if (_isFacingRight && moveDir < 0)
+            {
+                _isFacingRight = false;
+                _sprite.transform.Rotate(0, -180f, 0);
+            }
+            else if (!_isFacingRight && moveDir > 0)
+            {
+                _isFacingRight = true;
+                _sprite.transform.Rotate(0, 180f, 0);
+            }
+
+            // Anim
+            _animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            // Anim
+            _animator.SetBool("IsMoving", false);
+        }
+
+        _movement.OnMove(moveDir);
+    }
+
+    private void OnJump(InputAction.CallbackContext ctx)
+    {
+        var isPressed = ctx.started;
+
+        if (!_isInLight || (_isInLight && !isPressed)) return;
+
+        _movement.OnJump(isPressed);
+    }
+
     public void OnInteract(InputAction.CallbackContext ctx)
     {
-        if (trigger == null)
+        if (_trigger == null)
         {
             return;
         }
 
-        trigger.Interact();
-        trigger = null;
-    }
-
-    private void OnAttack(InputAction.CallbackContext ctx)
-    {
-        if (_comboAttackTimer <= 0)
-        {
-            InputManager.Instance.SetInputEnabled(Maps.Player, false);
-            Animator.Play(PlayerAnimator.AnimState.Jab);
-            _comboAttackTimer = _comboAttackAllowTime;
-            Invoke(nameof(OnAttackEnd), 0.33f);
-        }
-        else
-        {
-            InputManager.Instance.SetInputEnabled(Maps.Player, false);
-            CancelInvoke(nameof(OnAttackEnd));
-            Animator.Play(PlayerAnimator.AnimState.Cross);
-            _comboAttackTimer = 0f;
-            Invoke(nameof(OnAttackEnd), 0.33f);
-        }
-    }
-
-    private void OnAttackEnd()
-    {
-        InputManager.Instance.SetInputEnabled(Maps.Player, true);
-        Animator.Stop(PlayerAnimator.AnimState.Jab);
-        Animator.Stop(PlayerAnimator.AnimState.Cross);
+        _trigger.Interact();
+        _trigger = null;
     }
 
     public void OnParry(InputAction.CallbackContext ctx)
     {
         if (_parryingTimer > 0) return;
+        if (!_isInLight) return;
 
         InputManager.Instance.SetInputEnabled(Maps.Player, false);
 
         Animator.Play(PlayerAnimator.AnimState.Parry);
         _parryingTimer = _parryingAllowTime;
 
-        Invoke(nameof(OnParryEnd), _parryingAllowTime);
+        try
+        {
+            _parryingTokenSource?.Cancel();
+            _parryingTokenSource?.Dispose();
+        }
+        finally
+        {
+            _parryingTokenSource = new();
+        }
+
+        OnParryEnd(_parryingAllowTime, _parryingTokenSource.Token).Forget();
     }
 
-    private void OnParryEnd()
+    #endregion
+
+    private async UniTaskVoid OnParryEnd(float invokeDelay, CancellationToken token)
     {
+        await UniTask.Delay(TimeSpan.FromSeconds(_parryingAllowTime), cancellationToken: _parryingTokenSource.Token);
+
         Animator.Stop(PlayerAnimator.AnimState.Parry);
         Animator.Stop(PlayerAnimator.AnimState.Kick);
 
@@ -194,11 +245,9 @@ public class Player : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    
-
     public bool TryAttack()
     {
-        if (invincibleTimer > 0) return true;
+        if (_invincibleTimer > 0) return true;
         if (_isDead) return true;
 
         if (_parryingTimer > 0)
@@ -206,22 +255,42 @@ public class Player : MonoBehaviour
             _parryingTimer = 0f;
             Animator.Play(PlayerAnimator.AnimState.Kick);
             SoundManager.Instance.PlaySFX(Path.PlayerSFX.Parry, true);
-            invincibleTimer = invincibleDuration;
+            _invincibleTimer = _invincibleDuration;
 
             Time.timeScale = 0.5f;
-            CancelInvoke(nameof(OnParryEnd));
-            Invoke(nameof(OnParryEnd), 0.5f);
+
+            try
+            {
+                _parryingTokenSource?.Cancel();
+                _parryingTokenSource?.Dispose();
+            }
+            finally
+            {
+                _parryingTokenSource = new();
+            }
+
+            OnParryEnd(0.5f, _parryingTokenSource.Token).Forget();
+
             return false;
         }
         else
         {
-            _isDead = true;
+            onPlayerHPChanged?.Invoke(--_curHP);
 
-            GameManager.Instance.GameOver();
+            if (_curHP > 0)
+            {
+                SoundManager.Instance.PlaySFX(Path.PlayerSFX.Dead);
+            }
+            else
+            {
+                _isDead = true;
 
-            Animator.Play(PlayerAnimator.AnimState.Death, 0.25f);
+                GameManager.Instance.GameOver();
 
-            SoundManager.Instance.PlaySFX(Path.PlayerSFX.Dead);
+                Animator.Play(PlayerAnimator.AnimState.Death, 0.25f);
+
+                SoundManager.Instance.PlaySFX(Path.PlayerSFX.Dead);
+            }
 
             return true;
         }
@@ -229,14 +298,13 @@ public class Player : MonoBehaviour
 
     public void CanInteract(bool _val, IInteractable _trigger = null)
     {
-        trigger = _trigger;
+        this._trigger = _trigger;
     }
 
     private void CountTimers()
     {
-        invincibleTimer -= Time.deltaTime;
+        _invincibleTimer -= Time.deltaTime;
         _parryingTimer -= Time.deltaTime;
-        _comboAttackTimer -= Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -245,5 +313,21 @@ public class Player : MonoBehaviour
         {
             target.GetDamaged(1);
         }
+    }
+
+    public void OnEnterLight()
+    {
+        _sprite.color = Color.white;
+
+        _movement.ChangeModifier(new PlayerMovementModifier() { MaxMoveSpeed = 1f });
+        _isInLight = true;
+    }
+
+    public void OnExitLight()
+    {
+        _sprite.color = Color.red;
+
+        _movement.ChangeModifier(new PlayerMovementModifier() { MaxMoveSpeed = 0.3f });
+        _isInLight = false;
     }
 }

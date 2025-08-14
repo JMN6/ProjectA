@@ -1,17 +1,23 @@
 using Game.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class Aim : MonoBehaviour
 {
     public Gun CurGun { get; private set; }
     [SerializeField] private bool isFixed = true;
+    [SerializeField] PlayerStatsSO _stat;
+    [SerializeField] Light2D _flashLight;
+    [SerializeField] CircleCollider2D _falshLightColiider;
 
     private void Start()
     {
-        CurGun = new Sniper(1f, 5);
+        CurGun = new Gun(1f, _stat);
 
         SetupInput();
+
+        SetFlashLightRadius(5f);
     }
 
     private void SetupInput()
@@ -57,6 +63,18 @@ public class Aim : MonoBehaviour
         isFixed = false;
     }
 
+    public void ScaleFlashLightRadius(float scale)
+    {
+        _flashLight.pointLightOuterRadius *= scale;
+        _falshLightColiider.radius = _flashLight.pointLightOuterRadius;
+    }
+
+    public void SetFlashLightRadius(float radius)
+    {
+        _flashLight.pointLightOuterRadius = radius;
+        _falshLightColiider.radius = _flashLight.pointLightOuterRadius;
+    }
+
     private void LateUpdate()
     {
         //if(isFixed)
@@ -79,5 +97,33 @@ public class Aim : MonoBehaviour
         float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
 
         transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.TryGetComponent(out ILightSensitive obj))
+        {
+            obj = collision.GetComponentInParent<ILightSensitive>();
+        }
+
+        if (obj != null)
+        {
+            obj.OnEnterLight();
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.TryGetComponent(out ILightSensitive obj))
+        {
+            obj = collision.GetComponentInParent<ILightSensitive>();
+        }
+
+
+        if (obj != null)
+        {
+            obj.OnExitLight();
+        }
     }
 }

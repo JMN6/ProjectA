@@ -21,7 +21,6 @@ namespace Game.Input
         Jump,
         Interact,
         Parry,
-        Attack,
         Snipe,
         Shoot,
         Reload,
