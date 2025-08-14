@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private Collider2D _feetCollider;
     [SerializeField] private LayerMask _groundMask;
+    ContactFilter2D _filter;
     [SerializeField] private float _collisionDetectionLength;
     private RaycastHit2D[] _castHits = new RaycastHit2D[1];
     private Rigidbody2D _vehicle;
@@ -65,6 +66,11 @@ public class PlayerMovement : MonoBehaviour
     {
         _player = GetComponent<Player>();
         _rigid = GetComponent<Rigidbody2D>();
+
+        _filter = new ContactFilter2D();
+        _filter.SetLayerMask(_groundMask); // 기존 레이어 마스크 적용
+        _filter.useLayerMask = true;
+        _filter.useTriggers = false; // 트리거 무시 (원하면 true로 변경)
     }
 
     private void Start()
@@ -273,7 +279,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 boxCastOrigin = new Vector2(_feetCollider.bounds.center.x, _feetCollider.bounds.min.y);
         Vector2 boxCastSize = new Vector2(_feetCollider.bounds.size.x, _collisionDetectionLength);
 
-        int hits = Physics2D.BoxCastNonAlloc(boxCastOrigin, boxCastSize, 0f, Vector2.down, _castHits, _collisionDetectionLength, _groundMask);
+        int hits = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, Vector2.down, _filter, _castHits, _collisionDetectionLength);
 
         _isGrounded = false;
         _vehicle = null;
@@ -308,7 +314,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 boxCastOrigin = new Vector2(_bodyCollider.bounds.center.x, _bodyCollider.bounds.max.y);
         Vector2 boxCastSize = new Vector2(_feetCollider.bounds.size.x, _collisionDetectionLength);
 
-        int hits = Physics2D.BoxCastNonAlloc(boxCastOrigin, boxCastSize, 0f, Vector2.up, _castHits, _collisionDetectionLength, _groundMask);
+        int hits = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, Vector2.up, _filter, _castHits, _collisionDetectionLength);
 
         if (hits > 0 && !_castHits[0].transform.TryGetComponent(out PlatformEffector2D platform))
         {
