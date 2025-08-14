@@ -29,7 +29,9 @@ public class Enemy : Entity, IDamagalbe, IResetable
     [field: SerializeField] public AnimationPlayer anim;
     [field: SerializeField] public Movement move;
 
+    [SerializeField] private bool startFSMOnAwake = true;
     [SerializeField] private EnemyFSMManager fsmManager;
+
 
     public GameObject Target { get; set; }
 
@@ -50,6 +52,14 @@ public class Enemy : Entity, IDamagalbe, IResetable
         originPosition = transform.position;
         chaseRange.gameObject.SetActive(true);
 
+        if(startFSMOnAwake == true)
+        {
+            StartFSM();
+        }
+    }
+
+    public virtual void StartFSM()
+    {
         fsmManager.StartFSM();
     }
 
