@@ -7,15 +7,14 @@ public class HUD : MonoBehaviour
 
     private void Start()
     {
-        FindFirstObjectByType<Player>().onPlayerHPChanged += RefreshHP;
-        RefreshHP(3);
+        GameManager.Instance.Player.onPlayerHPChanged += RefreshHP;
     }
 
-    private void RefreshHP(int curHP)
+    private void RefreshHP(int curHP, int maxHP)
     {
         string hp = string.Empty;
 
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < maxHP; i++)
         {
             hp += curHP > i ? "¡Ü" : "¡Û";
         }

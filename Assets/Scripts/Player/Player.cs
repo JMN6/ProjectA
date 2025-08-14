@@ -109,20 +109,18 @@ public class Player : MonoBehaviour, ILightSensitive
 
     bool _isInLight = false;
 
-    public event Action<int> onPlayerHPChanged;
+    public event Action<int, int> onPlayerHPChanged;
 
 
     private void Awake()
     {
         Animator = new(GetComponent<Animator>());
 
+        _maxHP = _stat.DefaultMaxHP;
     }
 
     private void Start()
     {
-        _maxHP = _stat.DefaultMaxHP;
-        ResetPlayer(transform.position, false);
-
         SetupInput();
     }
 
@@ -144,7 +142,7 @@ public class Player : MonoBehaviour, ILightSensitive
     public void ResetPlayer(Vector3 _position, bool isLeft = true)
     {
         _curHP = _maxHP;
-        onPlayerHPChanged?.Invoke(_curHP);
+        onPlayerHPChanged?.Invoke(_curHP, _maxHP);
 
         _isFacingRight = true;
         _sprite.transform.rotation = Quaternion.identity;
@@ -254,7 +252,7 @@ public class Player : MonoBehaviour, ILightSensitive
         {
             _parryingTimer = 0f;
             Animator.Play(PlayerAnimator.AnimState.Kick);
-            SoundManager.Instance.PlaySFX(Path.PlayerSFX.Parry, true);
+            SoundManager.Instance.PlaySFX(Path.SFX.Player.Parry, true);
             _invincibleTimer = _invincibleDuration;
 
             Time.timeScale = 0.5f;
@@ -275,11 +273,11 @@ public class Player : MonoBehaviour, ILightSensitive
         }
         else
         {
-            onPlayerHPChanged?.Invoke(--_curHP);
+            ChangeHP(-1);
 
             if (_curHP > 0)
             {
-                SoundManager.Instance.PlaySFX(Path.PlayerSFX.Dead);
+                SoundManager.Instance.PlaySFX(Path.SFX.Player.Dead);
             }
             else
             {
@@ -289,11 +287,32 @@ public class Player : MonoBehaviour, ILightSensitive
 
                 Animator.Play(PlayerAnimator.AnimState.Death, 0.25f);
 
-                SoundManager.Instance.PlaySFX(Path.PlayerSFX.Dead);
+                SoundManager.Instance.PlaySFX(Path.SFX.Player.Dead);
             }
 
             return true;
         }
+    }
+
+    public void ChangeHP(int amount)
+    {
+        int newHP = _curHP + amount;
+
+        newHP = Mathf.Clamp(newHP, 0, _maxHP);
+
+        if (newHP != _curHP)
+        {
+            _curHP = newHP;
+            onPlayerHPChanged?.Invoke(_curHP, _maxHP);
+        }
+    }
+
+    public void IncreaseMaxHealth(int amount = 1)
+    {
+        if (_maxHP >= _stat.UpgradableMaxHP) return;
+
+        _maxHP = Mathf.Min(_maxHP + amount, _stat.UpgradableMaxHP);
+        onPlayerHPChanged?.Invoke(_curHP, _maxHP);
     }
 
     public void CanInteract(bool _val, IInteractable _trigger = null)

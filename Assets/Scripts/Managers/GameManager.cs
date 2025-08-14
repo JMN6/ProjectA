@@ -1,26 +1,12 @@
-using System;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using DataParseAndPlayer;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField] private Transform player;
-    private Player _playerScript;
-    public Player PlayerScript
-    {
-        get
-        {
-            if (_playerScript == null)
-            {
-                _playerScript = player?.GetComponent<Player>();
-            }
-            return _playerScript;
-        }
-        set { _playerScript = value; }
-    }
+    public Player Player { get; private set; }
+    public Aim Aim { get; private set; }
 
     [Header("Option")]
     [SerializeField] private OptionUI optionUI;
@@ -52,10 +38,22 @@ public class GameManager : MonoSingleton<GameManager>
 
     private float tempTimeScale = 1;
 
+    public ItemsSO ItemsSO { get; private set; }
+
+    private void Awake()
+    {
+        ItemsSO = Resources.Load<ItemsSO>(Path.Data.Items);
+        Player = Instantiate(Resources.Load<Player>(Path.Prefab.Player));
+        Aim = Instantiate(Resources.Load<Aim>(Path.Prefab.Aim));
+    }
+
     public void Start()
     {
-        camFollow.OpenningSequence(player);
+        camFollow.OpenningSequence();
         maxStage = stageManager.StagetCount;
+
+        Player.ResetPlayer(stageManager.GetRespawnPosition(currentStage),
+            stageManager.GetRespawnFaceWay(currentStage));
     }
 
     public void OnESC()
@@ -119,7 +117,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void ResetGame()
     {
-        PlayerScript.ResetPlayer(stageManager.GetRespawnPosition(currentStage), 
+        Player.ResetPlayer(stageManager.GetRespawnPosition(currentStage), 
             stageManager.GetRespawnFaceWay(currentStage) );
 
         stageManager.ResetGame(currentStage);

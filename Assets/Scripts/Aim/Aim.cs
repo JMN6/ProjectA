@@ -11,13 +11,18 @@ public class Aim : MonoBehaviour
     [SerializeField] Light2D _flashLight;
     [SerializeField] CircleCollider2D _falshLightColiider;
 
-    private void Start()
+    private void Awake()
     {
         CurGun = new Gun(1f, _stat);
+    }
 
+    private void Start()
+    {
         SetupInput();
 
         SetFlashLightRadius(5f);
+
+        CurGun.Init();
     }
 
     private void SetupInput()

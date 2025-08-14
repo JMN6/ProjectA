@@ -1,40 +1,52 @@
 namespace Path
 {
-    public static class SFXPath
+    public static class SFX
     {
         public const string Base = "Sounds/SFX";
-    }
 
-    public static class GunSFX
-    {
-        private static readonly string Base = $"{SFXPath.Base}/Guns";
-
-        public static class SniperSFX
+        public static class Gun
         {
-            public static readonly string Shoot = $"{Base}/Sniper/Shoot";
-            public static readonly string Reload = $"{Base}/Sniper/Reload";
-            public static readonly string Empty = $"{Base}/Sniper/Empty";
+            public static class SniperSFX
+            {
+                public static readonly string Shoot = $"{Base}/Guns/Sniper/Shoot";
+                public static readonly string Reload = $"{Base}/Guns/Sniper/Reload";
+                public static readonly string Empty = $"{Base}/Guns/Sniper/Empty";
+            }
+        }
+
+        public static class Zombie
+        {
+            private static readonly string Base = $"{SFX.Base}/Zombie";
+
+            public static readonly string Attack = $"{Base}/Attack";
+            public static readonly string Walk = $"{Base}/Walk";
+            public static readonly string Idle = $"{Base}/Idle";
+            public static readonly string Hurt = $"{Base}/Hurt";
+            public static readonly string Dead = $"{Base}/Dead";
+        }
+        public static class Player
+        {
+            private static readonly string Base = $"{SFX.Base}/Player";
+
+            public static readonly string Walk = $"{Base}/Walk";
+            public static readonly string Jump = $"{Base}/Jump";
+            public static readonly string Parry = $"{Base}/Parry";
+            public static readonly string Dead = $"{Base}/Dead";
         }
     }
 
-    public static class ZombieSFX
+    public static class Data
     {
-        private static readonly string Base = $"{SFXPath.Base}/Zombie";
+        public const string Base = "Data";
 
-        public static readonly string Attack = $"{Base}/Attack";
-        public static readonly string Walk = $"{Base}/Walk";
-        public static readonly string Idle = $"{Base}/Idle";
-        public static readonly string Hurt = $"{Base}/Hurt";
-        public static readonly string Dead = $"{Base}/Dead";
+        public static readonly string Items = $"{Base}/Items";
     }
 
-    public static class PlayerSFX
+    public static class Prefab
     {
-        private static readonly string Base = $"{SFXPath.Base}/Player";
+        public const string Base = "Prefabs";
 
-        public static readonly string Walk = $"{Base}/Walk";
-        public static readonly string Jump = $"{Base}/Jump";
-        public static readonly string Parry = $"{Base}/Parry";
-        public static readonly string Dead = $"{Base}/Dead";
+        public static readonly string Player = $"{Base}/Player";
+        public static readonly string Aim = $"{Base}/Aim";
     }
 }

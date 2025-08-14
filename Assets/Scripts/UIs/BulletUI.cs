@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class BulletUI : MonoBehaviour
 {
-    [SerializeField] private Aim aim;
     [SerializeField] private TextMeshProUGUI bullet;
 
-    private void Update()
+    private void Awake()
     {
-        Gun gun = aim.CurGun;
+        GameManager.Instance.Aim.CurGun.onAmmoChanged += Refresh;
+    }
 
-        bullet.text = $"{gun.CurBullets}/{gun.MaxBullets}";
+    private void Refresh(int loadedBullet, int ammo)
+    {
+        bullet.text = $"{loadedBullet}/{ammo}";
     }
 }

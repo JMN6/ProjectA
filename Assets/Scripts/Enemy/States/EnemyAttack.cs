@@ -52,7 +52,7 @@ namespace EnemeyFSM
 
         private void Attack()
         {
-            SoundManager.Instance.PlaySFX(Path.ZombieSFX.Attack);
+            SoundManager.Instance.PlaySFX(Path.SFX.Zombie.Attack);
 
             if (IsTargetFarAway() == true)
                 return;

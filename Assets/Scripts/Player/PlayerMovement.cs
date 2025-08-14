@@ -108,9 +108,9 @@ public class PlayerMovement : MonoBehaviour
 
             // Sound
             if (_isGrounded)
-                SoundManager.Instance.PlaySFX(Path.PlayerSFX.Walk);
+                SoundManager.Instance.PlaySFX(Path.SFX.Player.Walk);
             else
-                SoundManager.Instance.StopSFX(Path.PlayerSFX.Walk);
+                SoundManager.Instance.StopSFX(Path.SFX.Player.Walk);
         }
         else
         {
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
             _horizontalVelocity = Mathf.Lerp(_horizontalVelocity, 0f, dec * Time.deltaTime);
 
             // Sound
-            SoundManager.Instance.StopSFX(Path.PlayerSFX.Walk);
+            SoundManager.Instance.StopSFX(Path.SFX.Player.Walk);
         }
     }
     #endregion
@@ -134,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
 
         _player.Animator.Stop(PlayerAnimator.AnimState.Fall);
         _player.Animator.Play(PlayerAnimator.AnimState.Jump);
-        SoundManager.Instance.PlaySFX(Path.PlayerSFX.Jump, true);
+        SoundManager.Instance.PlaySFX(Path.SFX.Player.Jump, true);
     }
 
     private void Jump()

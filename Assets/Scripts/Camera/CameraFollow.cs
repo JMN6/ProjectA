@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -10,8 +7,6 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector2 padding;
     private Rigidbody2D rigid;
-
-    private Transform player;
 
     private Camera cam;
     [SerializeField] private Transform bottom;
@@ -24,7 +19,6 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float refocusToPlayer = 1.2f;
     public Vector3 startPos = new Vector3(-11.5f, 56.9f, -10f);
     public Vector3 endPos = new Vector3(-11.5f, 13.8f, -10f);
-    [SerializeField] private Aim aim;
 
     private void Awake()
     {
@@ -32,20 +26,14 @@ public class CameraFollow : MonoBehaviour
         cam = GetComponent<Camera>();
     }
 
-    private void Start()
-    {
-    }
-
     private int currentSequence = 0;
-    public void OpenningSequence(Transform _player)
+    public void OpenningSequence()
     {
         InputManager.Instance.HideCursor();
         InputManager.Instance.SetInputs(false);
 
         camFunc.Zoom(0f, 2.2f);
         SetFollow(null);
-
-        player = _player;
         StartCoroutine(CoShowSequence());
     }
 
@@ -79,15 +67,15 @@ public class CameraFollow : MonoBehaviour
             yield return null;
         }
 
-        SetFollow(player);
+        SetFollow(GameManager.Instance.Player.transform);
         camFunc.Zoom(refocusToPlayer, 1, () => SequenceOver());
     }
 
     private void SequenceOver()
     {
         InputManager.Instance.SetInputs(true);
-        aim.Fixed(player, Vector3.up * 1.2f);
-        aim.gameObject.SetActive(true);
+        GameManager.Instance.Aim.Fixed(GameManager.Instance.Player.transform, Vector3.up * 1.2f);
+        GameManager.Instance.Aim.gameObject.SetActive(true);
     }
 
     public void SetFollow(Transform transform)

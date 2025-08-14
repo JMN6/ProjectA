@@ -11,7 +11,7 @@ namespace EnemeyFSM
         public override void OnEnter()
         {
             anim.SetTrigger(EnemyAnimation.Hurt.ToString());
-            SoundManager.Instance.PlaySFX(Path.ZombieSFX.Hurt, true);
+            SoundManager.Instance.PlaySFX(Path.SFX.Zombie.Hurt, true);
 
             move.Rigid.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
             elapsedTime = 0f;
