@@ -26,8 +26,9 @@ public class Enemy : Entity, IDamagalbe, IResetable
     [SerializeField] protected BoxCollider2D attackRange;
     [field: SerializeField] public Rigidbody2D Rigid { get; private set; }
     [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
-    [field: SerializeField] public AnimationPlayer anim;
-    [field: SerializeField] public Movement move;
+    [field: SerializeField] public AnimationPlayer anim { get; private set; }
+    [field: SerializeField] public Movement move { get; private set; }
+    [field: SerializeField] public WayFindingManager wayFindingManager { get; private set; }
 
     [SerializeField] private bool startFSMOnAwake = true;
     [SerializeField] private EnemyFSMManager fsmManager;
