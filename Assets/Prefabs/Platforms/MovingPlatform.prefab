@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 3719651262718665618}
   - component: {fileID: 6687439138116002174}
   - component: {fileID: -1617832219942056386}
+  - component: {fileID: 1184062367059907719}
   m_Layer: 8
   m_Name: MovingPlatform
   m_TagString: Untagged
@@ -264,3 +265,18 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 0
+--- !u!114 &1184062367059907719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3737198112325663932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92c5c1538094184a9d09ce967d5a1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 3719651262718665618}
+  minPos: {fileID: 4904649627838619700}
+  maxPos: {fileID: 2193064597044745304}
