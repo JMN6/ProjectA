@@ -10,13 +10,16 @@ public class TalkTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Talker talker))
+        if (isExecuted) return;
+
+        if (!collision.TryGetComponent(out Talker talker))
         {
-            if (!isExecuted)
-            {
-                isExecuted = true;
-                talker.Talk(dialogue, Portrait);
-            }
+            talker = collision.GetComponentInParent<Talker>();
         }
+
+        if (talker == null) return;
+
+        isExecuted = true;
+        talker.Talk(dialogue, Portrait);
     }
 }
