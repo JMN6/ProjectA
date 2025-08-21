@@ -27,7 +27,7 @@ MonoBehaviour:
   <GroundDeceleration>k__BackingField: 20
   <AirAcceleration>k__BackingField: 35
   <AirDeceleration>k__BackingField: 20
-  <JumpPower>k__BackingField: 18
+  <JumpPower>k__BackingField: 18.5
   <Gravity>k__BackingField: 60
   <MaxJumpCount>k__BackingField: 1
   <ApexThreshold>k__BackingField: 0.95

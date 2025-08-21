@@ -1,4 +1,4 @@
-namespace Game.Input
+﻿namespace Game.Input
 {
     [System.Flags]
     public enum TriggerFlag
@@ -11,21 +11,30 @@ namespace Game.Input
     public enum Maps
     {
         Player,
-        Aim,
         UI,
     }
 
     public enum Actions
     {
         Move,
-        Jump,
-        Interact,
-        Parry,
+        Look,
+        Fire,
+        Navigate,
+        Submit,
+        Cancel,
+        Point,
+        Click,
+        ScrollWheel,
+        MiddleClick,
+        RightClick,
+        TrackedDevicePosition,
+        TrackedDeviceOrientation,
+        //임시로 만든 내용
         Snipe,
         Shoot,
         Reload,
-        ESC,
-        Skip,
-        Title,
+        Interact,
+        Parry,
+        Jump,
     }
 }
