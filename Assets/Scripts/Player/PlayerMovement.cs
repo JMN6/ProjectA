@@ -1,6 +1,4 @@
 using UnityEngine;
-using Game.Input;
-using UnityEngine.InputSystem;
 using static Player;
 
 public class PlayerMovementModifier
@@ -256,6 +254,14 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 _isGrounded = true;
+            }
+
+            if (_castHits[0].transform.TryGetComponent(out IStompSensitive stomped))
+            {
+                if (boxCastOrigin.y >= _castHits[0].transform.position.y)
+                {
+                    stomped.OnStomped();
+                }
             }
         }
     }
