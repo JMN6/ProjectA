@@ -1,4 +1,4 @@
-using TMPro;
+Ôªøusing TMPro;
 using UnityEngine;
 
 public class HUD : MonoBehaviour
@@ -16,7 +16,7 @@ public class HUD : MonoBehaviour
 
         for(int i = 0; i < maxHP; i++)
         {
-            hp += curHP > i ? "°‹" : "°€";
+            hp += curHP > i ? "‚óè" : "‚óã";
         }
 
         _tempHP.text = $"HP {hp}";
