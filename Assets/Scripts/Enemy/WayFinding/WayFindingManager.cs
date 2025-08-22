@@ -5,7 +5,7 @@ using UnityEngine;
 public class WayFindingManager : MonoBehaviour
 {
     static float WayFindingCoolTime = 0.3f;
-    static int goalToleranceCells = 5;
+    static int goalToleranceCells = 1;
     static int fallbackScanRadius = 20;
 
     public class Node
@@ -30,6 +30,12 @@ public class WayFindingManager : MonoBehaviour
 
     private TileMapDataConverter tileManager;
 
+    //#region Debug
+    //[SerializeField] private GameObject pointMarker;
+    //private GameObject s;
+    //private GameObject e;
+    //#endregion
+
     private void Start()
     {
         tileManager = TileMapDataConverter.Instance;
@@ -52,6 +58,17 @@ public class WayFindingManager : MonoBehaviour
                 };
             }
         }
+
+        //#region Debug
+        //var o = new GameObject($"{gameObject.name}_AI");
+        //s = Instantiate(pointMarker);
+        //s.GetComponent<SpriteRenderer>().color = Color.blue;
+        //s.transform.SetParent(o.transform, false);
+
+        //e = Instantiate(pointMarker);
+        //e.GetComponent<SpriteRenderer>().color = Color.red;
+        //e.transform.SetParent(o.transform, false);
+        //#endregion
     }
 
     private IEnumerator CoCountCoolTime()
@@ -149,6 +166,11 @@ public class WayFindingManager : MonoBehaviour
 
         Vector2Int next = goalIndex;
         Route.Push(next);
+
+        //#region Debug
+        //e.transform.position = tileManager.GetTilePosition(goalIndex);
+        //#endregion
+
         while (next != start)
         {
             Vector2Int parent = Nodes[next.x, next.y].ParentIndex;
@@ -156,6 +178,13 @@ public class WayFindingManager : MonoBehaviour
             next = parent;
             Route.Push(next);
         }
+
+        //#region Debug
+        //s.transform.position = tileManager.GetTilePosition(Route.Peek());
+        //s.gameObject.SetActive(true);
+        //e.gameObject.SetActive(true);
+        //#endregion
+
         return true;
     }
 
@@ -240,5 +269,10 @@ public class WayFindingManager : MonoBehaviour
                 isVisited[i, j] = false;
             }
         }
+
+        //#region Debug
+        //s.gameObject.SetActive(false);
+        //e.gameObject.SetActive(false);
+        //#endregion  
     }
 }
