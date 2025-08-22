@@ -19,6 +19,11 @@ public class Talker : MonoBehaviour
         speechBubble.gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        speechBubble.transform.rotation = Quaternion.identity;
+    }
+
     public void Talk(string dialogue, Sprite portrait = null)
     {
         if (coroutine != null) StopCoroutine(coroutine);

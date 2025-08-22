@@ -31,7 +31,7 @@ public class CutSceneTrigger : MonoBehaviour, IInteractable
         if (isUsed == true)
             return;
 
-        if (collision.gameObject.TryGetComponent<Player>(out playerScript) == true)
+        if (collision.attachedRigidbody.TryGetComponent<Player>(out playerScript) == true)
         {
             playerScript.CanInteract(true, this);
 
