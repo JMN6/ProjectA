@@ -190,8 +190,10 @@ MonoBehaviour:
   attackRange: {fileID: 4205857064287010097}
   <Rigid>k__BackingField: {fileID: 3898875011844823680}
   <spriteRenderer>k__BackingField: {fileID: 8643738160213163674}
-  anim: {fileID: 3016761472551951661}
-  move: {fileID: 7705923809490691564}
+  <anim>k__BackingField: {fileID: 3016761472551951661}
+  <move>k__BackingField: {fileID: 7705923809490691564}
+  <wayFindingManager>k__BackingField: {fileID: 5149184346550393333}
+  startFSMOnAwake: 1
   fsmManager: {fileID: 2415304642021434469}
   startPos: {fileID: 9146673853212794169}
   endPos: {fileID: 7110805067359624497}
@@ -228,6 +230,17 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 5187031100326390299, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
   m_PrefabInstance: {fileID: 9052866348564043562}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5149184346550393333 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4240049006960185055, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
+  m_PrefabInstance: {fileID: 9052866348564043562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454089555429926564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a60cf2927129794f8f2094ca2d5c7bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5285685775783507073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3817006084746797995, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}

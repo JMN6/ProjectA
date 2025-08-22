@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 939810182529166768}
   - component: {fileID: 1680631124056191686}
   - component: {fileID: 6088740706538768903}
+  - component: {fileID: 4240049006960185055}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -339,8 +340,9 @@ MonoBehaviour:
   attackRange: {fileID: 5187031100326390299}
   <Rigid>k__BackingField: {fileID: 5456581334746467754}
   <spriteRenderer>k__BackingField: {fileID: 744932277728913840}
-  anim: {fileID: 6088740706538768903}
-  move: {fileID: 1680631124056191686}
+  <anim>k__BackingField: {fileID: 6088740706538768903}
+  <move>k__BackingField: {fileID: 1680631124056191686}
+  <wayFindingManager>k__BackingField: {fileID: 4240049006960185055}
   startFSMOnAwake: 1
   fsmManager: {fileID: 6640240152435585871}
 --- !u!114 &6640240152435585871
@@ -417,3 +419,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 939810182529166768}
+--- !u!114 &4240049006960185055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930495063069487502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a60cf2927129794f8f2094ca2d5c7bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 4800507100103719686}
