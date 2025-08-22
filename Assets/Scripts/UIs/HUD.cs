@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.Player.onPlayerHPChanged += RefreshHP;
+        RefreshHP(3, 3);
     }
 
     private void RefreshHP(int curHP, int maxHP)

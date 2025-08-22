@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1257631685829286064}
   - component: {fileID: 5525201256036454567}
   - component: {fileID: 8347394967502439789}
+  - component: {fileID: 899568720228543368}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,52 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f9a03a336668a479ef72bc74ded4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   optionUI: {fileID: 0}
   <Option>k__BackingField: {fileID: 11400000, guid: 9073a8dfca4d8e74ca9d2de65e291c00, type: 2}
-  maxStage: 3
-  currentStage: 0
-  datas:
-  - respawnPosition: {fileID: 0}
-    ResetObjs:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - respawnPosition: {fileID: 0}
-    ResetObjs:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - respawnPosition: {fileID: 0}
-    ResetObjs:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
   cutScenePlayer: {fileID: 0}
+  clearCutScene: 
   camFollow: {fileID: 0}
   camFunc: {fileID: 0}
   zoomInTime: 1.3
@@ -100,6 +59,8 @@ MonoBehaviour:
   Skip:
     m_PersistentCalls:
       m_Calls: []
+  stageManager: {fileID: 0}
+  currentStage: 0
 --- !u!114 &8347394967502439789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,3 +91,76 @@ MonoBehaviour:
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &899568720228543368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8452057917108031345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa05b94a6361a14a90747b9ae16b7d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  datas:
+  - respawnPosition: {fileID: 0}
+    isFacedLeft: 0
+    ResetObjs:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - respawnPosition: {fileID: 0}
+    isFacedLeft: 0
+    ResetObjs:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - respawnPosition: {fileID: 0}
+    isFacedLeft: 0
+    ResetObjs:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
