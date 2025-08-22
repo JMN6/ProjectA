@@ -35,7 +35,8 @@ public class TileMapDataConverter : MonoSingleton<TileMapDataConverter>
     [Header("ExtraMapObjects")]
     [SerializeField] private List<Tilemap> tilemaps;
     [SerializeField] private List<Collider2D> staticObjects;
-    [SerializeField] private List<ConvertibleTile> convertibleObjects;
+    [SerializeField] private Transform convertalbeObjectsParent;
+    //[SerializeField] private List<ConvertibleTile> convertibleObjects;
 
     private bool isMapSet = false;
 
@@ -96,7 +97,8 @@ public class TileMapDataConverter : MonoSingleton<TileMapDataConverter>
             AddStaticObjToMap(obj);
         }
 
-        foreach (var obj in convertibleObjects)
+        var objs = convertalbeObjectsParent.GetComponentsInChildren<ConvertibleTile>();
+        foreach (var obj in objs)
         {
             AddConvertibleObjToMap(obj);
         }
@@ -237,7 +239,7 @@ public class TileMapDataConverter : MonoSingleton<TileMapDataConverter>
         return position;
     }
 
-    public int GetFloorTileYValue(Vector2Int index)
+    public int GetFloorTileYIndexValue(Vector2Int index)
     {
         if (isMapSet == false)
             return -1;

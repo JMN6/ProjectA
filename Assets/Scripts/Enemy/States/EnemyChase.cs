@@ -11,15 +11,41 @@ namespace EnemeyFSM
 
         private int targetDirection;
 
+        private WayFindingManager wayFindingManager;
+
+        private Vector3 nextTilePosition;
+
         public override void OnEnter()
         {
             anim.SetTrigger(Enemy.EnemyAnimation.Run.ToString());
             enemy.StopLookingForPlayer();
 
             targetTrasnform = enemy.Target.transform;
+            wayFindingManager = enemy.wayFindingManager;
+            wayFindingManager.IsWayFindingCoolTimeOver = true;
+            if (wayFindingManager.SearchWay(enemy.transform.position, targetTrasnform.position, true))
+            {
+                SetNextTilePosition();
+            }
 
             sqrAttackRange = enemy.AttackRange * enemy.AttackRange;
             targetDirection = 0;
+        }
+
+        private void SetNextTilePosition()
+        {
+            Vector2Int index = wayFindingManager.Route.Pop();
+            nextTilePosition = TileMapDataConverter.Instance.GetTileInfo(index).Position;
+
+            float dir = (targetTrasnform.position - move.Rigid.transform.position).x;
+            newDir = Convert.ToInt32(Mathf.Sign(dir));
+
+            if (targetDirection != newDir && newDir != 0)
+            {
+                targetDirection = newDir;
+
+                enemy.spriteRenderer.flipX = dir < 0f;
+            }
         }
 
         public override void OnFixedUpdate()
@@ -37,23 +63,31 @@ namespace EnemeyFSM
             }
         }
 
+        private int newDir = 0;
         private void ChaseTarget()
         {
-            float dir = (targetTrasnform.position - move.Rigid.transform.position).x;
-            int newDir = Convert.ToInt32(Mathf.Sign(dir));
+            // Å¸°ÙÀÌ °øÁß¿¡ ÀÖÀ» °æ¿ì ±× ¶³¾îÁö´Â °÷À¸·Î ÀÌµ¿
+            Vector2Int i = TileMapDataConverter.Instance.GetNodeIndex(targetTrasnform.position);
+            int y = TileMapDataConverter.Instance.GetFloorTileYIndexValue(i);
+            i.y = y;
+            Vector3 newTargetPos = TileMapDataConverter.Instance.GetTilePosition(i);
 
-            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù±ï¿½
-            if(targetDirection != newDir && newDir != 0)
+            if (wayFindingManager.SearchWay(enemy.transform.position, newTargetPos))
             {
-                targetDirection = newDir;
-
-                enemy.spriteRenderer.flipX = dir < 0f;
+                SetNextTilePosition();
             }
 
             move.SetVelocity(newDir * enemy.Speed, move.Rigid.linearVelocityY);
         }
 
-        private bool IsTargetCloseEnough() => (move.Rigid.position - (Vector2)targetTrasnform.position).sqrMagnitude < sqrAttackRange;
+        private bool IsTargetCloseEnough() => 
+            (move.Rigid.position - (Vector2)targetTrasnform.position).sqrMagnitude < sqrAttackRange;
+        private bool IsNextTileReached()
+        {
+            var d = (Vector2)nextTilePosition - move.Rigid.position;
+            return d.sqrMagnitude <= 0.1f;
+        }
+
 
         public override void OnExit()
         {

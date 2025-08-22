@@ -1,5 +1,6 @@
 using UnityEngine;
 using EnemeyFSM;
+using UnityEngine.Rendering;
 
 public class Enemy : Entity, IDamagalbe, IResetable
 {
@@ -73,7 +74,16 @@ public class Enemy : Entity, IDamagalbe, IResetable
             timer = 0;
             Speed = 6 / Speed;
         }
+
     }
+
+    #region Debug
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green; 
+        Gizmos.DrawWireSphere(chaseRange.transform.position, SightRange); 
+    }
+    #endregion
 
     public virtual void OnReset()
     {
