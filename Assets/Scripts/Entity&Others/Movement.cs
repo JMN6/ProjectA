@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rigid;
+    [SerializeField] protected Rigidbody2D rigid;
     public Rigidbody2D Rigid => rigid;
 
     public void SetVelocity(float x, float y)
@@ -12,12 +12,12 @@ public class Movement : MonoBehaviour
         SetVelocity(new Vector2 (x, y));
     }
 
-    public void SetVelocity(Vector2 dir)
+    public virtual void SetVelocity(Vector2 dir)
     {
         rigid.linearVelocity = dir;
     }
 
-    public void MovePosition(Vector2 pos)
+    public virtual void MovePosition(Vector2 pos)
     {
         rigid.MovePosition(pos);
     }

@@ -191,13 +191,24 @@ MonoBehaviour:
   <Rigid>k__BackingField: {fileID: 3898875011844823680}
   <spriteRenderer>k__BackingField: {fileID: 8643738160213163674}
   <anim>k__BackingField: {fileID: 3016761472551951661}
-  <move>k__BackingField: {fileID: 7705923809490691564}
+  <move>k__BackingField: {fileID: 647246101266617011}
   <wayFindingManager>k__BackingField: {fileID: 5149184346550393333}
   startFSMOnAwake: 1
   fsmManager: {fileID: 2415304642021434469}
   startPos: {fileID: 9146673853212794169}
   endPos: {fileID: 7110805067359624497}
   <PatrolSpeed>k__BackingField: 0.8
+--- !u!114 &647246101266617011 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8455867963189200281, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
+  m_PrefabInstance: {fileID: 9052866348564043562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454089555429926564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5c0468a6520214a84fa7fda233a6a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2415304642021434469 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6640240152435585871, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
@@ -251,17 +262,6 @@ CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 2392686054698292303, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
   m_PrefabInstance: {fileID: 9052866348564043562}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7705923809490691564 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1680631124056191686, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}
-  m_PrefabInstance: {fileID: 9052866348564043562}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454089555429926564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74cb41618b0bdd64d9c98b145c2c390d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &8643738160213163674 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 744932277728913840, guid: 00bb8e25e1387a7418d07b38355b5511, type: 3}

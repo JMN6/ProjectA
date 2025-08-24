@@ -55,7 +55,7 @@ namespace EnemeyFSM
                 enemy.spriteRenderer.flipX = dir.x < 0;
             }
 
-            move.MovePosition(newPosition);
+            move.SetVelocity(dir.x * enemy.Speed, move.Rigid.linearVelocityY);
         }
 
 

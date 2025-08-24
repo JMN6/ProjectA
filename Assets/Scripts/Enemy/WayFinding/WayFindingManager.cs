@@ -5,7 +5,7 @@ using UnityEngine;
 public class WayFindingManager : MonoBehaviour
 {
     static float WayFindingCoolTime = 0.3f;
-    static int goalToleranceCells = 1;
+    static int goalToleranceCells = 0;
     static int fallbackScanRadius = 20;
 
     public class Node
@@ -30,11 +30,11 @@ public class WayFindingManager : MonoBehaviour
 
     private TileMapDataConverter tileManager;
 
-    //#region Debug
-    //[SerializeField] private GameObject pointMarker;
-    //private GameObject s;
-    //private GameObject e;
-    //#endregion
+    #region Debug
+    [SerializeField] private GameObject pointMarker;
+    private GameObject s;
+    private GameObject e;
+    #endregion
 
     private void Start()
     {
@@ -59,16 +59,16 @@ public class WayFindingManager : MonoBehaviour
             }
         }
 
-        //#region Debug
-        //var o = new GameObject($"{gameObject.name}_AI");
-        //s = Instantiate(pointMarker);
-        //s.GetComponent<SpriteRenderer>().color = Color.blue;
-        //s.transform.SetParent(o.transform, false);
+        #region Debug
+        var o = new GameObject($"{gameObject.name}_AI");
+        s = Instantiate(pointMarker);
+        s.GetComponent<SpriteRenderer>().color = Color.blue;
+        s.transform.SetParent(o.transform, false);
 
-        //e = Instantiate(pointMarker);
-        //e.GetComponent<SpriteRenderer>().color = Color.red;
-        //e.transform.SetParent(o.transform, false);
-        //#endregion
+        e = Instantiate(pointMarker);
+        e.GetComponent<SpriteRenderer>().color = Color.red;
+        e.transform.SetParent(o.transform, false);
+        #endregion
     }
 
     private IEnumerator CoCountCoolTime()
@@ -116,7 +116,7 @@ public class WayFindingManager : MonoBehaviour
         int bestH = Nodes[start.x, start.y].ToEnd;
 
         // 목표 허용 비용
-        int tolCost = goalToleranceCells * 10;
+        int tolCost = goalToleranceCells * 12;
         bool reached = false;
         Vector2Int reachedIndex = start;
 
@@ -167,9 +167,9 @@ public class WayFindingManager : MonoBehaviour
         Vector2Int next = goalIndex;
         Route.Push(next);
 
-        //#region Debug
-        //e.transform.position = tileManager.GetTilePosition(goalIndex);
-        //#endregion
+        #region Debug
+        e.transform.position = tileManager.GetTilePosition(goalIndex);
+        #endregion
 
         while (next != start)
         {
@@ -179,11 +179,11 @@ public class WayFindingManager : MonoBehaviour
             Route.Push(next);
         }
 
-        //#region Debug
-        //s.transform.position = tileManager.GetTilePosition(Route.Peek());
-        //s.gameObject.SetActive(true);
-        //e.gameObject.SetActive(true);
-        //#endregion
+        #region Debug
+        s.transform.position = tileManager.GetTilePosition(Route.Peek());
+        s.gameObject.SetActive(true);
+        e.gameObject.SetActive(true);
+        #endregion
 
         return true;
     }
@@ -270,9 +270,9 @@ public class WayFindingManager : MonoBehaviour
             }
         }
 
-        //#region Debug
-        //s.gameObject.SetActive(false);
-        //e.gameObject.SetActive(false);
-        //#endregion  
+        #region Debug
+        s.gameObject.SetActive(false);
+        e.gameObject.SetActive(false);
+        #endregion  
     }
 }
