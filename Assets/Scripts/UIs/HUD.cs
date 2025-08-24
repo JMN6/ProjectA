@@ -4,21 +4,29 @@ using UnityEngine;
 public class HUD : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _tempHP;
+    [SerializeField] TextMeshProUGUI _ammo;
 
     private void Start()
     {
         GameManager.Instance.Player.onPlayerHPChanged += RefreshHP;
+        GameManager.Instance.Aim.onAimAmmoChanged += RefreshAmmo;
+        RefreshHP();
     }
 
-    private void RefreshHP(int curHP, int maxHP)
+    private void RefreshHP()
     {
         string hp = string.Empty;
 
-        for(int i = 0; i < maxHP; i++)
+        for(int i = 0; i < GameManager.Instance.Player.MaxHP; i++)
         {
-            hp += curHP > i ? "¡Ü" : "¡Û";
+            hp += GameManager.Instance.Player.CurHP > i ? "¡Ü" : "¡Û";
         }
 
         _tempHP.text = $"HP {hp}";
+    }
+
+    private void RefreshAmmo()
+    {
+        _ammo.text = $"Ammo ¡¿ {GameManager.Instance.Aim.Ammo}";
     }
 }
