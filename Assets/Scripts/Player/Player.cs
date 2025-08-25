@@ -10,8 +10,8 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour, ILightSensitive
 {
     [SerializeField] PlayerStatsSO _stat;
-    int _curHP;
-    int _maxHP;
+    public int CurHP { get; private set; }
+    public int MaxHP { get; private set; }
 
     public class PlayerAnimator
     {
@@ -109,14 +109,14 @@ public class Player : MonoBehaviour, ILightSensitive
 
     bool _isInLight = false;
 
-    public event Action<int, int> onPlayerHPChanged;
+    public event Action onPlayerHPChanged;
 
 
     private void Awake()
     {
         Animator = new(GetComponent<Animator>());
 
-        _maxHP = _stat.DefaultMaxHP;
+        MaxHP = _stat.DefaultMaxHP;
     }
 
     private void Start()
@@ -141,8 +141,8 @@ public class Player : MonoBehaviour, ILightSensitive
 
     public void ResetPlayer(Vector3 _position, bool isLeft = true)
     {
-        _curHP = _maxHP;
-        onPlayerHPChanged?.Invoke(_curHP, _maxHP);
+        CurHP = MaxHP;
+        onPlayerHPChanged?.Invoke();
 
         _isFacingRight = true;
         _sprite.transform.rotation = Quaternion.identity;
@@ -275,7 +275,7 @@ public class Player : MonoBehaviour, ILightSensitive
         {
             ChangeHP(-1);
 
-            if (_curHP > 0)
+            if (CurHP > 0)
             {
                 SoundManager.Instance.PlaySFX(Path.SFX.Player.Dead);
             }
@@ -296,23 +296,23 @@ public class Player : MonoBehaviour, ILightSensitive
 
     public void ChangeHP(int amount)
     {
-        int newHP = _curHP + amount;
+        int newHP = CurHP + amount;
 
-        newHP = Mathf.Clamp(newHP, 0, _maxHP);
+        newHP = Mathf.Clamp(newHP, 0, MaxHP);
 
-        if (newHP != _curHP)
+        if (newHP != CurHP)
         {
-            _curHP = newHP;
-            onPlayerHPChanged?.Invoke(_curHP, _maxHP);
+            CurHP = newHP;
+            onPlayerHPChanged?.Invoke();
         }
     }
 
     public void IncreaseMaxHealth(int amount = 1)
     {
-        if (_maxHP >= _stat.UpgradableMaxHP) return;
+        if (MaxHP >= _stat.UpgradableMaxHP) return;
 
-        _maxHP = Mathf.Min(_maxHP + amount, _stat.UpgradableMaxHP);
-        onPlayerHPChanged?.Invoke(_curHP, _maxHP);
+        MaxHP = Mathf.Min(MaxHP + amount, _stat.UpgradableMaxHP);
+        onPlayerHPChanged?.Invoke();
     }
 
     public void CanInteract(bool _val, IInteractable _trigger = null)

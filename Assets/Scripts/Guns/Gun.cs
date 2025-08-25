@@ -5,7 +5,7 @@ public class Gun
 {
     public float Cooltime { get; protected set; }
     public int LoadedBullets { get; protected set; }
-    public int Ammo { get; protected set; }
+    public const int MaxBullets = 5;
 
     public PlayerStatsSO _temp;
 
@@ -15,7 +15,7 @@ public class Gun
 
     protected static readonly int TargetLayerMask = LayerMask.GetMask("Enemy", "InteractableObject");
 
-    public event Action<int, int> onAmmoChanged;
+    public event Action onGunAmmoChanged;
 
     private bool isCooldownReady => Time.time - lastShot >= Cooltime;
     private bool isEmpty => LoadedBullets <= 0;
@@ -28,22 +28,8 @@ public class Gun
     public void Init()
     {
         LoadedBullets = _temp._initialLoadedBullets;
-        Ammo = _temp._initialAmmo;
 
-        onAmmoChanged?.Invoke(LoadedBullets, Ammo);
-    }
-
-    public void ChangeAmmo(int amount)
-    {
-        int newAmmo = Ammo + amount;
-
-        newAmmo = Mathf.Clamp(newAmmo, 0, _temp.MaxAmmo);
-
-        if (newAmmo != Ammo)
-        {
-            Ammo = newAmmo;
-            onAmmoChanged?.Invoke(LoadedBullets, Ammo);
-        }
+        onGunAmmoChanged?.Invoke();
     }
 
     public void Fire(Vector2 position)
@@ -64,7 +50,7 @@ public class Gun
             SoundManager.Instance.PlaySFX(Path.SFX.Gun.SniperSFX.Shoot, true);
             cameraFunctions.Shake();
 
-            onAmmoChanged?.Invoke(LoadedBullets, Ammo);
+            onGunAmmoChanged?.Invoke();
         }
     }
 
@@ -72,11 +58,9 @@ public class Gun
     {
         SoundManager.Instance.PlaySFX(Path.SFX.Gun.SniperSFX.Reload);
 
-        int amount = Ammo >= _temp.MaxMagazine ? _temp.MaxMagazine : Ammo;
+        LoadedBullets = MaxBullets;
+        onGunAmmoChanged?.Invoke();
 
-        LoadedBullets = amount;
-
-        ChangeAmmo(-amount);
     }
 
     public void Shoot(Vector2 position)

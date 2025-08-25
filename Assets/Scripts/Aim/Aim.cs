@@ -1,3 +1,4 @@
+using System;
 using Game.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,9 +12,14 @@ public class Aim : MonoBehaviour
     [SerializeField] Light2D _flashLight;
     [SerializeField] CircleCollider2D _falshLightColiider;
 
+    public float Ammo { get; private set; }
+    public event Action onAimAmmoChanged;
     private void Awake()
     {
         CurGun = new Gun(1f, _stat);
+
+        Ammo = _stat._initialAmmo;
+        onAimAmmoChanged?.Invoke();
     }
 
     private void Start()
@@ -49,7 +55,20 @@ public class Aim : MonoBehaviour
 
     public void OnReload(InputAction.CallbackContext ctx)
     {
+        if (Ammo <= 0 || CurGun.LoadedBullets == Gun.MaxBullets)
+        {
+            SoundManager.Instance.PlaySFX(Path.SFX.Gun.SniperSFX.Empty);
+            return;
+        }
+
+        ChangeAmmo(-1);
         CurGun.Reload();
+    }
+
+    public void ChangeAmmo(int amount)
+    {
+        Ammo += amount;
+        onAimAmmoChanged?.Invoke();
     }
 
     private Transform fixedTarget;
