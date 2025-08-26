@@ -7,11 +7,11 @@ public class BulletUI : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.Aim.CurGun.onAmmoChanged += Refresh;
+        GameManager.Instance.Aim.CurGun.onGunAmmoChanged += Refresh;
     }
 
-    private void Refresh(int loadedBullet, int ammo)
+    private void Refresh()
     {
-        bullet.text = $"{loadedBullet}/{ammo}";
+        bullet.text = $"{GameManager.Instance.Aim.CurGun.LoadedBullets}/5";
     }
 }
