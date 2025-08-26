@@ -22,12 +22,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   <CollisionDetectionLength>k__BackingField: 0.03
-  <MaxMoveSpeed>k__BackingField: 8
+  <MaxMoveSpeed>k__BackingField: 5
   <GroundAcceleration>k__BackingField: 35
   <GroundDeceleration>k__BackingField: 20
   <AirAcceleration>k__BackingField: 35
   <AirDeceleration>k__BackingField: 20
-  <JumpPower>k__BackingField: 18.5
+  <JumpPower>k__BackingField: 16
   <Gravity>k__BackingField: 60
   <MaxJumpCount>k__BackingField: 1
   <ApexThreshold>k__BackingField: 0.95

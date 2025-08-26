@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -24,6 +24,9 @@ public class CameraFollow : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         cam = GetComponent<Camera>();
+
+        startPos.x = (bottom.position.x + top.position.x) * 0.5f;
+        endPos.x = (bottom.position.x + top.position.x) * 0.5f;
     }
 
     private int currentSequence = 0;
@@ -32,7 +35,7 @@ public class CameraFollow : MonoBehaviour
         InputManager.Instance.HideCursor();
         InputManager.Instance.SetInputs(false);
 
-        camFunc.Zoom(0f, 2.2f);
+        camFunc.Zoom(0f, Mathf.Abs(bottom.position.x - top.position.x) / (2f * Camera.main.aspect * Camera.main.orthographicSize));
         SetFollow(null);
         StartCoroutine(CoShowSequence());
     }
@@ -98,7 +101,7 @@ public class CameraFollow : MonoBehaviour
         Vector3 camPos = transform.position;
         Vector2 targetPos = follow.position;
 
-        // Dead zone ¹üÀ§ °è»ê
+        // Dead zone ë²”ìœ„ ê³„ì‚°
         float leftBound = camPos.x - padding.x;
         float rightBound = camPos.x + padding.x;
         float bottomBound = camPos.y - padding.y;
@@ -107,18 +110,18 @@ public class CameraFollow : MonoBehaviour
         float newCamX = camPos.x;
         float newCamY = camPos.y;
 
-        // ÇÃ·¹ÀÌ¾î°¡ µ¥µåÁ¸ ¹Ù±ù¿¡ ÀÖ´Â °æ¿ì¸¸ Ä«¸Ş¶ó ÀÌµ¿
+        // í”Œë ˆì´ì–´ê°€ ë°ë“œì¡´ ë°”ê¹¥ì— ìˆëŠ” ê²½ìš°ë§Œ ì¹´ë©”ë¼ ì´ë™
         if (targetPos.x < leftBound) newCamX = targetPos.x + padding.x;
         else if (targetPos.x > rightBound) newCamX = targetPos.x - padding.x;
 
         if (targetPos.y < bottomBound) newCamY = targetPos.y + padding.y;
         else if (targetPos.y > topBound) newCamY = targetPos.y - padding.y;
 
-        // ¸Ê °æ°è Á¦ÇÑ (Ä«¸Ş¶ó Å©±â Æ÷ÇÔ)
+        // ë§µ ê²½ê³„ ì œí•œ (ì¹´ë©”ë¼ í¬ê¸° í¬í•¨)
         float clampedX = Mathf.Clamp(newCamX, bottom.position.x + camHalfWidth, top.position.x - camHalfWidth);
         float clampedY = Mathf.Clamp(newCamY, bottom.position.y + camHalfHeight, top.position.y - camHalfHeight);
 
-        // À§Ä¡ ¹İ¿µ
+        // ìœ„ì¹˜ ë°˜ì˜
         transform.position = new Vector3(clampedX, clampedY, camPos.z);
     }
 }
