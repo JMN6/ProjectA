@@ -31,12 +31,10 @@ namespace EnemeyFSM
             endPos = e.EndPos;
             speed = e.PatrolSpeed;
 
-            dir = (endPos - startPos).normalized;
+            dir = (endPos - (Vector2)enemy.transform.position).normalized;
             enemy.spriteRenderer.flipX = dir.x < 0;
 
             elapsedTime = 0f;
-
-            enemy.transform.position = startPos;
 
             enemy.Rigid.linearVelocity = Vector2.zero;
         }

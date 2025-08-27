@@ -1,0 +1,392 @@
+fileFormatVersion: 2
+guid: 7c4fc6479bdf35a4fae2028c00d2a915
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9145214978501766712
+    second: EYEzombie_Death-Sheet_0
+  - first:
+      213: 4506942972214855348
+    second: EYEzombie_Death-Sheet_1
+  - first:
+      213: 6330589540703317208
+    second: EYEzombie_Death-Sheet_2
+  - first:
+      213: 8590355827342657822
+    second: EYEzombie_Death-Sheet_3
+  - first:
+      213: -4115106256746413450
+    second: EYEzombie_Death-Sheet_4
+  - first:
+      213: -3877536607430255116
+    second: EYEzombie_Death-Sheet_5
+  - first:
+      213: 1611534101325082953
+    second: EYEzombie_Death-Sheet_6
+  - first:
+      213: 1842200752028623707
+    second: EYEzombie_Death-Sheet_7
+  - first:
+      213: -1949295119344951754
+    second: EYEzombie_Death-Sheet_8
+  - first:
+      213: -125857054404469840
+    second: EYEzombie_Death-Sheet_9
+  - first:
+      213: -1095398511150535721
+    second: EYEzombie_Death-Sheet_10
+  - first:
+      213: -941824476917357249
+    second: EYEzombie_Death-Sheet_11
+  - first:
+      213: -1591990753071211255
+    second: EYEzombie_Death-Sheet_12
+  - first:
+      213: -3127199728859272515
+    second: EYEzombie_Death-Sheet_13
+  - first:
+      213: 385458457912392560
+    second: EYEzombie_Death-Sheet_14
+  - first:
+      213: 3463786254494678616
+    second: EYEzombie_Death-Sheet_15
+  - first:
+      213: 5831989311591519856
+    second: EYEzombie_Death-Sheet_16
+  - first:
+      213: -4487456879078119769
+    second: EYEzombie_Death-Sheet_17
+  - first:
+      213: 7541880848998766418
+    second: EYEzombie_Death-Sheet_18
+  - first:
+      213: 5448824481742570179
+    second: EYEzombie_Death-Sheet_19
+  - first:
+      213: 7043148549341381682
+    second: EYEzombie_Death-Sheet_20
+  - first:
+      213: 1592630324692038352
+    second: EYEzombie_Death-Sheet_21
+  - first:
+      213: -7897943444988410595
+    second: EYEzombie_Death-Sheet_22
+  - first:
+      213: -6970193951019159069
+    second: EYEzombie_Death-Sheet_23
+  - first:
+      213: 4893242837649561442
+    second: EYEzombie_Death-Sheet_24
+  - first:
+      213: -7487110894537744635
+    second: EYEzombie_Death-Sheet_25
+  - first:
+      213: 2897389919464254544
+    second: EYEzombie_Death-Sheet_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EYEzombie_Death-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 3
+        width: 52
+        height: 130
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c112d33e6ba51180800000000000000
+      internalID: -9145214978501766712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Death-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 0
+        width: 54
+        height: 118
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b64fc121c0eb8e30800000000000000
+      internalID: 4506942972214855348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Death-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 0
+        width: 56
+        height: 85
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bb9eb30dadd04ef0800000000000000
+      internalID: -125857054404469840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Death-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 0
+        width: 56
+        height: 115
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dba25ab4a64f994d0800000000000000
+      internalID: -3127199728859272515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Death-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 0
+        width: 91
+        height: 54
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c2c7bd3ffc1e9b40800000000000000
+      internalID: 5448824481742570179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Death-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 0
+        width: 76
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d2b8c997d82a1610800000000000000
+      internalID: 1592630324692038352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Death-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 0
+        width: 41
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d154759284ed46290800000000000000
+      internalID: -7897943444988410595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5cf65c27f7bc6ca42b94ea686b59ed5d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EYEzombie_Death-Sheet_0: -9145214978501766712
+      EYEzombie_Death-Sheet_1: 4506942972214855348
+      EYEzombie_Death-Sheet_10: -1095398511150535721
+      EYEzombie_Death-Sheet_11: -941824476917357249
+      EYEzombie_Death-Sheet_12: -1591990753071211255
+      EYEzombie_Death-Sheet_13: -3127199728859272515
+      EYEzombie_Death-Sheet_14: 385458457912392560
+      EYEzombie_Death-Sheet_15: 3463786254494678616
+      EYEzombie_Death-Sheet_16: 5831989311591519856
+      EYEzombie_Death-Sheet_17: -4487456879078119769
+      EYEzombie_Death-Sheet_18: 7541880848998766418
+      EYEzombie_Death-Sheet_19: 5448824481742570179
+      EYEzombie_Death-Sheet_2: 6330589540703317208
+      EYEzombie_Death-Sheet_20: 7043148549341381682
+      EYEzombie_Death-Sheet_21: 1592630324692038352
+      EYEzombie_Death-Sheet_22: -7897943444988410595
+      EYEzombie_Death-Sheet_23: -6970193951019159069
+      EYEzombie_Death-Sheet_24: 4893242837649561442
+      EYEzombie_Death-Sheet_25: -7487110894537744635
+      EYEzombie_Death-Sheet_26: 2897389919464254544
+      EYEzombie_Death-Sheet_3: 8590355827342657822
+      EYEzombie_Death-Sheet_4: -4115106256746413450
+      EYEzombie_Death-Sheet_5: -3877536607430255116
+      EYEzombie_Death-Sheet_6: 1611534101325082953
+      EYEzombie_Death-Sheet_7: 1842200752028623707
+      EYEzombie_Death-Sheet_8: -1949295119344951754
+      EYEzombie_Death-Sheet_9: -125857054404469840
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
