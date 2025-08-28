@@ -16,17 +16,6 @@ public class AnalyticsSystem : Singleton<AnalyticsSystem>
     [SerializeField] float _sendInterval = 10f;
     [SerializeField] int _loopCount = -1; // -1 for infinite
 
-    public void Init()
-    {
-        GameManager.Instance.onGameStarted += InitAsync().Forget;
-        GameManager.Instance.onGameEnded += OnGameEnded;
-
-        GameManager.Instance.onGameStarted += () =>
-        {
-            GameManager.Instance.Player.onPlayerHitBefore += OnPlayerHitBefore;
-        };
-    }
-
     public async UniTaskVoid InitAsync()
     {
         try
@@ -37,6 +26,8 @@ public class AnalyticsSystem : Singleton<AnalyticsSystem>
 
             _startTime = Time.time;
 
+            GameManager.Instance.onGameEnded += OnGameEnded;
+            GameManager.Instance.Player.onPlayerHitBefore += OnPlayerHitBefore;
             RecordPlayerPosition(_loopCount).Forget();
         }
         catch (System.Exception e)

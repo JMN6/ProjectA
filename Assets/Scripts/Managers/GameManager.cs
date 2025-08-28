@@ -44,7 +44,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public ItemsSO ItemsSO { get; private set; }
 
-    public event Action onGameStarted;
     public event Action<bool> onGameEnded;
 
     private void Awake()
@@ -62,7 +61,7 @@ public class GameManager : MonoSingleton<GameManager>
         Player.ResetPlayer(stageManager.GetRespawnPosition(CurrentStage),
             stageManager.GetRespawnFaceWay(CurrentStage));
 
-        onGameStarted?.Invoke();
+        AnalyticsSystem.Instance.InitAsync().Forget();
     }
 
     private void OnApplicationQuit()

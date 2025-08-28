@@ -277,7 +277,7 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
 
         onPlayerHitBefore?.Invoke(enemy.gameObject);
 
-        ChangeHP(damage);
+        ChangeHP(-damage);
 
         if (CurHP > 0)
         {
