@@ -57,16 +57,7 @@ namespace EnemeyFSM
             if (IsTargetFarAway() == true)
                 return;
 
-            var res = target.TryAttack();
-            Debug.Log("attak");
-
-            if(!res)
-            {
-                // parried by player
-                enemy.isParried = true;
-                enemy.GetDamaged(3);
-                EffectManager.Instance.PlayParticle(Effects.Spit, enemy.transform.position + Vector3.up);
-            }
+            target.GetDamaged(1, enemy.gameObject);
 
             isAttacking = false;
         }

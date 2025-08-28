@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakableObject : MonoBehaviour, IDamagalbe, IResetable
+public class BreakableObject : MonoBehaviour, IDamageable, IResetable
 {
     [SerializeField] private Animator anim;
     [SerializeField] private Collider2D col;
@@ -20,7 +18,7 @@ public class BreakableObject : MonoBehaviour, IDamagalbe, IResetable
         col.enabled = true;
     }
 
-    public virtual void GetDamaged(int damage)
+    public virtual void GetDamaged(int damage, GameObject damageSource)
     {
         ShowEffect();
     }

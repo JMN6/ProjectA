@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using DataParseAndPlayer;
+using System;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -33,12 +34,18 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("Stage")]
     [SerializeField] private StageManager stageManager;
 
-    [SerializeField] private int currentStage = 0;
+    public int CurrentStage { get; private set; } = 0;
+    public int Try { get; private set; } = 0;
+    private bool _isGameCleared;
+
     private int maxStage;
 
     private float tempTimeScale = 1;
 
     public ItemsSO ItemsSO { get; private set; }
+
+    public event Action onGameStarted;
+    public event Action<bool> onGameEnded;
 
     private void Awake()
     {
@@ -52,8 +59,15 @@ public class GameManager : MonoSingleton<GameManager>
         camFollow.OpenningSequence();
         maxStage = stageManager.StagetCount;
 
-        Player.ResetPlayer(stageManager.GetRespawnPosition(currentStage),
-            stageManager.GetRespawnFaceWay(currentStage));
+        Player.ResetPlayer(stageManager.GetRespawnPosition(CurrentStage),
+            stageManager.GetRespawnFaceWay(CurrentStage));
+
+        onGameStarted?.Invoke();
+    }
+
+    private void OnApplicationQuit()
+    {
+        onGameEnded?.Invoke(_isGameCleared);
     }
 
     public void OnESC()
@@ -90,8 +104,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void StageClear()
     {
-        currentStage = Mathf.Clamp(currentStage + 1, 0, maxStage);
-        if (currentStage == maxStage)
+        CurrentStage = Mathf.Clamp(CurrentStage + 1, 0, maxStage);
+        if (CurrentStage == maxStage)
         {
             GameClear();
             return;
@@ -100,6 +114,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void GameClear()
     {
+        _isGameCleared = true;
+
         cutScenePlayer.StartScene(Parser<CutSceneRow>.Convert("CutScene", clearCutScene), ReturnToMain);
     }
 
@@ -117,10 +133,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void ResetGame()
     {
-        Player.ResetPlayer(stageManager.GetRespawnPosition(currentStage), 
-            stageManager.GetRespawnFaceWay(currentStage) );
+        Player.ResetPlayer(stageManager.GetRespawnPosition(CurrentStage), 
+            stageManager.GetRespawnFaceWay(CurrentStage) );
 
-        stageManager.ResetGame(currentStage);
+        stageManager.ResetGame(CurrentStage);
 
         camFunc.Zoom(zoomOutTime, zoomOutScale, GameAllSet);
     }

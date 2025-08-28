@@ -2,7 +2,7 @@ using UnityEngine;
 using EnemeyFSM;
 using UnityEngine.Rendering;
 
-public class Enemy : Entity, IDamagalbe, IResetable
+public class Enemy : Entity, IDamageable, IResetable
 {
     public enum EnemyAnimation
     {
@@ -37,13 +37,9 @@ public class Enemy : Entity, IDamagalbe, IResetable
 
     public GameObject Target { get; set; }
 
-    public bool isParried { get; set; }
-
     public bool isDead { get; set; }
 
     private Vector2 originPosition;
-
-    private float timer;
 
     protected virtual void Awake()
     {
@@ -65,18 +61,6 @@ public class Enemy : Entity, IDamagalbe, IResetable
         fsmManager.StartFSM();
     }
 
-    private void Update()
-    {
-        timer += Time.timeScale;
-
-        if (timer > 0.2f)
-        {
-            timer = 0;
-            Speed = 6 / Speed;
-        }
-
-    }
-
     #region Debug
     private void OnDrawGizmos()
     {
@@ -93,7 +77,6 @@ public class Enemy : Entity, IDamagalbe, IResetable
         anim.SetTrigger(EnemyAnimation.Idle.ToString());
 
         Target = null;
-        isParried = false;
         isDead = false;
 
         gameObject.SetActive(true);
@@ -107,7 +90,7 @@ public class Enemy : Entity, IDamagalbe, IResetable
         transform.position = originPosition;
     }
 
-    public void GetDamaged(int damage)
+    public void GetDamaged(int damage, GameObject damageSource)
     {
         if(isDead == true)
         {
@@ -120,6 +103,8 @@ public class Enemy : Entity, IDamagalbe, IResetable
         {
             fsmManager.ChangeState(FSMState.Death);
             isDead = true;
+
+            AnalyticsSystem.Instance.OnEnemyKilled(this, damageSource);
         }
         else
         {

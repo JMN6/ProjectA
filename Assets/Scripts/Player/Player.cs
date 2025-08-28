@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class Player : MonoBehaviour, ILightSensitive
+public class Player : MonoBehaviour, ILightSensitive, IDamageable
 {
     [SerializeField] PlayerStatsSO _stat;
     public int CurHP { get; private set; }
@@ -109,6 +109,7 @@ public class Player : MonoBehaviour, ILightSensitive
 
     bool _isInLight = false;
 
+    public event Action<GameObject> onPlayerHitBefore;
     public event Action onPlayerHPChanged;
 
 
@@ -243,12 +244,12 @@ public class Player : MonoBehaviour, ILightSensitive
         Time.timeScale = 1;
     }
 
-    public bool TryAttack()
+    public void GetDamaged(int damage, GameObject damageSource)
     {
-        if (_invincibleTimer > 0) return true;
-        if (_isDead) return true;
+        if (_invincibleTimer > 0) return;
+        if (_isDead) return;
 
-        if (_parryingTimer > 0)
+        if (damageSource.TryGetComponent(out Enemy enemy) && _parryingTimer > 0)
         {
             _parryingTimer = 0f;
             Animator.Play(PlayerAnimator.AnimState.Kick);
@@ -269,28 +270,28 @@ public class Player : MonoBehaviour, ILightSensitive
 
             OnParryEnd(0.5f, _parryingTokenSource.Token).Forget();
 
-            return false;
+            enemy.GetDamaged(3, gameObject);
+            EffectManager.Instance.PlayParticle(Effects.Spit, enemy.transform.position + Vector3.up);
+            return;
+        }
+
+        onPlayerHitBefore?.Invoke(enemy.gameObject);
+
+        ChangeHP(damage);
+
+        if (CurHP > 0)
+        {
+            SoundManager.Instance.PlaySFX(Path.SFX.Player.Dead);
         }
         else
         {
-            ChangeHP(-1);
+            _isDead = true;
 
-            if (CurHP > 0)
-            {
-                SoundManager.Instance.PlaySFX(Path.SFX.Player.Dead);
-            }
-            else
-            {
-                _isDead = true;
+            GameManager.Instance.GameOver();
 
-                GameManager.Instance.GameOver();
+            Animator.Play(PlayerAnimator.AnimState.Death, 0.25f);
 
-                Animator.Play(PlayerAnimator.AnimState.Death, 0.25f);
-
-                SoundManager.Instance.PlaySFX(Path.SFX.Player.Dead);
-            }
-
-            return true;
+            SoundManager.Instance.PlaySFX(Path.SFX.Player.Dead);
         }
     }
 
@@ -324,14 +325,6 @@ public class Player : MonoBehaviour, ILightSensitive
     {
         _invincibleTimer -= Time.deltaTime;
         _parryingTimer -= Time.deltaTime;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out IDamagalbe target))
-        {
-            target.GetDamaged(1);
-        }
     }
 
     public void OnEnterLight()
