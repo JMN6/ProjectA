@@ -3,6 +3,7 @@ using Unity.Services.Analytics;
 using Unity.Services.Core;
 using UnityEngine;
 
+// 스프레드 시트로 전환
 public class AnalyticsSystem : Singleton<AnalyticsSystem>
 {
     [Header("Analytics Info")]
@@ -46,9 +47,9 @@ public class AnalyticsSystem : Singleton<AnalyticsSystem>
         {
             if (GameManager.Instance.Player != null)
             {
-                evt["playTime"] = (Time.time - _startTime).ToString("F2");
-                evt["playerX"] = GameManager.Instance.Player.transform.position.x.ToString("F2");
-                evt["playerY"] = GameManager.Instance.Player.transform.position.y.ToString("F2");
+                evt["playTime"] = (Time.time - _startTime);
+                evt["playerX"] = GameManager.Instance.Player.transform.position.x;
+                evt["playerY"] = GameManager.Instance.Player.transform.position.y;
                 evt["stage"] = GameManager.Instance.CurrentStage;
 
                 AnalyticsService.Instance.RecordEvent(evt);
@@ -64,9 +65,9 @@ public class AnalyticsSystem : Singleton<AnalyticsSystem>
 
         var evt = new CustomEvent("player_hit")
         {
-            { "playTime", (Time.time - _startTime).ToString("F2") },
-            { "playerX", player.transform.position.x.ToString("F2") },
-            { "playerY", player.transform.position.y.ToString("F2") },
+            { "playTime", (Time.time - _startTime) },
+            { "playerX", player.transform.position.x },
+            { "playerY", player.transform.position.y },
             { "damage_source", damageSource.name },
             { "hp_before", player.CurHP },
         };
@@ -78,7 +79,7 @@ public class AnalyticsSystem : Singleton<AnalyticsSystem>
     {
         var evt = new CustomEvent("game_end")
         {
-            { "playTime", (Time.time - _startTime).ToString("F2") },
+            { "playTime", (Time.time - _startTime) },
             { "try", GameManager.Instance.Try },
             { "clear", isGameCleared },
         };
@@ -92,9 +93,9 @@ public class AnalyticsSystem : Singleton<AnalyticsSystem>
 
         var evt = new CustomEvent("item_get")
         {
-            { "playTime", (Time.time - _startTime).ToString("F2") },
-            { "playerX", player.transform.position.x.ToString("F2") },
-            { "playerY", player.transform.position.y.ToString("F2") },
+            { "playTime", (Time.time - _startTime) },
+            { "playerX", player.transform.position.x },
+            { "playerY", player.transform.position.y }, 
             { "item_name", GameManager.Instance.ItemsSO.GetItem(itemId).Name },
         };
 
@@ -107,15 +108,17 @@ public class AnalyticsSystem : Singleton<AnalyticsSystem>
 
         var evt = new CustomEvent("enemy_kill")
         {
-            { "playTime", (Time.time - _startTime).ToString("F2") },
-            { "playerX", player.transform.position.x.ToString("F2") },
-            { "playerY", player.transform.position.y.ToString("F2") },
-            { "enemy_x", enemy.transform.position.x.ToString("F2") },
-            { "enemy_y", enemy.transform.position.y.ToString("F2") },
+            { "playTime", (Time.time - _startTime) },
+            { "playerX", player.transform.position.x },
+            { "playerY", player.transform.position.y },
+            { "enemy_x", enemy.transform.position.x },
+            { "enemy_y", enemy.transform.position.y },
             { "enemy_name", enemy.name },
             { "damage_source", damageSource.name },
         };
 
         AnalyticsService.Instance.RecordEvent(evt);
     }
+
+
 }
