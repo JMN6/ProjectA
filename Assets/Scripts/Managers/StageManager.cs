@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +14,7 @@ public class StageManager : MonoBehaviour
     }
 
     [Header("Stage")]
+    [Tooltip ("플레이어가 죽었을 때, 사라졌거나, 아니면 재배치 되어야하는 오브젝트만 넣기")]
     [SerializeField] private StageDatas[] datas;
     public int StagetCount { get => datas.Length; }
 
@@ -42,7 +43,7 @@ public class StageManager : MonoBehaviour
     {
         foreach (var _ in datas[stage].ResetScripts)
         {
-            _.OnReset();
+            _?.OnReset();
         }
     }
 }

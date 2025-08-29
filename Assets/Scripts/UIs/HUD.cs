@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 
 public class HUD : MonoBehaviour
@@ -19,7 +19,7 @@ public class HUD : MonoBehaviour
 
         for(int i = 0; i < GameManager.Instance.Player.MaxHP; i++)
         {
-            hp += GameManager.Instance.Player.CurHP > i ? "¡Ü" : "¡Û";
+            hp += GameManager.Instance.Player.CurHP > i ? "ï¿½ï¿½" : "ï¿½ï¿½";
         }
 
         _tempHP.text = $"HP {hp}";
@@ -27,6 +27,6 @@ public class HUD : MonoBehaviour
 
     private void RefreshAmmo()
     {
-        _ammo.text = $"Ammo ¡¿ {GameManager.Instance.Aim.Ammo}";
+        _ammo.text = $"Ammo ï¿½ï¿½ {GameManager.Instance.Aim.Ammo}";
     }
 }
