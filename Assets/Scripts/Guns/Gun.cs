@@ -13,7 +13,7 @@ public class Gun
 
     private CameraFunctions cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
 
-    protected static readonly int TargetLayerMask = LayerMask.GetMask("Enemy", "InteractableObject");
+    protected static readonly int TargetLayerMask = LayerMask.GetMask("Enemy", "InteractableObject", "EyeEnemy");
 
     public event Action onGunAmmoChanged;
 
