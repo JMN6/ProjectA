@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightAndZombieLayer:
     serializedVersion: 2
-    m_Bits: 36864
+    m_Bits: 20480
   defaultMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   allWhiteMaterial: {fileID: 2100000, guid: 0bf31be38f1085045910546e2d894c7f, type: 2}
   sampleCheckOffset: 0.05

@@ -12,7 +12,7 @@ public class Aim : MonoBehaviour
     [SerializeField] Light2D _flashLight;
     [SerializeField] CircleCollider2D _falshLightColiider;
 
-    public float Ammo { get; private set; }
+    public int Ammo { get; private set; }
     public event Action onAimAmmoChanged;
     private void Awake()
     {
