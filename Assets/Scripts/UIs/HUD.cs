@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class HUD : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _tempHP;
+    [Header("HP")]
     [SerializeField] private Transform _heartParent;
     [SerializeField] private GameObject _heartUI;
     private List<HeartUI> _hearts = new List<HeartUI>();
     private int _currentMaxHP = 0;
-    private int _currentHP = 0;
 
+    [Header("Ammo")]
     [SerializeField] TextMeshProUGUI _ammo;
 
     private void Start()
@@ -19,7 +19,6 @@ public class HUD : MonoBehaviour
         GameManager.Instance.Aim.onAimAmmoChanged += RefreshAmmo;
 
         _currentMaxHP = 0;
-        _currentHP = GameManager.Instance.Player.CurHP;
 
         RefreshHP();
     }
@@ -43,6 +42,6 @@ public class HUD : MonoBehaviour
 
     private void RefreshAmmo()
     {
-        _ammo.text = $"Ammo �� {GameManager.Instance.Aim.Ammo}";
+        _ammo.text = $"X {GameManager.Instance.Aim.Ammo}";
     }
 }
