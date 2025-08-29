@@ -1,0 +1,372 @@
+fileFormatVersion: 2
+guid: 06e89f40518f04c478997a0512c54b37
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7428537311536829854
+    second: EYEzombie_Attack-Sheet_0
+  - first:
+      213: 7510263299429324259
+    second: EYEzombie_Attack-Sheet_1
+  - first:
+      213: 510835738398074050
+    second: EYEzombie_Attack-Sheet_2
+  - first:
+      213: 1051878265802152693
+    second: EYEzombie_Attack-Sheet_3
+  - first:
+      213: 5448497070147114198
+    second: EYEzombie_Attack-Sheet_4
+  - first:
+      213: -5576026269571865112
+    second: EYEzombie_Attack-Sheet_5
+  - first:
+      213: -7090972224453902574
+    second: EYEzombie_Attack-Sheet_6
+  - first:
+      213: 6634773036405297234
+    second: EYEzombie_Attack-Sheet_7
+  - first:
+      213: 299748626764083213
+    second: EYEzombie_Attack-Sheet_8
+  - first:
+      213: 2443320374608356997
+    second: EYEzombie_Attack-Sheet_9
+  - first:
+      213: 7151483991124870937
+    second: EYEzombie_Attack-Sheet_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EYEzombie_Attack-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 0
+        width: 52
+        height: 126
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26aac195ca888e890800000000000000
+      internalID: -7428537311536829854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Attack-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 0
+        width: 52
+        height: 127
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e553240ea0d93860800000000000000
+      internalID: 7510263299429324259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Attack-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0
+        width: 42
+        height: 127
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c4aac5c56ad61700800000000000000
+      internalID: 510835738398074050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Attack-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 0
+        width: 40
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fa571ca5b5099e00800000000000000
+      internalID: 1051878265802152693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Attack-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 0
+        width: 40
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d410e9c733fc9b40800000000000000
+      internalID: 5448497070147114198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Attack-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 0
+        width: 79
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e52cef96a9fd92b0800000000000000
+      internalID: -5576026269571865112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Attack-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 0
+        width: 70
+        height: 105
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21f7349d45ec79d90800000000000000
+      internalID: -7090972224453902574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Attack-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1046
+        y: 0
+        width: 71
+        height: 116
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25017409ce2731c50800000000000000
+      internalID: 6634773036405297234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Attack-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 0
+        width: 75
+        height: 121
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58661097fea68e120800000000000000
+      internalID: 2443320374608356997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e9c9552e18335cb488301efc1f103aec
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EYEzombie_Attack-Sheet_0: -7428537311536829854
+      EYEzombie_Attack-Sheet_1: 7510263299429324259
+      EYEzombie_Attack-Sheet_10: 7151483991124870937
+      EYEzombie_Attack-Sheet_2: 510835738398074050
+      EYEzombie_Attack-Sheet_3: 1051878265802152693
+      EYEzombie_Attack-Sheet_4: 5448497070147114198
+      EYEzombie_Attack-Sheet_5: -5576026269571865112
+      EYEzombie_Attack-Sheet_6: -7090972224453902574
+      EYEzombie_Attack-Sheet_7: 6634773036405297234
+      EYEzombie_Attack-Sheet_8: 299748626764083213
+      EYEzombie_Attack-Sheet_9: 2443320374608356997
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

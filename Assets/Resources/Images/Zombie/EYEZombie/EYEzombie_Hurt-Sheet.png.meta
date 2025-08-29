@@ -1,0 +1,280 @@
+fileFormatVersion: 2
+guid: ba51210b2f1c596418a09ab105ee94e0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6347007245922958472
+    second: EYEzombie_Hurt-Sheet_0
+  - first:
+      213: 110942932117056320
+    second: EYEzombie_Hurt-Sheet_1
+  - first:
+      213: 5080559289050792414
+    second: EYEzombie_Hurt-Sheet_2
+  - first:
+      213: 3966631227013788277
+    second: EYEzombie_Hurt-Sheet_3
+  - first:
+      213: 2824084580851354901
+    second: EYEzombie_Hurt-Sheet_4
+  - first:
+      213: 7296313454009638626
+    second: EYEzombie_Hurt-Sheet_5
+  - first:
+      213: 3876237637616790102
+    second: EYEzombie_Hurt-Sheet_6
+  - first:
+      213: 5611148163397405183
+    second: EYEzombie_Hurt-Sheet_7
+  - first:
+      213: 5026058484435647705
+    second: EYEzombie_Hurt-Sheet_8
+  - first:
+      213: -7047547635739736125
+    second: EYEzombie_Hurt-Sheet_9
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EYEzombie_Hurt-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 0
+        width: 52
+        height: 127
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8738ee7a986eae7a0800000000000000
+      internalID: -6347007245922958472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Hurt-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 0
+        width: 62
+        height: 129
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04b6d2b42062a8100800000000000000
+      internalID: 110942932117056320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Hurt-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 0
+        width: 63
+        height: 123
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d8d41b6f9213720800000000000000
+      internalID: 2824084580851354901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Hurt-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 0
+        width: 58
+        height: 107
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eed52ccd66b14560800000000000000
+      internalID: 7296313454009638626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYEzombie_Hurt-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 0
+        width: 55
+        height: 105
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65ae52f18992bc530800000000000000
+      internalID: 3876237637616790102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: eb0f52b696577af4f8eb296c5bd02c0b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EYEzombie_Hurt-Sheet_0: -6347007245922958472
+      EYEzombie_Hurt-Sheet_1: 110942932117056320
+      EYEzombie_Hurt-Sheet_2: 5080559289050792414
+      EYEzombie_Hurt-Sheet_3: 3966631227013788277
+      EYEzombie_Hurt-Sheet_4: 2824084580851354901
+      EYEzombie_Hurt-Sheet_5: 7296313454009638626
+      EYEzombie_Hurt-Sheet_6: 3876237637616790102
+      EYEzombie_Hurt-Sheet_7: 5611148163397405183
+      EYEzombie_Hurt-Sheet_8: 5026058484435647705
+      EYEzombie_Hurt-Sheet_9: -7047547635739736125
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
