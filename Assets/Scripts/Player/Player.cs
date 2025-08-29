@@ -136,8 +136,10 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
 
         input.AddListener(Actions.Interact, TriggerFlag.Started, OnInteract);
         input.AddListener(Actions.Parry, TriggerFlag.Started, OnParry);
-        input.AddListener(Actions.Move, TriggerFlag.Started | TriggerFlag.Canceled, OnMove);
-        input.AddListener(Actions.Jump, TriggerFlag.Started | TriggerFlag.Canceled, OnJump);
+        input.AddListener(Actions.Move, TriggerFlag.Started, OnMove);
+        input.AddListener(Actions.Move, TriggerFlag.Canceled, OnMove);
+        input.AddListener(Actions.Jump, TriggerFlag.Started, OnJump);
+        input.AddListener(Actions.Jump, TriggerFlag.Canceled, OnJump);
     }
 
     public void ResetPlayer(Vector3 _position, bool isLeft = true)
