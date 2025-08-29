@@ -31,6 +31,7 @@ public abstract class ItemBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        AnalyticsSystem.Instance.OnPlayerGotItem(_id);
         Use();
 
         Destroy(gameObject);

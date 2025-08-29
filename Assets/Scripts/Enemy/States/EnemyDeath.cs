@@ -13,7 +13,7 @@ namespace EnemeyFSM
             bool isLeft = enemy.spriteRenderer.flipX;
             Vector2 forceVec= (Vector2.up + (isLeft ? Vector2.right : Vector2.right * -1f)).normalized;
 
-            enemy.Rigid.AddForce(forceVec * 100f * (enemy.isParried ? 3f: 1f));
+            enemy.Rigid.AddForce(forceVec * 100f);// * (enemy.isParried ? 3f: 1f));
             anim.SetTrigger(Enemy.EnemyAnimation.IsDead.ToString());
             elaspedTime = 0f;
             EffectManager.Instance.PlayParticle(Effects.Blood, enemy.transform.position + Vector3.up);

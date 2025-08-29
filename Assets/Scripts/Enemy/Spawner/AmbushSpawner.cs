@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class AmbushSpawner : BreakableObject
 {
@@ -20,7 +20,7 @@ public class AmbushSpawner : BreakableObject
         }
     }
 
-    public override void GetDamaged(int damage)
+    public override void GetDamaged(int damage, GameObject damageSource)
     {
         health = Mathf.Clamp(health - 1, 0, maxHealth);
         if (health > 0)
@@ -28,7 +28,7 @@ public class AmbushSpawner : BreakableObject
             return;
         }
 
-        base.GetDamaged(damage);
+        base.GetDamaged(damage, damageSource);
 
         float c = Random.Range(0f, 100f);
         if(c > _spawnChance)

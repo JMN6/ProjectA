@@ -13,7 +13,7 @@ public class Gun
 
     private CameraFunctions cameraFunctions = Camera.main.GetComponent<CameraFunctions>();
 
-    protected static readonly int TargetLayerMask = LayerMask.GetMask("Enemy", "InteractableObject");
+    protected static readonly int TargetLayerMask = LayerMask.GetMask("Enemy", "InteractableObject", "EyeEnemy");
 
     public event Action onGunAmmoChanged;
 
@@ -67,9 +67,9 @@ public class Gun
     {
         Collider2D hit = Physics2D.OverlapPoint(position, TargetLayerMask);
 
-        if (hit && hit.TryGetComponent(out IDamagalbe target))
+        if (hit && hit.TryGetComponent(out IDamageable target))
         {
-            target.GetDamaged(1);
+            target.GetDamaged(1, GameManager.Instance.Aim.gameObject);
         }
     }
 }

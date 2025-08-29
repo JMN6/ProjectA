@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonObject : MonoBehaviour, IDamagalbe, IResetable
+public class ButtonObject : MonoBehaviour, IDamageable, IResetable
 {
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Sprite OnSprite;
@@ -28,7 +28,7 @@ public class ButtonObject : MonoBehaviour, IDamagalbe, IResetable
     {
     }
 
-    public void GetDamaged(int damage)
+    public void GetDamaged(int damage, GameObject damageSource)
     {
         ShowEffect();
 

@@ -115,7 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367ffe56b89f6414da07563a4cadfa99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aim: {fileID: 3408882082170307674}
   bullet: {fileID: 5766335995185260248}
 --- !u!1 &4576565411940903135
 GameObject:
@@ -298,7 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 626737546750717388}
   - component: {fileID: 1922082676677046618}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: FlashLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
