@@ -30,11 +30,11 @@ public class WayFindingManager : MonoBehaviour
 
     private TileMapDataConverter tileManager;
 
-    #region Debug
+    #if UNITY_EDITOR
     [SerializeField] private GameObject pointMarker;
     private GameObject s;
     private GameObject e;
-    #endregion
+    #endif
 
     private void Start()
     {
@@ -59,6 +59,7 @@ public class WayFindingManager : MonoBehaviour
             }
         }
 
+#if UNITY_EDITOR
         #region Debug
         var o = new GameObject($"{gameObject.name}_AI");
         s = Instantiate(pointMarker);
@@ -69,6 +70,7 @@ public class WayFindingManager : MonoBehaviour
         e.GetComponent<SpriteRenderer>().color = Color.red;
         e.transform.SetParent(o.transform, false);
         #endregion
+#endif
     }
 
     private IEnumerator CoCountCoolTime()
@@ -167,9 +169,9 @@ public class WayFindingManager : MonoBehaviour
         Vector2Int next = goalIndex;
         Route.Push(next);
 
-        #region Debug
+        #if UNITY_EDITOR
         e.transform.position = tileManager.GetTilePosition(goalIndex);
-        #endregion
+        #endif
 
         while (next != start)
         {
@@ -178,12 +180,11 @@ public class WayFindingManager : MonoBehaviour
             next = parent;
             Route.Push(next);
         }
-
-        #region Debug
+#if UNITY_EDITOR
         s.transform.position = tileManager.GetTilePosition(Route.Peek());
         s.gameObject.SetActive(true);
         e.gameObject.SetActive(true);
-        #endregion
+#endif
 
         return true;
     }
@@ -270,9 +271,11 @@ public class WayFindingManager : MonoBehaviour
             }
         }
 
+#if UNITY_EDITOR
         #region Debug
         s.gameObject.SetActive(false);
         e.gameObject.SetActive(false);
-        #endregion  
+        #endregion
+#endif
     }
 }
