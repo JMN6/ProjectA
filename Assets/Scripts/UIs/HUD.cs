@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -43,6 +43,6 @@ public class HUD : MonoBehaviour
 
     private void RefreshAmmo()
     {
-        _ammo.text = $"Ammo ¡¿ {GameManager.Instance.Aim.Ammo}";
+        _ammo.text = $"Ammo ï¿½ï¿½ {GameManager.Instance.Aim.Ammo}";
     }
 }

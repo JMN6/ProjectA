@@ -1,4 +1,4 @@
-public class AmmoBox : ItemBase
+﻿public class AmmoBox : ItemBase
 {
     public override void Use()
     {
