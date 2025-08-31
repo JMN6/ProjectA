@@ -23,6 +23,8 @@ public class CutScenePlayer : DataPlayer<CutSceneRow>
 
     protected override void Init()
     {
+        base.Init();
+
         wfTextInterval = new WaitForSeconds(textShowIntervalSpeed);
         wfNextCut = new WaitForSeconds(moveToNextCutSpeed);
     }
