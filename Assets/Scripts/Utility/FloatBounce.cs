@@ -7,6 +7,7 @@ public class FloatBounce : MonoBehaviour
     [SerializeField] private float floatTime = 1.3f;
     [SerializeField] private float floatSpeed = 2f;
 
+    private Vector3 _origin;
     private Coroutine _floatingEffect = null;
 
     private void OnEnable()
@@ -15,6 +16,8 @@ public class FloatBounce : MonoBehaviour
         {
             StopCoroutine(_floatingEffect);
         }
+
+        _origin = transform.position;
 
         _floatingEffect = StartCoroutine(CoFloatItem(
             transform.position + transform.up * floatDistance * 0.5f,
@@ -29,6 +32,8 @@ public class FloatBounce : MonoBehaviour
 
     private IEnumerator CoFloatItem(Vector3 startPos, Vector3 endPos)
     {
+        transform.position = _origin;
+
         float elapsedTime = 0f;
 
         while (elapsedTime < floatTime)
