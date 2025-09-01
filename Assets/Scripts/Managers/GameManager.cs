@@ -92,7 +92,6 @@ public class GameManager : MonoSingleton<GameManager>
     public void OnSkip()
     {
         Skip?.Invoke();
-
     }
     public IResetable[] ResetScripts;
 

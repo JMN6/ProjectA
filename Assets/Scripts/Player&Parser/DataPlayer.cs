@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Input;
+using Unity.Services.Analytics;
+using UnityEngine.InputSystem;
 
 namespace DataParseAndPlayer
 {
@@ -14,12 +17,16 @@ namespace DataParseAndPlayer
 
         protected Action _callback;
 
+        protected Coroutine _textShowCoroutine;
+
         protected virtual void Start()
         {
             Init();
         }
 
-        protected virtual void Init() { }
+        protected virtual void Init()
+        {
+        }
 
         public void StartScene(in List<T> rows, Action callback = null)
         {
@@ -52,7 +59,7 @@ namespace DataParseAndPlayer
 
         protected abstract void ShowText();
 
-        protected void StopText() => StopAllCoroutines();
+        public void StopText() => StopCoroutine(_textShowCoroutine);
 
         public virtual void OnShowNextScene()
         {
