@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Items
   m_EditorClassIdentifier: 
   _items:
-  - <Name>k__BackingField: "\uBE05\uB300"
+  - <Name>k__BackingField: "\uBD95\uB300"
     <ID>k__BackingField: 0
-    <Sprite>k__BackingField: {fileID: 0}
+    <Sprite>k__BackingField: {fileID: 5542889790565514203, guid: c3cf3cf5442622944b1ff5694eeac173, type: 3}
   - <Name>k__BackingField: "\uD0C4\uC57D \uC0C1\uC790"
     <ID>k__BackingField: 1
-    <Sprite>k__BackingField: {fileID: 0}
+    <Sprite>k__BackingField: {fileID: -55983464482194132, guid: 610b0cc0b9e9c51489ab2af261a14d01, type: 3}
   - <Name>k__BackingField: "\uC758\uB8CC \uD0A4\uD2B8"
     <ID>k__BackingField: 2
-    <Sprite>k__BackingField: {fileID: 0}
+    <Sprite>k__BackingField: {fileID: -7751179130306737120, guid: 610a623dcf70aa449b92965fd80ecc9a, type: 3}
   - <Name>k__BackingField: "\uBC30\uD130\uB9AC"
     <ID>k__BackingField: 3
-    <Sprite>k__BackingField: {fileID: 0}
+    <Sprite>k__BackingField: {fileID: 183654901427598797, guid: eeaa3eb723507f243ae353d9db4516f2, type: 3}
