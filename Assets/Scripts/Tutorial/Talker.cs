@@ -31,6 +31,7 @@ public class Talker : MonoBehaviour
         if (portrait) image.sprite = portrait;
 
         speechBubble.gameObject.SetActive(true);
+        InputManager.Instance.SetInputEnabled(Game.Input.Maps.Player, false);
 
         coroutine = StartCoroutine(StringUtility.Typing.CoTextTyping(dialogue, this.dialogue, talkTerm, () => Invoke(nameof(HideBubble), 1f)));
     }
@@ -38,5 +39,6 @@ public class Talker : MonoBehaviour
     public void HideBubble()
     {
         speechBubble.gameObject.SetActive(false);
+        InputManager.Instance.SetInputEnabled(Game.Input.Maps.Player, true);
     }
 }

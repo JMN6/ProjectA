@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -14,11 +11,18 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             if (_instance == null)
             {
                 _instance = FindAnyObjectByType<T>(FindObjectsInactive.Include);
+
                 if (_instance == null)
                 {
                     GameObject go = new GameObject();
                     _instance = go.AddComponent<T>();
                 }
+            }
+
+            if (!isInit)
+            {
+                (_instance as MonoSingleton<T>)?.Init();
+                isInit = true;
             }
 
             return _instance;

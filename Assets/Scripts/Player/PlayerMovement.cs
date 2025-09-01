@@ -250,6 +250,15 @@ public class PlayerMovement : MonoBehaviour
                     _isGrounded = true;
                     _vehicle = vehicle.GetBody();
                 }
+
+                else
+                {
+                    _rigid.transform.position = new Vector3(_rigid.transform.position.x, _castHits[0].transform.position.y + _stat.CollisionDetectionLength, _rigid.transform.position.z);
+
+                    _isGrounded = true;
+                    _vehicle = vehicle.GetBody();
+                }
+
             }
             else
             {
