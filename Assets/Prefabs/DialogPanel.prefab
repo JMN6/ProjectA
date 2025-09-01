@@ -173,6 +173,7 @@ MonoBehaviour:
   text: {fileID: 8130187769959045410}
   nameText: {fileID: 468923393526709477}
   textShowIntervalSpeed: 0.05
+  nextBtn: {fileID: 7114131368245506118}
 --- !u!1 &1660701061756577226
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +242,7 @@ MonoBehaviour:
   m_text: "\uC6A9\uBCF5"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2ea06be64eb9b8b40a2b2f773fe0f22b, type: 2}
-  m_sharedMaterial: {fileID: -24313937947562895, guid: 0ca472194185a4b4499778aa068695a6, type: 2}
+  m_sharedMaterial: {fileID: 3606772830733965322, guid: 2ea06be64eb9b8b40a2b2f773fe0f22b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -281,15 +282,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -304,7 +307,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2309156669709058787
@@ -377,7 +380,7 @@ MonoBehaviour:
     \uC548\uB155\uD558\uC138\uC694 \uC548\uB155\uD558\uC138\uC694 "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2ea06be64eb9b8b40a2b2f773fe0f22b, type: 2}
-  m_sharedMaterial: {fileID: -24313937947562895, guid: 0ca472194185a4b4499778aa068695a6, type: 2}
+  m_sharedMaterial: {fileID: 3606772830733965322, guid: 2ea06be64eb9b8b40a2b2f773fe0f22b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -417,15 +420,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -440,7 +445,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6170300558737469164
@@ -533,6 +538,7 @@ GameObject:
   - component: {fileID: 1059715970138792223}
   - component: {fileID: 1530196617626273604}
   - component: {fileID: 5688795297963954038}
+  - component: {fileID: 5865890617794734078}
   m_Layer: 5
   m_Name: NextBtn
   m_TagString: Untagged
@@ -556,8 +562,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1640, y: -987}
-  m_SizeDelta: {x: 45, y: 45}
+  m_AnchoredPosition: {x: 1593, y: -959}
+  m_SizeDelta: {x: 45, y: 58.5}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1059715970138792223
 CanvasRenderer:
@@ -642,7 +648,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7574623184356776438}
-        m_TargetAssemblyTypeName: DataParseAndPlayer.DataPlayer`1[[DialogRow, Assembly-CSharp
+        m_TargetAssemblyTypeName: DialogPlayer, Assembly-CSharp
         m_MethodName: OnShowNextScene
         m_Mode: 1
         m_Arguments:
@@ -653,6 +659,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5865890617794734078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7114131368245506118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5791d03d070a8e34cb6f152d4c11c820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatDistance: 50
+  floatTime: 0.5
+  floatSpeed: 2
 --- !u!1 &8166737053726008729
 GameObject:
   m_ObjectHideFlags: 0

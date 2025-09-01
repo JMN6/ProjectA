@@ -46,7 +46,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public event Action<bool> onGameEnded;
 
-    private void Awake()
+    protected override void Init()
     {
         ItemsSO = Resources.Load<ItemsSO>(Path.Data.Items);
         Player = Instantiate(Resources.Load<Player>(Path.Prefab.Player));
@@ -61,7 +61,7 @@ public class GameManager : MonoSingleton<GameManager>
         Player.ResetPlayer(stageManager.GetRespawnPosition(CurrentStage),
             stageManager.GetRespawnFaceWay(CurrentStage));
 
-        AnalyticsSystem.Instance.InitAsync().Forget();
+        AnalyticsSystem.Instance.InitAsync();
     }
 
     private void OnApplicationQuit()
@@ -92,7 +92,6 @@ public class GameManager : MonoSingleton<GameManager>
     public void OnSkip()
     {
         Skip?.Invoke();
-
     }
     public IResetable[] ResetScripts;
 

@@ -112,8 +112,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a159f4bc31541af41a6934ee1fd5ff4c, type: 3}
-  m_Color: {r: 0, g: 0.31026816, b: 1, a: 1}
+  m_Sprite: {fileID: -7167835504965216189, guid: 62f464c290e14d04ebe2611803babdf7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -201,6 +201,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allowTime: 3
+  _sprite: {fileID: 621255144963803557}
+  _originalSprite: {fileID: -7167835504965216189, guid: 62f464c290e14d04ebe2611803babdf7, type: 3}
+  _brokenSprite: {fileID: -2093035642323236793, guid: 1d60c155e91a02c4bbf9238be8a27555, type: 3}
+  _collider: {fileID: 6258093685673377306}
 --- !u!1 &4668240284358605409
 GameObject:
   m_ObjectHideFlags: 0

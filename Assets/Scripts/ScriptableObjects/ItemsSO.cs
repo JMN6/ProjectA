@@ -15,9 +15,14 @@ public class ItemsSO : ScriptableObject
     [SerializeField] List<Item> _items;
     Dictionary<int, Item> _itemDict;
 
-    public Item GetItem(int id) => _itemDict != null && _itemDict.ContainsKey(id) ? _itemDict[id] : null;
+    public Item GetItem(int id)
+    {
+        if (_itemDict == null) Init();
 
-    private void Awake()
+        return _itemDict.ContainsKey(id) ? _itemDict[id] : null;
+    }
+
+    private void Init()
     {
         _itemDict = new(_items.Count);
 

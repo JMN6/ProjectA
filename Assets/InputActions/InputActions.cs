@@ -237,7 +237,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""b9fccbde-46ea-4430-b8f7-dd7908288a1f"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -246,7 +246,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""18c470df-1bff-4fa2-9d4d-1c75dbe59b4e"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -314,7 +314,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Title"",
                     ""type"": ""Button"",
                     ""id"": ""a7156b8e-8aa1-4208-a3bb-075b61dae5e5"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false

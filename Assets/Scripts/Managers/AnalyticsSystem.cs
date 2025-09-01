@@ -1,14 +1,12 @@
 using Cysharp.Threading.Tasks;
-using Unity.Services.Analytics;
-using Unity.Services.Core;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class AnalyticsSystem : Singleton<AnalyticsSystem>
 {
     [Header("Analytics Info")]
-    [SerializeField] bool _isInitialized;
-    [SerializeField] string _userId;
-    [SerializeField] string _sessionId;
     [SerializeField] float _startTime;
 
     [Header("Settings")]
@@ -16,106 +14,135 @@ public class AnalyticsSystem : Singleton<AnalyticsSystem>
     [SerializeField] float _sendInterval = 10f;
     [SerializeField] int _loopCount = -1; // -1 for infinite
 
-    public async UniTaskVoid InitAsync()
+    private List<AnalyticsEvent> _events = new List<AnalyticsEvent>();
+    private string _savePath;
+
+    [Serializable]
+    public struct AnalyticsEvent
     {
-        try
-        {
-            await UnityServices.InitializeAsync();
+        public string name;
+        public float playTime;
+        public List<KeyValue> data; // Dictionary ´ëÃ¼¿ë
+    }
 
-            AnalyticsService.Instance.StartDataCollection();
+    [Serializable]
+    public struct KeyValue
+    {
+        public string key;
+        public string value;
+    }
 
-            _startTime = Time.time;
+    public void InitAsync()
+    {
+        _startTime = Time.time;
+        _savePath = System.IO.Path.Combine(Application.persistentDataPath, "analytics.json");
 
-            GameManager.Instance.onGameEnded += OnGameEnded;
-            GameManager.Instance.Player.onPlayerHitBefore += OnPlayerHitBefore;
-            RecordPlayerPosition(_loopCount).Forget();
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"Failed to initialize Analytics Service: {e.Message}");
-        }
+        GameManager.Instance.onGameEnded += OnGameEnded;
+        GameManager.Instance.Player.onPlayerHitBefore += OnPlayerHitBefore;
+        RecordPlayerPosition(_loopCount).Forget();
     }
 
     private async UniTaskVoid RecordPlayerPosition(int loopCount)
     {
-        await UniTask.Delay(System.TimeSpan.FromSeconds(_startDelay), DelayType.DeltaTime);
-
-        var evt = new CustomEvent("player_position");
+        await UniTask.Delay(TimeSpan.FromSeconds(_startDelay), DelayType.DeltaTime);
 
         for (int i = 0; i < loopCount || loopCount == -1; i++)
         {
             if (GameManager.Instance.Player != null)
             {
-                evt["playTime"] = (Time.time - _startTime).ToString("F2");
-                evt["playerX"] = GameManager.Instance.Player.transform.position.x.ToString("F2");
-                evt["playerY"] = GameManager.Instance.Player.transform.position.y.ToString("F2");
-                evt["stage"] = GameManager.Instance.CurrentStage;
-
-                AnalyticsService.Instance.RecordEvent(evt);
+                AddEvent("player_position", new Dictionary<string, object>
+                {
+                    { "playerX", GameManager.Instance.Player.transform.position.x },
+                    { "playerY", GameManager.Instance.Player.transform.position.y },
+                    { "stage", GameManager.Instance.CurrentStage }
+                });
             }
 
-            await UniTask.Delay(System.TimeSpan.FromSeconds(_sendInterval), DelayType.DeltaTime);
+            await UniTask.Delay(TimeSpan.FromSeconds(_sendInterval), DelayType.DeltaTime);
         }
     }
 
     public void OnPlayerHitBefore(GameObject damageSource)
     {
         var player = GameManager.Instance.Player;
-
-        var evt = new CustomEvent("player_hit")
+        AddEvent("player_hit", new Dictionary<string, object>
         {
-            { "playTime", (Time.time - _startTime).ToString("F2") },
-            { "playerX", player.transform.position.x.ToString("F2") },
-            { "playerY", player.transform.position.y.ToString("F2") },
             { "damage_source", damageSource.name },
             { "hp_before", player.CurHP },
-        };
-
-        AnalyticsService.Instance.RecordEvent(evt);
+            { "playerX", player.transform.position.x },
+            { "playerY", player.transform.position.y }
+        });
     }
 
     private void OnGameEnded(bool isGameCleared)
     {
-        var evt = new CustomEvent("game_end")
+        AddEvent("game_end", new Dictionary<string, object>
         {
-            { "playTime", (Time.time - _startTime).ToString("F2") },
             { "try", GameManager.Instance.Try },
-            { "clear", isGameCleared },
-        };
+            { "clear", isGameCleared }
+        });
 
-        AnalyticsService.Instance.RecordEvent(evt);
+        SaveToJson();
     }
 
     public void OnPlayerGotItem(int itemId)
     {
         var player = GameManager.Instance.Player;
+        if (player == null) return;
 
-        var evt = new CustomEvent("item_get")
+        AddEvent("item_get", new Dictionary<string, object>
         {
-            { "playTime", (Time.time - _startTime).ToString("F2") },
-            { "playerX", player.transform.position.x.ToString("F2") },
-            { "playerY", player.transform.position.y.ToString("F2") },
             { "item_name", GameManager.Instance.ItemsSO.GetItem(itemId).Name },
-        };
-
-        AnalyticsService.Instance.RecordEvent(evt);
+            { "playerX", player.transform.position.x },
+            { "playerY", player.transform.position.y }
+        });
     }
 
     public void OnEnemyKilled(Enemy enemy, GameObject damageSource)
     {
         var player = GameManager.Instance.Player;
-
-        var evt = new CustomEvent("enemy_kill")
+        AddEvent("enemy_kill", new Dictionary<string, object>
         {
-            { "playTime", (Time.time - _startTime).ToString("F2") },
-            { "playerX", player.transform.position.x.ToString("F2") },
-            { "playerY", player.transform.position.y.ToString("F2") },
-            { "enemy_x", enemy.transform.position.x.ToString("F2") },
-            { "enemy_y", enemy.transform.position.y.ToString("F2") },
+            { "enemy_x", enemy.transform.position.x },
+            { "enemy_y", enemy.transform.position.y },
             { "enemy_name", enemy.name },
             { "damage_source", damageSource.name },
-        };
+            { "playerX", player.transform.position.x },
+            { "playerY", player.transform.position.y }
+        });
+    }
 
-        AnalyticsService.Instance.RecordEvent(evt);
+    private void AddEvent(string type, Dictionary<string, object> data)
+    {
+        var kvList = new List<KeyValue>();
+        foreach (var kv in data)
+        {
+            kvList.Add(new KeyValue
+            {
+                key = kv.Key,
+                value = kv.Value.ToString()
+            });
+        }
+
+        _events.Add(new AnalyticsEvent
+        {
+            name = type,
+            playTime = (Time.time - _startTime),
+            data = kvList
+        });
+    }
+
+
+    public void SaveToJson()
+    {
+        string json = JsonUtility.ToJson(new Wrapper { events = _events }, true);
+        File.WriteAllText(_savePath, json);
+        Debug.Log($"Analytics saved to: {_savePath}");
+    }
+
+    [Serializable]
+    private class Wrapper
+    {
+        public List<AnalyticsEvent> events;
     }
 }

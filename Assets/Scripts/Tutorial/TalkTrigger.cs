@@ -3,14 +3,14 @@
 [RequireComponent(typeof(Collider2D))]
 public class TalkTrigger : MonoBehaviour
 {
-    [SerializeField, TextArea] private string dialogue;
-    [SerializeField] private Sprite Portrait;
-    private bool isExecuted = false;
+    [SerializeField, TextArea] private string _dialogue;
+    [SerializeField] private Sprite _portrait;
+    private bool _isExecuted = false;
     
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isExecuted) return;
+        if (_isExecuted) return;
 
         if (!collision.TryGetComponent(out Talker talker))
         {
@@ -19,7 +19,7 @@ public class TalkTrigger : MonoBehaviour
 
         if (talker == null) return;
 
-        isExecuted = true;
-        talker.Talk(dialogue, Portrait);
+        _isExecuted = true;
+        talker.Talk(_dialogue, _portrait);
     }
 }
