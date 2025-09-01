@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using static Player;
 
 public class PlayerMovementModifier
@@ -53,9 +53,9 @@ public class PlayerMovement : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
 
         _filter = new ContactFilter2D();
-        _filter.SetLayerMask(_stat.GroundMask); // ±âÁ¸ ·¹ÀÌ¾î ¸¶½ºÅ© Àû¿ë
+        _filter.SetLayerMask(_stat.GroundMask); // ê¸°ì¡´ ë ˆì´ì–´ ë§ˆìŠ¤í¬ ì ìš©
         _filter.useLayerMask = true;
-        _filter.useTriggers = false; // Æ®¸®°Å ¹«½Ã (¿øÇÏ¸é true·Î º¯°æ)
+        _filter.useTriggers = false; // íŠ¸ë¦¬ê±° ë¬´ì‹œ (ì›í•˜ë©´ trueë¡œ ë³€ê²½)
     }
 
     private void Update()
