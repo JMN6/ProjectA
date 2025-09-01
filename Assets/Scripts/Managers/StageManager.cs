@@ -31,7 +31,7 @@ public class StageManager : MonoBehaviour
             _.ResetScripts = new IResetable[size];
             for (int i = 0; i < size; i++)
             {
-                _.ResetScripts[i] = _.ResetObjs[i].GetComponent<IResetable>();
+                _.ResetScripts[i] = _.ResetObjs[i]?.GetComponent<IResetable>();
             }
         }
     }
