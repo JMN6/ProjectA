@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 72
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,8 +106,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -126,13 +126,14 @@ TextureImporter:
       name: Player Jump_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 4
-        width: 20
-        height: 34
+        x: 41
+        y: 6
+        width: 64
+        height: 127
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -147,13 +148,14 @@ TextureImporter:
       name: Player Jump_1
       rect:
         serializedVersion: 2
-        x: 60
-        y: 4
-        width: 19
-        height: 34
+        x: 181
+        y: 14
+        width: 68
+        height: 122
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -168,13 +170,14 @@ TextureImporter:
       name: Player Jump_2
       rect:
         serializedVersion: 2
-        x: 107
-        y: 4
-        width: 20
-        height: 34
+        x: 325
+        y: 21
+        width: 69
+        height: 109
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -189,13 +192,14 @@ TextureImporter:
       name: Player Jump_3
       rect:
         serializedVersion: 2
-        x: 152
-        y: 4
-        width: 25
-        height: 34
+        x: 464
+        y: 30
+        width: 79
+        height: 100
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -210,13 +214,14 @@ TextureImporter:
       name: Player Jump_4
       rect:
         serializedVersion: 2
-        x: 200
-        y: 4
-        width: 25
-        height: 34
+        x: 600
+        y: 24
+        width: 90
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -231,13 +236,14 @@ TextureImporter:
       name: Player Jump_5
       rect:
         serializedVersion: 2
-        x: 248
-        y: 4
-        width: 23
-        height: 34
+        x: 749
+        y: 10
+        width: 82
+        height: 126
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -249,6 +255,7 @@ TextureImporter:
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -258,6 +265,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       Player Jump_0: 982185064
       Player Jump_1: 886647638
@@ -265,7 +274,6 @@ TextureImporter:
       Player Jump_3: -1303377860
       Player Jump_4: 1850351288
       Player Jump_5: 931284392
-      Player Jump_6: -55825603
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
