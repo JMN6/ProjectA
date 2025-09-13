@@ -26,7 +26,6 @@ public class Player : MonoBehaviour, IDamageable
             Cross = 1 << 5,
             Jump = 1 << 6,
             Fall = 1 << 7,
-            Hurt = 1 << 8,
             Death = 1 << 9,
         }
 
@@ -294,7 +293,7 @@ public class Player : MonoBehaviour, IDamageable
 
         if (CurHP > 0)
         {
-            Animator.Play(PlayerAnimator.AnimState.Hurt, 0.25f);
+            Animator.Animator.SetTrigger("Hurt");
 
             SoundManager.Instance.PlaySFX(Path.SFX.Player.Dead);
         }
