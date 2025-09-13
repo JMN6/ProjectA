@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class Player : MonoBehaviour, ILightSensitive, IDamageable
+public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] PlayerStatsSO _stat;
     public int CurHP { get; private set; }
@@ -26,10 +26,11 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
             Cross = 1 << 5,
             Jump = 1 << 6,
             Fall = 1 << 7,
-            Death = 1 << 8,
+            Death = 1 << 9,
         }
 
-        private Animator animator;
+        private Animator legacyAnimator;
+        public Animator Animator => legacyAnimator;
 
         private Dictionary<AnimState, int> stateToHash;
         private const AnimState defaultState = AnimState.Idle;
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
 
         public PlayerAnimator(Animator anim)
         {
-            animator = anim;
+            legacyAnimator = anim;
             stateToHash = new();
 
             foreach (AnimState state in Enum.GetValues(typeof(AnimState)))
@@ -54,8 +55,8 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
 
             if (stateToHash.TryGetValue(state, out int hash))
             {
-                if (time == 0f) animator.Play(hash);
-                else animator.CrossFade(hash, time);
+                if (time == 0f) legacyAnimator.Play(hash);
+                else legacyAnimator.CrossFade(hash, time);
             }
         }
 
@@ -72,8 +73,8 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
 
             if (stateToHash.TryGetValue((AnimState)curFlag, out int hash))
             {
-                if (time == 0f) animator.Play(hash);
-                else animator.CrossFade(hash, time);
+                if (time == 0f) legacyAnimator.Play(hash);
+                else legacyAnimator.CrossFade(hash, time);
             }
         }
 
@@ -83,7 +84,7 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
 
             if (stateToHash.TryGetValue(defaultState, out int hash))
             {
-                animator.Play(hash);
+                legacyAnimator.Play(hash);
             }
         }
     }
@@ -107,6 +108,7 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
     private float _invincibleTimer;
     private bool _isDead;
 
+    [SerializeField] LightExposure _lightExposure;
     bool _isInLight = false;
 
     public event Action<GameObject> onPlayerHitBefore;
@@ -128,6 +130,14 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
     private void Update()
     {
         CountTimers();
+        if (_lightExposure.LitPercentage > 0.5f)
+        {
+            OnEnterLight();
+        }
+        else
+        {
+            OnExitLight();
+        }
     }
 
     private void SetupInput()
@@ -285,6 +295,8 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
 
         if (CurHP > 0)
         {
+            Animator.Animator.SetTrigger("Hurt");
+
             SoundManager.Instance.PlaySFX(Path.SFX.Player.Dead);
         }
         else
@@ -333,16 +345,18 @@ public class Player : MonoBehaviour, ILightSensitive, IDamageable
 
     public void OnEnterLight()
     {
-        _sprite.color = Color.white;
+        if (_isInLight) return;
 
+        Animator.Animator.SetBool("IsCrouched", false);
         _movement.ChangeModifier(new PlayerMovementModifier() { MaxMoveSpeed = 1f });
         _isInLight = true;
     }
 
     public void OnExitLight()
     {
-        _sprite.color = Color.red;
+        if (!_isInLight) return;
 
+        Animator.Animator.SetBool("IsCrouched", true);
         _movement.ChangeModifier(new PlayerMovementModifier() { MaxMoveSpeed = 0.3f });
         _isInLight = false;
     }

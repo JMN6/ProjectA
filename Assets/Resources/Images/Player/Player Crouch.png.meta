@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 00489be63a1c0e647a5857aa10c6aa20
+guid: 84f7bfd1719fea64b9b8e4d2369241ad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7527575431382319028
-    second: Nolight-platform_0
+      213: -675008643044156858
+    second: Player Crouch_0
+  - first:
+      213: -9191062621427390330
+    second: Player Crouch_1
+  - first:
+      213: 8273271194913387462
+    second: Player Crouch_2
+  - first:
+      213: 390998846037455439
+    second: Player Crouch_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 72
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +109,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Nolight-platform_0
+      name: Player Crouch_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 21
-        width: 144
-        height: 27
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 39
+        y: 10
+        width: 63
+        height: 97
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c40cf78270ea88790800000000000000
-      internalID: -7527575431382319028
+      spriteID: 64ad80b2733e1a6f0800000000000000
+      internalID: -675008643044156858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player Crouch_1
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 10
+        width: 69
+        height: 110
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 688237dfd39c27080800000000000000
+      internalID: -9191062621427390330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player Crouch_2
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 10
+        width: 66
+        height: 97
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c3b84f615090d270800000000000000
+      internalID: 8273271194913387462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player Crouch_3
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 10
+        width: 69
+        height: 110
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4276adf06b1d6500800000000000000
+      internalID: 390998846037455439
       vertices: []
       indices: 
       edges: []
@@ -125,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bf7b93529f2cf5340bf4686b25a911cf
+    spriteID: 54eaf73810deb5242999684603331ad4
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Nolight-platform_0: -7527575431382319028
+      Player Crouch_0: -675008643044156858
+      Player Crouch_1: -9191062621427390330
+      Player Crouch_2: 8273271194913387462
+      Player Crouch_3: 390998846037455439
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

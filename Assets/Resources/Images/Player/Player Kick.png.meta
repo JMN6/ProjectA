@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 72
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -113,13 +113,14 @@ TextureImporter:
       name: Player Kick_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 6
-        width: 16
-        height: 32
+        x: 46
+        y: 7
+        width: 63
+        height: 124
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -134,13 +135,14 @@ TextureImporter:
       name: Player Kick_1
       rect:
         serializedVersion: 2
-        x: 65
-        y: 6
-        width: 18
-        height: 32
+        x: 187
+        y: 7
+        width: 75
+        height: 124
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -155,13 +157,14 @@ TextureImporter:
       name: Player Kick_2
       rect:
         serializedVersion: 2
-        x: 114
-        y: 6
-        width: 22
-        height: 31
+        x: 323
+        y: 7
+        width: 98
+        height: 124
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -176,13 +179,14 @@ TextureImporter:
       name: Player Kick_3
       rect:
         serializedVersion: 2
-        x: 163
-        y: 8
-        width: 15
-        height: 28
+        x: 467
+        y: 7
+        width: 100
+        height: 124
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -197,13 +201,14 @@ TextureImporter:
       name: Player Kick_4
       rect:
         serializedVersion: 2
-        x: 211
-        y: 8
-        width: 15
-        height: 26
+        x: 614
+        y: 7
+        width: 72
+        height: 117
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -214,7 +219,30 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player Kick_5
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 7
+        width: 72
+        height: 108
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a1c20f5d52c02c498c0e87aa633bf48
+      internalID: -744036527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -224,12 +252,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       Player Kick_0: -879561800
       Player Kick_1: -2044071562
       Player Kick_2: -1384667542
       Player Kick_3: -1027128052
       Player Kick_4: -913232272
+      Player Kick_5: -744036527
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
