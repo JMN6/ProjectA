@@ -1,14 +1,26 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
+    public class SoundInfo
+    {
+        public bool isPlaying { get; set; }
+        public Coroutine coroutine { get; set; }
+        public AudioSource audioSource { get; set; }
+    }
+
     private AudioSource _bgmSource;
     private List<AudioSource> _sfxAudio;
 
     [SerializeField] private AudioClip _bgm;
 
     private int sfxChannel = 8;
+
+    private Dictionary<string, SoundInfo> _randomLoopSoundCorotines = new Dictionary<string, SoundInfo>();
 
     private void Awake()
     {
@@ -107,6 +119,13 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void StopSFX(string path)
     {
+        if (_randomLoopSoundCorotines.ContainsKey(path) == true &&
+            _randomLoopSoundCorotines[path].isPlaying == true)
+        {
+            StopSFXRandomLoop(path);
+            return;
+        }
+
         // TODO: Run with pooling in resource manager
         AudioClip clip = Resources.Load<AudioClip>(path);
 
@@ -117,6 +136,73 @@ public class SoundManager : MonoSingleton<SoundManager>
                 audio.Stop();
 
                 return;
+            }
+        }
+    }
+
+    private void StopSFXRandomLoop(string path)
+    {
+        _randomLoopSoundCorotines[path].isPlaying = false;
+
+        StopCoroutine(_randomLoopSoundCorotines[path].coroutine);
+        _randomLoopSoundCorotines[path].coroutine = null;
+
+        _randomLoopSoundCorotines[path].audioSource?.Stop();
+        _randomLoopSoundCorotines[path].audioSource = null;
+    }
+
+    public void PlaySFXRandom(string  path, int randomCount, bool isOneShot = false)
+    {
+        if (isOneShot)
+        {
+            PlaySFX(path + Random.Range(1, randomCount + 1), isOneShot);
+        }
+        else
+        {
+            if(_randomLoopSoundCorotines.ContainsKey(path))
+            {
+                if (_randomLoopSoundCorotines[path].isPlaying == true)
+                    return;
+
+                _randomLoopSoundCorotines[path].isPlaying = true;
+                _randomLoopSoundCorotines[path].coroutine = StartCoroutine(CoPlaySFXRandom(path, randomCount));
+            }
+            else
+            {
+                _randomLoopSoundCorotines.Add(path, new SoundInfo());
+                _randomLoopSoundCorotines[path].isPlaying = true;
+                _randomLoopSoundCorotines[path].coroutine = StartCoroutine(CoPlaySFXRandom(path, randomCount));
+                _randomLoopSoundCorotines[path].audioSource = null;
+            }
+        }
+    }
+
+    private IEnumerator CoPlaySFXRandom(string path, int randomCount)
+    {
+        while (true)
+        {
+            bool isPlayed = false;
+
+            foreach (var audio in _sfxAudio)
+            {
+                if (!audio.isPlaying)
+                {
+                    isPlayed = true;
+                    audio.volume = GameManager.Instance.Option.SfxVolume;
+
+                    // TODO: Run with pooling in resource manager
+                    AudioClip clip = Resources.Load<AudioClip>(path + Random.Range(1, randomCount + 1));
+
+                    audio.PlayOneShot(clip);
+                    _randomLoopSoundCorotines[path].audioSource = audio;
+                    yield return new WaitForSeconds(clip.length);
+                }
+            }
+
+            if(isPlayed == false)
+            {
+                _randomLoopSoundCorotines[path].audioSource = null;
+                yield return null;
             }
         }
     }

@@ -227,6 +227,7 @@ public class Player : MonoBehaviour, IDamageable
         InputManager.Instance.SetInputEnabled(Maps.Player, false);
 
         Animator.Play(PlayerAnimator.AnimState.Parry);
+        SoundManager.Instance.PlaySFX(Path.SFX.Player.Parry, true);
         _parryingTimer = _parryingAllowTime;
 
         try
@@ -265,7 +266,8 @@ public class Player : MonoBehaviour, IDamageable
         {
             _parryingTimer = 0f;
             Animator.Play(PlayerAnimator.AnimState.Kick);
-            SoundManager.Instance.PlaySFX(Path.SFX.Player.Parry, true);
+            SoundManager.Instance.StopSFX(Path.SFX.Player.Parry);
+            SoundManager.Instance.PlaySFX(Path.SFX.Player.ParrySuccess, true);
             _invincibleTimer = _invincibleDuration;
 
             Time.timeScale = 0.5f;

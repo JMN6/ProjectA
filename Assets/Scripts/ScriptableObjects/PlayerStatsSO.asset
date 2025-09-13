@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DefaultMaxHP>k__BackingField: 3
   <UpgradableMaxHP>k__BackingField: 5
-  <_initialLoadedBullets>k__BackingField: 5
-  <_initialAmmo>k__BackingField: 15
+  <_initialLoadedBullets>k__BackingField: 0
+  <_initialAmmo>k__BackingField: 0
   <MaxMagazine>k__BackingField: 5
   <MaxAmmo>k__BackingField: 30
   <GroundMask>k__BackingField:

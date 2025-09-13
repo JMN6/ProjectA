@@ -26,7 +26,9 @@ public class EnemyMovement : Movement
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.GetContact(0).normal.y > 0.7f &&
+        if (collision.rigidbody != null && 
+            collision.contacts.Length > 0 &&
+            collision.GetContact(0).normal.y > 0.7f &&
             collision.rigidbody.TryGetComponent<MovingPlatforms>(out var p))
         {
             _vehicle = collision.rigidbody;

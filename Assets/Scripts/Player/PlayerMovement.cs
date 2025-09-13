@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using static Player;
 
 public class PlayerMovementModifier
@@ -53,9 +53,9 @@ public class PlayerMovement : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
 
         _filter = new ContactFilter2D();
-        _filter.SetLayerMask(_stat.GroundMask); // ±âÁ¸ ·¹ÀÌ¾î ¸¶½ºÅ© Àû¿ë
+        _filter.SetLayerMask(_stat.GroundMask); // ê¸°ì¡´ ë ˆì´ì–´ ë§ˆìŠ¤í¬ ì ìš©
         _filter.useLayerMask = true;
-        _filter.useTriggers = false; // Æ®¸®°Å ¹«½Ã (¿øÇÏ¸é true·Î º¯°æ)
+        _filter.useTriggers = false; // íŠ¸ë¦¬ê±° ë¬´ì‹œ (ì›í•˜ë©´ trueë¡œ ë³€ê²½)
     }
 
     private void Update()
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
             // Sound
             if (_isGrounded)
-                SoundManager.Instance.PlaySFX(Path.SFX.Player.Walk);
+                SoundManager.Instance.PlaySFXRandom(Path.SFX.Player.Walk, Path.SFX.Player.WalkSoundsCount);
             else
                 SoundManager.Instance.StopSFX(Path.SFX.Player.Walk);
         }
@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
         _player.Animator.Stop(PlayerAnimator.AnimState.Fall);
         _player.Animator.Play(PlayerAnimator.AnimState.Jump);
-        SoundManager.Instance.PlaySFX(Path.SFX.Player.Jump, true);
+        SoundManager.Instance.PlaySFXRandom(Path.SFX.Player.Jump, Path.SFX.Player.JumpSoundsCount, true);
     }
 
     private void Jump()
