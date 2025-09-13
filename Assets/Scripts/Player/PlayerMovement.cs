@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
             // Sound
             if (_isGrounded)
-                SoundManager.Instance.PlaySFX(Path.SFX.Player.Walk);
+                SoundManager.Instance.PlaySFXRandom(Path.SFX.Player.Walk, Path.SFX.Player.WalkSoundsCount);
             else
                 SoundManager.Instance.StopSFX(Path.SFX.Player.Walk);
         }
@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
         _player.Animator.Stop(PlayerAnimator.AnimState.Fall);
         _player.Animator.Play(PlayerAnimator.AnimState.Jump);
-        SoundManager.Instance.PlaySFX(Path.SFX.Player.Jump, true);
+        SoundManager.Instance.PlaySFXRandom(Path.SFX.Player.Jump, Path.SFX.Player.JumpSoundsCount, true);
     }
 
     private void Jump()
