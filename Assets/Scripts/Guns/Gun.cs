@@ -56,7 +56,7 @@ public class Gun
 
     public void Reload()
     {
-        SoundManager.Instance.PlaySFX(Path.SFX.Gun.SniperSFX.Reload);
+        SoundManager.Instance.PlaySFXRandom(Path.SFX.Gun.SniperSFX.Reload, Path.SFX.Gun.SniperSFX.ReloadSoundsCount, true);
 
         LoadedBullets = MaxBullets;
         onGunAmmoChanged?.Invoke();

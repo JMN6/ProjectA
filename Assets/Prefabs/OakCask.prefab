@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6198012019500742980}
   - component: {fileID: 5365978947424439270}
   - component: {fileID: 7036362752772362381}
-  - component: {fileID: 4684258122748430924}
   - component: {fileID: 4965289118510079803}
+  - component: {fileID: 769645507094180027}
   m_Layer: 0
-  m_Name: Wood
+  m_Name: OakCask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,20 +159,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4684258122748430924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7330319812484471752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92d2201402fa2404293b30610885276b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 7036362752772362381}
-  col: {fileID: 5365978947424439270}
 --- !u!114 &4965289118510079803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,4 +171,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9a2edc81b3cc241b1eb6c65e6509ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  col: {fileID: 5365978947424439270}
+--- !u!114 &769645507094180027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7330319812484471752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a815a4504397bdf4eb109096b47e7289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 7036362752772362381}
   col: {fileID: 5365978947424439270}

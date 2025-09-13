@@ -42,6 +42,6 @@ public class HUD : MonoBehaviour
 
     private void RefreshAmmo()
     {
-        _ammo.text = $"X {GameManager.Instance.Aim.Ammo}";
+        _ammo.text = $"{GameManager.Instance.Aim.Ammo}";
     }
 }
