@@ -6,11 +6,12 @@ using TMPro;
 using StringUtility;
 using DataParseAndPlayer;
 using Game.Input;
+using Assets.Scripts.Managers;
 
 public class DialogPlayer : DataPlayer<DialogRow>
 {
-    private static readonly string FName = "ø§∏Æ";
-    private static readonly string MName = "µ•¿Ã∫Í";
+    private static readonly string FNameID = "CHARACTER_FEMALE";
+    private static readonly string MNameID = "CHARACTER_MALE";
 
     private static readonly string FPicPath = "Images/Dialog/F{0}";
     private static readonly string MPicPath = "Images/Dialog/M{0}";
@@ -36,6 +37,9 @@ public class DialogPlayer : DataPlayer<DialogRow>
 
         isTextOver = false;
         wfTextInterval = new WaitForSeconds(textShowIntervalSpeed);
+
+        LanguageManager.Instance.SetTextFont(text);
+        LanguageManager.Instance.SetTextFont(nameText);
     }
 
     private void OnEnable()
@@ -61,13 +65,13 @@ public class DialogPlayer : DataPlayer<DialogRow>
 
         if (info.Talker == 0)
         {
-            nameText.text = FName;
+            nameText.text = LanguageManager.Instance.GetString(FNameID);
             pic2.color = Color.gray;
             pic1.color = Color.white;
         }
         else
         {
-            nameText.text = MName;
+            nameText.text = LanguageManager.Instance.GetString(MNameID);
             pic1.color = Color.gray;
             pic2.color = Color.white;
         }
@@ -80,8 +84,9 @@ public class DialogPlayer : DataPlayer<DialogRow>
 
     protected override void ShowText()
     {
+        string dialogueText = LanguageManager.Instance.GetString(_sceneInfo[_currentRow].TextID);
         _textShowCoroutine = StartCoroutine(Typing.CoTextTyping(
-            _sceneInfo[_currentRow].Text, text, wfTextInterval, OnTextEnd));
+            dialogueText, text, wfTextInterval, OnTextEnd));
         isTextOver = false;
     }
 
@@ -106,7 +111,7 @@ public class DialogPlayer : DataPlayer<DialogRow>
         if(isTextOver == false)
         {
             StopText();
-            text.text = _sceneInfo[_currentRow].Text;
+            text.text = LanguageManager.Instance.GetString(_sceneInfo[_currentRow].TextID);
             OnTextEnd();
         }
         else

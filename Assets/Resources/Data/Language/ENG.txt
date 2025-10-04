@@ -1,0 +1,37 @@
+Key	Text
+LANGSET	Language Setting
+GAMESTART	Click to Start
+OPTION_EFFECT_SOUND	Sound Effect
+OPTION_BGM	BGM
+OPTION_MOUSE_SENSITIVITY	Mouse Sensitivity
+CHARACTER_MALE	David
+CHARACTER_FEMALE	Ellie
+TALK_1	Press [A, D] to move left and right, David.
+TALK_2	Shine your light for me, Ellie, so I can read the terrain around us and move quickly.
+TALK_3	Press [Space] to clear obstacles—I think you can jump up to three tiles.
+TALK_4	Head to the generator (checkpoint) above and press [E] or [F] to turn it on.
+TALK_5	Use [C, Shift] to counter when the enemy attacks, David.
+TALK_6	Use [Right Click] to reload and [Left Click] to shoot—take down the zombies, Ellie.
+TALK_7	I’ll smash the oak barrel up ahead; go through there, David!\n[Hit the oak barrel to break it]
+TALK_8	There’s a moving platform near the green sign—let’s wait for it.
+TALK_9	The gray platform with red rebar driven into it is full of cracks; it looks like it’ll break if you step on it.
+TALK_10	You can’t step on the blue platform unless it’s lit.\nMove after I shine the light!
+TEMPCUTSCENE_0	2050\nSeoul
+TEMPCUTSCENE_1	I’ve got all the antibodies—where do I go...?\nI think the radio’s dying...
+TEMPCUTSCENE_2	Climb to the top of the factory you see ahead.\nThe helicopter is waiting!
+TEMPCUTSCENE1_0	I’m here—I did it. I came all the way like you said.\nThis damned zombie ordeal is finally over.
+TEMPCUTSCENE1_1	Actually, that helicopter is low on fuel—don’t come back.\nIf you do, we won’t be able to deliver the antibodies. You’ve done well....
+TEMPCUTSCENE1_2	I’m ending the transmission. Take care...
+TEMPCUTSCENE1_3	..........
+TEMPDIALOG_0	Your birthday is next week...
+TEMPDIALOG_1	I’ll be satisfied with those antibodies instead of a present.
+TEMPDIALOG_2	When HQ makes the vaccine... let’s go to the beach—the place you wanted to visit.
+TEMPDIALOG_3	Sounds good. I want to be somewhere that smells like people—see people, not zombies.
+TEMPDIALOG_4	Haha... me too. After smelling zombies so long, I can’t even taste coffee anymore.
+TEMPDIALOG_5	When this is over, I’ll brew you a proper cup of coffee...
+TEMPDIALOG_7	Keep that promise.
+TEMPDIALOG1_0	I don’t know if I can make it to the helicopter... I’m not confident.
+TEMPDIALOG1_1	You can—because it’s you.
+TEMPDIALOG1_2	I’m... so scared.
+TEMPDIALOG1_3	I’m here to the end. You promised you’d make it all the way, too.
+TEMPDIALOG1_4	...Okay. Let’s go—both of us....

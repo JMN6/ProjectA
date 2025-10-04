@@ -6,6 +6,7 @@ using TMPro;
 using StringUtility;
 using System;
 using DataParseAndPlayer;
+using Assets.Scripts.Managers;
 
 public class CutScenePlayer : DataPlayer<CutSceneRow>
 {
@@ -27,6 +28,8 @@ public class CutScenePlayer : DataPlayer<CutSceneRow>
 
         wfTextInterval = new WaitForSeconds(textShowIntervalSpeed);
         wfNextCut = new WaitForSeconds(moveToNextCutSpeed);
+
+        LanguageManager.Instance.SetTextFont(text);
     }
 
     protected override void SetSceneInfo(CutSceneRow info)
@@ -45,8 +48,9 @@ public class CutScenePlayer : DataPlayer<CutSceneRow>
 
     protected override void ShowText()
     {
+        string cutText = LanguageManager.Instance.GetString(_sceneInfo[_currentRow].TextID);
         StartCoroutine(Typing.CoTextTyping(
-            _sceneInfo[_currentRow].Text, text, wfTextInterval, OnShowNextScene));
+            cutText, text, wfTextInterval, OnShowNextScene));
     }
 
     protected override void OnSceneEnd()

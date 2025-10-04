@@ -57,7 +57,7 @@ public class DialogTrigger : MonoBehaviour, IInteractable
 
         if(playerObj == collision.gameObject)
         {
-            playerScript.CanInteract(false);
+            playerScript?.CanInteract(false);
             playerObj = null;
             playerScript = null;
         }

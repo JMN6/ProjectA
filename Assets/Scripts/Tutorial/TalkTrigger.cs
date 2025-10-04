@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Managers;
+using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class TalkTrigger : MonoBehaviour
 {
-    [SerializeField, TextArea] private string _dialogue;
+    //[SerializeField, TextArea] private string _dialogue;
+    [SerializeField] private string _dialogueTextId;
     [SerializeField] private Sprite _portrait;
     private bool _isExecuted = false;
     
@@ -20,6 +22,7 @@ public class TalkTrigger : MonoBehaviour
         if (talker == null) return;
 
         _isExecuted = true;
-        talker.Talk(_dialogue, _portrait);
+        string dialogue = LanguageManager.Instance.GetString(_dialogueTextId);
+        talker.Talk(dialogue, _portrait);
     }
 }

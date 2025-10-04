@@ -56,7 +56,24 @@ namespace Path
         public const string Base = "Data";
 
         public static readonly string Items = $"{Base}/Items";
+        public static readonly string Language = $"{Base}/Language";
     }
+
+    public static class Language
+    {
+        public const string Base = "Data/Language";
+
+        public static readonly string KOR = $"{Base}/KOR";
+        public static readonly string ENG = $"{Base}/ENG";
+        public static readonly string CHN = $"{Base}/CHN";
+        public static readonly string JPN = $"{Base}/JPN";
+    }
+
+    public static class PlayerPrefs
+    {
+        public const string LanguageSetting = "Lang";
+    }
+
 
     public static class Prefab
     {

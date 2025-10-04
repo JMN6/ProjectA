@@ -12,7 +12,7 @@ namespace DataParseAndPlayer
         public float FontSize;
         public int Align;
         public string Pic;
-        public string Text;
+        public string TextID;
 
         public override void SetValue(string[] datas)
         {
@@ -22,7 +22,7 @@ namespace DataParseAndPlayer
             FontSize = int.Parse(datas[3]);
             Align = int.Parse(datas[4]);
             Pic = datas[5];
-            Text = datas[6].Replace("\\\\n", "\n");
+            TextID = datas[6].Replace("\\\\n", "\n");
         }
     }
 

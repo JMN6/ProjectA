@@ -1,3 +1,4 @@
+using Assets.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,11 @@ public class Talker : MonoBehaviour
         talkTerm = new WaitForSeconds(0.2f / talkSpeed);
 
         speechBubble.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        LanguageManager.Instance.SetTextFont(dialogue);
     }
 
     private void Update()

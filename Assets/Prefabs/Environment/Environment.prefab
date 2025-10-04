@@ -84,6 +84,7 @@ MonoBehaviour:
   _dialogue: "\uC8FC\uBCC0 \uC9C0\uD615\uC9C0\uBB3C\uC744 \uBCF4\uACE0 \uBE60\uB974\uAC8C
     \uC774\uB3D9\uD560 \uC218 \uC788\uB3C4\uB85D \uB098\uC5D0\uAC8C \uBE5B\uC744
     \uBE44\uCDB0\uC918 \uC5D8\uB9AC"
+  _dialogueTextId: TALK_2
   _portrait: {fileID: 21300000, guid: a54acb11baa4e8d458f79e5db8f17f1d, type: 3}
 --- !u!1 &543715126814183332
 GameObject:
@@ -233,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogue: "\uCD08\uB85D\uC0C9 \uD45C\uC9C0\uD310 \uADFC\uCC98\uC5D0\uB294 \uC6C0\uC9C1\uC774\uB294
     \uD50C\uB7AB\uD3FC\uC774 \uC788\uC5B4, \uD55C\uBC88 \uAE30\uB2E4\uB824\uBCF4\uC790"
+  _dialogueTextId: TALK_8
   _portrait: {fileID: 21300000, guid: fa241debf664b7b408d0f17c5a182937, type: 3}
 --- !u!1 &1157551392499865850
 GameObject:
@@ -548,6 +550,7 @@ MonoBehaviour:
   _dialogue: "[Space] \uD0A4\uB97C \uB20C\uB7EC \uC9C0\uD615\uC9C0\uBB3C\uB4E4\uC744
     \uAC74\uB108\uB6F0\uC5B4 3\uCE78\uAE4C\uC9C0\uB294 \uB118\uC5B4\uAC08 \uC218
     \uC788\uC744\uAC83 \uAC19\uC544"
+  _dialogueTextId: TALK_3
   _portrait: {fileID: 21300000, guid: fa241debf664b7b408d0f17c5a182937, type: 3}
 --- !u!1 &2760832087745449654
 GameObject:
@@ -46556,6 +46559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogue: "[C, Shift] \uB97C \uC774\uC6A9\uD574 \uC801\uC758 \uACF5\uACA9\uC774
     \uC62C \uB54C \uBC18\uACA9\uD574 \uB370\uC774\uBE0C"
+  _dialogueTextId: TALK_5
   _portrait: {fileID: 21300000, guid: fa241debf664b7b408d0f17c5a182937, type: 3}
 --- !u!1 &4635958646003676692
 GameObject:
@@ -46705,7 +46709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5336722351225354578}
-  fileName: TempCutScene 1
+  fileName: TempCutScene 1_Lang
 --- !u!1 &4774576377762663282
 GameObject:
   m_ObjectHideFlags: 0
@@ -46789,6 +46793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogue: "\uC704\uCABD\uC5D0 \uBCF4\uC774\uB294 \uBC1C\uC804\uAE30(\uCCB4\uD06C\uD3EC\uC778\uD2B8)\uB85C
     \uAC00\uC11C [E, F]\uB97C \uB20C\uB7EC \uCF1C"
+  _dialogueTextId: TALK_4
   _portrait: {fileID: 21300000, guid: fa241debf664b7b408d0f17c5a182937, type: 3}
 --- !u!1 &5188048229018260262
 GameObject:
@@ -46874,6 +46879,7 @@ MonoBehaviour:
   _dialogue: "\uC55E\uC5D0 \uBCF4\uC774\uB294 \uC624\uD06C\uD1B5\uC744 \uBD80\uC234\uC904\uAC8C,
     \uADF8\uACF3\uC73C\uB85C \uC9C0\uB098\uAC00 \uB370\uC774\uBE0C!\n[\uC624\uD06C\uD1B5\uC744
     \uB9DE\uCDB0 \uBD80\uC218\uC138\uC694]"
+  _dialogueTextId: TALK_7
   _portrait: {fileID: 21300000, guid: fa241debf664b7b408d0f17c5a182937, type: 3}
 --- !u!1 &5900367048941388063
 GameObject:
@@ -46958,6 +46964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogue: "[A,D] \uD0A4\uB97C \uB20C\uB7EC \uC88C\uC6B0\uB85C \uC774\uB3D9\uD574
     \uB370\uC774\uBE0C"
+  _dialogueTextId: TALK_1
   _portrait: {fileID: 21300000, guid: fa241debf664b7b408d0f17c5a182937, type: 3}
 --- !u!1 &6005357852323341054
 GameObject:
@@ -47126,6 +47133,7 @@ MonoBehaviour:
   _dialogue: "\uD478\uB978 \uD50C\uB7AB\uD3FC\uC740 \uBE5B\uC744 \uBE44\uCD94\uC9C0
     \uC54A\uC558\uC744\uB54C\uB294 \uBC1F\uC744 \uC218 \uC5C6\uC5B4\n\uB0B4\uAC00
     \uBE5B\uC744 \uBE44\uCDB0\uC8FC\uACE0 \uB098\uC11C \uC774\uB3D9\uD574!"
+  _dialogueTextId: TALK_10
   _portrait: {fileID: 21300000, guid: fa241debf664b7b408d0f17c5a182937, type: 3}
 --- !u!1 &8235455655116498939
 GameObject:
@@ -47258,6 +47266,7 @@ MonoBehaviour:
   _dialogue: "\uBD89\uC740 \uCCA0\uADFC\uC774 \uBC15\uD78C \uD68C\uC0C9 \uD50C\uB7AB\uD3FC\uC5D0\uB294
     \uAE08\uC774 \uB9CE\uC774 \uAC00 \uC788\uC5B4, \uBC1F\uC73C\uBA74 \uBD80\uC11C\uC9C8\uAC83
     \uAC19\uC544"
+  _dialogueTextId: TALK_9
   _portrait: {fileID: 21300000, guid: fa241debf664b7b408d0f17c5a182937, type: 3}
 --- !u!1 &8773914246648858036
 GameObject:
@@ -47476,6 +47485,7 @@ MonoBehaviour:
   _dialogue: "[\uC6B0\uD074\uB9AD]\uC744 \uD1B5\uD574 \uCD1D\uC744 \uC7AC\uC7A5\uC804\uD558\uACE0
     [\uC88C\uD074\uB9AD]\uC744 \uD1B5\uD574 \uC801\uC744 \uC3F4\uC11C \uC880\uBE44
     \uC8FD\uC5EC\uC918 \uC5D8\uB9AC"
+  _dialogueTextId: TALK_6
   _portrait: {fileID: 21300000, guid: a54acb11baa4e8d458f79e5db8f17f1d, type: 3}
 --- !u!1001 &42142496861012013
 PrefabInstance:
@@ -49227,7 +49237,7 @@ PrefabInstance:
       objectReference: {fileID: 190265956140064799}
     - target: {fileID: 2394958380880547541, guid: a72a731dfef43364b86be858133bf134, type: 3}
       propertyPath: dialogFileName
-      value: TempDialog 1
+      value: TempDialog 1_Lang
       objectReference: {fileID: 0}
     - target: {fileID: 2818459425423559651, guid: a72a731dfef43364b86be858133bf134, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52391,6 +52401,10 @@ PrefabInstance:
       propertyPath: dialogPlayer
       value: 
       objectReference: {fileID: 190265956140064799}
+    - target: {fileID: 2394958380880547541, guid: a72a731dfef43364b86be858133bf134, type: 3}
+      propertyPath: dialogFileName
+      value: TempDialog_Lang
+      objectReference: {fileID: 0}
     - target: {fileID: 2818459425423559651, guid: a72a731dfef43364b86be858133bf134, type: 3}
       propertyPath: m_LocalPosition.x
       value: 40
@@ -53593,7 +53607,7 @@ PrefabInstance:
       objectReference: {fileID: 190265956140064799}
     - target: {fileID: 2394958380880547541, guid: a72a731dfef43364b86be858133bf134, type: 3}
       propertyPath: dialogFileName
-      value: TempDialog 1
+      value: TempDialog 1_Lang
       objectReference: {fileID: 0}
     - target: {fileID: 2818459425423559651, guid: a72a731dfef43364b86be858133bf134, type: 3}
       propertyPath: m_LocalPosition.x

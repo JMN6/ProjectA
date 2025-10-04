@@ -18,12 +18,12 @@ namespace DataParseAndPlayer
 
     public class Parser<T> where T : DataRow, new()
     {
-        public static List<T> Convert(string _folderName, string _fileName)
+        public static List<T> Convert(string fileRoot)
         {
-            TextAsset tsvFile = Resources.Load<TextAsset>($"{_folderName}/{_fileName}");
+            TextAsset tsvFile = Resources.Load<TextAsset>(fileRoot);
             if (tsvFile == null)
             {
-                Debug.LogError($"TSV file not found: {_folderName}/{_fileName}");
+                Debug.LogError($"TSV file not found: {fileRoot}");
                 return null;
             }
 
@@ -49,6 +49,11 @@ namespace DataParseAndPlayer
             }
 
             return dataList;
+        }
+
+        public static List<T> Convert(string _folderName, string _fileName)
+        {
+            return Convert($"{_folderName}/{_fileName}");
         }
     }
 
