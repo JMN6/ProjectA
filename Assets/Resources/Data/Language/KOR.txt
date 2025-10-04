@@ -1,0 +1,37 @@
+Key	Text
+LANGSET	언어 설정
+GAMESTART	클릭하여 게임 시작
+OPTION_EFFECT_SOUND	효과음
+OPTION_BGM	배경음악
+OPTION_MOUSE_SENSITIVITY	마우스 민감도
+CHARACTER_MALE	데이브
+CHARACTER_FEMALE	엘리
+TALK_1	[A, D] 키를 눌러 좌우로 이동해 데이브
+TALK_2	주변 지형지물을 보고 빠르게 이동할 수 있도록 나에게 빛을 비춰줘 엘리
+TALK_3	[Space] 키를 눌러 지형지물들을 건너뛰어 3칸까지는 넘어갈 수 있을것 같아
+TALK_4	위쪽에 보이는 발전기(체크포인트)로 가서 [E, F]를 눌러 켜
+TALK_5	[C, Shift] 를 이용해 적의 공격이 올 때 반격해 데이브
+TALK_6	[우클릭]을 통해 총을 재장전하고 [좌클릭]을 통해 적을 쏴서 좀비 죽여줘 엘리
+TALK_7	앞에 보이는 오크통을 부숴줄게, 그곳으로 지나가 데이브!\n[오크통을 맞춰 부수세요]
+TALK_8	초록색 표지판 근처에는 움직이는 플랫폼이 있어, 한번 기다려보자
+TALK_9	붉은 철근이 박힌 회색 플랫폼에는 금이 많이 가 있어, 밟으면 부서질것 같아
+TALK_10	푸른 플랫폼은 빛을 비추지 않았을때는 밟을 수 없어\n내가 빛을 비춰주고 나서 이동해!
+TEMPCUTSCENE_0	2050년\n서울
+TEMPCUTSCENE_1	"항체 다 챙겼어 어디로 가야 해...?\n무전기가 다 된 것 같아..."
+TEMPCUTSCENE_2	"앞에 보이는 공장 꼭대기로 어서 올라가\n헬기가 대기하고 있어!"
+TEMPCUTSCENE1_0	"왔어 해냈어 당신 말대로 끝까지 왔어\n드디어 이 지긋지긋한 좀비도 끝이야"
+TEMPCUTSCENE1_1	 “사실 그 헬기 기름이 부족해 돌아오지마\n돌아오면 항체 전달 못해 고생했어....”
+TEMPCUTSCENE1_2	 “무전 끊을게 잘 지내...”
+TEMPCUTSCENE1_3	".........."
+TEMPDIALOG_0	다음 주 생일이지 ….
+TEMPDIALOG_1	선물 대신 그 항체로 만족할게
+TEMPDIALOG_2	본부에서 백신 만들면… 우리 해변 가자. 너가 가고 싶었던 곳
+TEMPDIALOG_3	좋지. 사람 냄새나는 곳에서, 좀비 말고 사람 좀 보고 싶다.
+TEMPDIALOG_4	하하… 나도. 좀비 냄새 맡으니까 이젠 커피 맛도 모르겠어.
+TEMPDIALOG_5	끝나면 당신한테 제대로 커피 내려줄게….
+TEMPDIALOG_7	그 말, 꼭 지켜.
+TEMPDIALOG1_0	헬기까지 갈 수 있을까… 자신 없어.
+TEMPDIALOG1_1	할 수 있어. 당신이니까
+TEMPDIALOG1_2	나…너무 무서워.
+TEMPDIALOG1_3	난 끝까지 여기 있어. 당신도 끝까지 와 약속했잖아
+TEMPDIALOG1_4	…그래. 가자, 우리 둘 다....

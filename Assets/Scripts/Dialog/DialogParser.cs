@@ -46,7 +46,7 @@ public class DialogParser : MonoBehaviour
                 Number = int.Parse(values[0]),
                 Pic1Number= int.Parse(values[1]),
                 Pic2Number= int.Parse(values[2]),
-                Text = values[3],
+                TextID = values[3],
                 Talker = int.Parse(values[4])
             };
 

@@ -8,7 +8,7 @@ public class DialogRow : DataRow
 {
     public int Pic1Number;
     public int Pic2Number;
-    public string Text;
+    public string TextID;
     public int Talker;
 
     public override void SetValue(string[] datas)
@@ -16,7 +16,7 @@ public class DialogRow : DataRow
         base.SetValue(datas);
         Pic1Number = int.Parse(datas[1]);
         Pic2Number = int.Parse(datas[2]);
-        Text = datas[3];
+        TextID = datas[3];
         Talker = int.Parse(datas[4]);
     }
 }
